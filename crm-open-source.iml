@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="web" name="Web">
+      <configuration>
+        <descriptors>
+          <deploymentDescriptor name="web.xml" url="file://$MODULE_DIR$/web/WEB-INF/web.xml" />
+        </descriptors>
+        <webroots>
+          <root url="file://$MODULE_DIR$/src/web/jsp" relative="/" />
+          <root url="file://$MODULE_DIR$/src/web/css" relative="/css" />
+          <root url="file://$MODULE_DIR$/src/web/javascript" relative="/javascript" />
+          <root url="file://$MODULE_DIR$/src/web/images" relative="/images" />
+          <root url="file://$MODULE_DIR$/src/web/WEB-INF" relative="/WEB-INF" />
+          <root url="file://$MODULE_DIR$/src/sql" relative="/WEB-INF/setup" />
+          <root url="file://$MODULE_DIR$/pref/cfs/system" relative="/WEB-INF/setup/init" />
+          <root url="file://$MODULE_DIR$/pref/cfs/transfer" relative="/WEB-INF/setup/init" />
+          <root url="file://$MODULE_DIR$/src/languages" relative="/WEB-INF/languages" />
+          <root url="file://$MODULE_DIR$/src/web/html" relative="/" />
+          <root url="file://$MODULE_DIR$/pref/cfs/source" relative="/WEB-INF" />
+        </webroots>
+        <sourceRoots>
+          <root url="file://$MODULE_DIR$/src/java" />
+        </sourceRoots>
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/src/java" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/src/testcases" isTestSource="true" />
+      <excludeFolder url="file://$MODULE_DIR$/build" />
+      <excludeFolder url="file://$MODULE_DIR$/dist" />
+      <excludeFolder url="file://$MODULE_DIR$/centric_temp" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" exported="" name="All Jars" level="project" />
+    <orderEntry type="library" name="Tomcat" level="application" />
+    <orderEntry type="library" name="ant" level="application" />
+  </component>
+</module>

@@ -67,7 +67,7 @@
 </table>
 <%-- End Trails --%>
 <dhv:container name="users" selected="details" object="UserRecord"
-               param="<%= "id=" + UserRecord.getId() %>">
+               param='<%= "id=" + UserRecord.getId() %>'>
 <% if (request.getParameter("return") != null) {%>
 <input type="hidden" name="return" value="<%=request.getParameter("return")%>">
 <%}%>
@@ -191,13 +191,13 @@
           <td width="8"></td>
           <td valign="center">
             <dhv:evaluate
-                if="<%= !"".equals(UserRecord.getContact().getPrimaryEmailAddress()) %>">
+                if='<%= !"".equals(UserRecord.getContact().getPrimaryEmailAddress()) %>'>
               <dhv:label name="admin.newPassword.emailed">Note: New password
                 will be emailed to the following address:</dhv:label>
               <%= UserRecord.getContact().getPrimaryEmailAddress() %>
             </dhv:evaluate>
             <dhv:evaluate
-                if="<%= "".equals(UserRecord.getContact().getPrimaryEmailAddress()) %>">
+                if='<%= "".equals(UserRecord.getContact().getPrimaryEmailAddress()) %>'>
               <dhv:label name="contacts.noContactEmailAddressFound">No Contact
                 Email Address found. Please add one.</dhv:label>
             </dhv:evaluate>

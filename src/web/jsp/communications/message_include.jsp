@@ -162,7 +162,7 @@
                 </dhv:evaluate>
               </select>
             </td>
-            <dhv:permission name="<%= "accounts-accounts-documents-view"+","+"accounts-accounts-contacts-documents-view"+","+ "contacts-external_contacts-documents-view" +","+ "documents-view"+","+ "projects-view"%>" all="false">
+            <dhv:permission name='<%= "accounts-accounts-documents-view"+","+"accounts-accounts-contacts-documents-view"+","+ "contacts-external_contacts-documents-view" +","+ "documents-view"+","+ "projects-view"%>' all="false">
             <td valign="top">
               <input type="hidden" name="previousSelection" value="" />
               <% String params = "";

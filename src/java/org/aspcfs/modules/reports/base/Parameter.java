@@ -684,7 +684,7 @@ public class Parameter
           "\" value=\"" + value + "\">" +
           "&nbsp; [<a href=\"javascript:popSiteAccountsListSingle('" + name +
           "','change" + name + "','siteid" +
-          "', 'showMyCompany=true&filters=all|my|disabled');\">Select</a>]" +
+          "', 'showMyCompany=true&filters=all%7Cmy%7Cdisabled');\">Select</a>]" +
           "&nbsp; [<a href=\"javascript:changeDivContent('change" + name +
           "','All');javascript:resetNumericFieldValue('" + name +
           "');\">Clear</a>]";

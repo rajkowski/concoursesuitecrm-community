@@ -12,7 +12,7 @@ function popProductCatalogsListSingle(hiddenFieldId, displayFieldId, params) {
   var posy = (screen.height - height)/2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + ',screenX=' + posx + ',screenY=' + posy;
   if(params != ''){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin=window.open('ProductCatalogSelector.do?command=ListProductCatalogs&listType=single&reset=true&previousSelection='+document.getElementById(hiddenFieldId).value+'&displayFieldId='+displayFieldId+'&hiddenFieldId='+hiddenFieldId + params, title, windowParams);
   newwin.focus();
@@ -44,7 +44,7 @@ function popProductCatalogsListMultiple(displayFieldId, highLightedId, params) {
   }
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin=window.open('ProductCatalogSelector.do?command=ListProductCatalogs&previousSelection=' + selectedIds + '&previousSelectionDisplay=' + selectedDisplays + '&listType=list&flushtemplist=true&selectedIds='+highLightedId+'&displayFieldId='+displayFieldId + params, title, windowParams);
   newwin.focus();
@@ -64,7 +64,7 @@ function popProductCatalogsListMultipleCategory(existingIds, params) {
   var posy = (screen.height - height)/2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var selectedIds = "";
   for (count=0; count < existingIds.length; ++count) {

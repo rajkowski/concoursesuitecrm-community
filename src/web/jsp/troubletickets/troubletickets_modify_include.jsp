@@ -362,7 +362,7 @@ function popKbEntries() {
             &nbsp;
             <%= showAttribute(request, "productIdError") %>
             [<a
-              href="javascript:popProductListSingle('productId','addLaborCategory', 'filters=all|my|disabled');"><dhv:label
+              href="javascript:popProductListSingle('productId','addLaborCategory', 'filters=all%7Cmy%7Cdisabled');"><dhv:label
               name="accounts.accounts_add.select">Select</dhv:label></a>]
             &nbsp [<a
               href="javascript:changeDivContent('addLaborCategory',label('none.selected','None Selected'));javascript:resetNumericFieldValue('productId');"><dhv:label
@@ -390,9 +390,7 @@ function popKbEntries() {
     <table border="0" cellspacing="0" cellpadding="0" class="empty">
       <tr>
         <td>
-          <textarea name="problem" cols="55"
-                    rows="8"><%= toString(TicketDetails.getProblem()) %>
-          </textarea>
+          <textarea name="problem" cols="55" rows="8"><%= toString(TicketDetails.getProblem()) %></textarea>
         </td>
         <td valign="top">
           <font
@@ -616,9 +614,7 @@ function popKbEntries() {
     <table border="0" cellspacing="0" cellpadding="0" class="empty">
       <tr>
         <td valign="top">
-          <textarea name="comment" cols="55"
-                    rows="5"><%= toString(TicketDetails.getComment()) %>
-          </textarea><br/>
+          <textarea name="comment" cols="55" rows="5"><%= toString(TicketDetails.getComment()) %></textarea><br/>
           <dhv:label name="tickets.noteAddedtoTicketHistory.brackets">(This note
             is added to the ticket history. Previous notes for this ticket are
             listed under the history tab.)</dhv:label>
@@ -641,9 +637,7 @@ function popKbEntries() {
         <dhv:label name="account.ticket.cause">Cause</dhv:label>
       </td>
       <td>
-        <textarea name="cause" cols="55"
-                  rows="8"><%= toString(TicketDetails.getCause()) %>
-        </textarea>
+        <textarea name="cause" cols="55" rows="8"><%= toString(TicketDetails.getCause()) %></textarea>
         <dhv:include name="ticket.causeId" none="true"><br/>
           <%= causeList.getHtmlSelect("causeId", TicketDetails.getCauseId()) %>
         </dhv:include>
@@ -679,9 +673,7 @@ function popKbEntries() {
     </td>
     <td>
       <dhv:include name="ticket.resolution" none="true">
-        <textarea name="solution" cols="55"
-                  rows="8"><%= toString(TicketDetails.getSolution()) %>
-        </textarea><br/></dhv:include>
+        <textarea name="solution" cols="55" rows="8"><%= toString(TicketDetails.getSolution()) %></textarea><br/></dhv:include>
       <dhv:include name="ticket.resolutionId" none="true">
         <%= resolutionList.getHtmlSelect("resolutionId", TicketDetails.getResolutionId()) %>
         <br/>

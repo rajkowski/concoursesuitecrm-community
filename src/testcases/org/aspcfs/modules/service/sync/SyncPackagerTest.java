@@ -17,6 +17,12 @@ package org.aspcfs.modules.service.sync;
 
 import helpers.sqlHelper.SqlEntry;
 import helpers.sqlHelper.SqlParser;
+import junit.framework.TestCase;
+import org.aspcfs.apps.transfer.reader.cfsdatabasereader.Property;
+import org.aspcfs.apps.transfer.reader.cfsdatabasereader.PropertyMap;
+import org.aspcfs.apps.transfer.reader.cfsdatabasereader.PropertyMapList;
+import org.aspcfs.utils.XMLUtils;
+import org.w3c.dom.Element;
 
 import java.io.File;
 import java.lang.reflect.Method;
@@ -25,14 +31,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-
-import org.aspcfs.apps.transfer.reader.cfsdatabasereader.Property;
-import org.aspcfs.apps.transfer.reader.cfsdatabasereader.PropertyMap;
-import org.aspcfs.apps.transfer.reader.cfsdatabasereader.PropertyMapList;
-import org.aspcfs.utils.XMLUtils;
-import org.w3c.dom.Element;
-
-import junit.framework.TestCase;
 
 /**
  * Description of the Class
@@ -52,7 +50,7 @@ public class SyncPackagerTest extends TestCase {
 
     PropertyMapList mappings = new PropertyMapList();;
     try{
-      mappings.loadMap(mappingFile, new ArrayList());
+      mappings.loadMap(new File(mappingFile).toURL(), new ArrayList());
     }catch(Exception e){
       fail(e.getMessage());
     }

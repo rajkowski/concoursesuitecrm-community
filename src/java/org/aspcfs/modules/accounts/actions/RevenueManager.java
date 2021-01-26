@@ -28,7 +28,7 @@ import org.aspcfs.utils.web.HtmlSelect;
 import org.aspcfs.utils.web.PagedListInfo;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
@@ -55,7 +55,7 @@ import java.util.*;
  *
  * @author chris
  * @version $Id: RevenueManager.java,v 1.24 2003/01/09 18:10:27 mrajkowski Exp
- *          $
+ * $
  * @created November, 2002
  */
 public final class RevenueManager extends CFSModule {
@@ -272,13 +272,13 @@ public final class RevenueManager extends CFSModule {
       XYItemRenderer renderer = plot.getRenderer();
       if (renderer instanceof StandardXYItemRenderer) {
         StandardXYItemRenderer rr = (StandardXYItemRenderer) renderer;
-        rr.setPlotShapes(true);
-        rr.setShapesFilled(false);
-        rr.setItemLabelsVisible(true);
+        rr.setPlotLines(true);
+        rr.setBaseShapesFilled(false);
+        rr.setDefaultItemLabelsVisible(true);
         // Tool tip formatting using locale {1} = Date, {2} = Amount
         StandardXYToolTipGenerator ttg = new StandardXYToolTipGenerator(
             "{2} ({1})", sdf, NumberFormat.getInstance(locale));
-        rr.setToolTipGenerator(ttg);
+        rr.setSeriesToolTipGenerator(0, ttg);
       }
       //Output the chart
       if (System.getProperty("DEBUG") != null) {
@@ -293,17 +293,17 @@ public final class RevenueManager extends CFSModule {
         java.util.Date testDate = new java.util.Date();
         String fileName = String.valueOf(idToUse) + String.valueOf(
             testDate.getTime()) + String.valueOf(
-                context.getSession().getCreationTime());
+            context.getSession().getCreationTime());
 
         // Write the chart image
         ChartRenderingInfo info = new ChartRenderingInfo(
             new StandardEntityCollection());
         File imageFile = new File(filePath + fileName + ".jpg");
-        ChartUtilities.saveChartAsJPEG(
+        ChartUtils.saveChartAsJPEG(
             imageFile, 1.0f, chart, width, height, info);
         PrintWriter pw = new PrintWriter(
             new BufferedWriter(new FileWriter(filePath + fileName + ".map")));
-        ChartUtilities.writeImageMap(pw, fileName, info, false);
+        ChartUtils.writeImageMap(pw, fileName, info, false);
         pw.flush();
         pw.close();
 

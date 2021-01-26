@@ -146,7 +146,7 @@
         <tr>
           <td align="center">
             <%= toHtml(applicationPrefs.get("VERSION")) %><br />
-            &#169; Copyright 2000-2007 Concourse Suite Community Edition &#149; <dhv:label name="global.label.allRightsReserved">All rights reserved.</dhv:label>
+            &#169; Copyright 2021 CRM Owner &#149; <dhv:label name="global.label.allRightsReserved">All rights reserved.</dhv:label>
           </td>
         </tr>
       </table>

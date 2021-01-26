@@ -39,7 +39,7 @@
 <%@ include file="initPage.jsp" %>
 <html>
 <head>
-<title><dhv:label name="templates.CentricCRM">Concourse Suite Community Edition</dhv:label></title>
+<title><dhv:label name="templates.CentricCRM">CRM</dhv:label></title>
 </head>
 <link rel="stylesheet" href="css/template-login.css" type="text/css">
 <script language="JavaScript">
@@ -102,12 +102,7 @@
               </div>
               <div class="information">
                 <div class="nameAndSecurity">
-                    <dhv:evaluate if='<%= !applicationPrefs.has("LAYOUT.JSP.LOGIN.TEXT") %>'>
-                      Concourse Suite Community Edition
-                    </dhv:evaluate>
-                    <dhv:evaluate if='<%= applicationPrefs.has("LAYOUT.JSP.LOGIN.TEXT") %>'>
-                      <%= toHtml(applicationPrefs.get("LAYOUT.JSP.LOGIN.TEXT")) %>
-                    </dhv:evaluate>
+                    CRM
                     <% if("https".equals(request.getScheme())) {%>
                       <dhv:label name="calendar.secureLogin">Secure Login</dhv:label>
                     <%} else {%>
@@ -142,7 +137,7 @@
                 <dhv:evaluate if="<%= hasText(APP_ORGANIZATION) %>"><dhv:label name="calendar.licensedTo.colon" param='<%= "organization="+toHtml(APP_ORGANIZATION) %>'>Licensed to: <%= toHtml(APP_ORGANIZATION) %></dhv:label></dhv:evaluate>
                 </dhv:evaluate>
               </div>
-            &#169; Copyright 2000-2007 Concursive Corporation. &#149; <dhv:label name="global.label.allRightsReserved">All rights reserved.</dhv:label>
+            &#169; Copyright 2021 CRM Owner &#149; <dhv:label name="global.label.allRightsReserved">All rights reserved.</dhv:label>
           </td>
         </tr>
       </table>

@@ -37,7 +37,7 @@ import org.aspcfs.utils.UserUtils;
 import org.aspcfs.utils.web.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
@@ -422,9 +422,9 @@ public final class Leads extends CFSModule {
     if (recordInserted) {
       addRecentItem(context, newOpp.getHeader());
       if (context.getRequest().getParameter("popup") != null) {
-          if(context.getRequest().getParameter("fromPop").equals("true")){
-           context.getRequest().setAttribute("fromPop", "true");
-          }
+        if (context.getRequest().getParameter("fromPop").equals("true")) {
+          context.getRequest().setAttribute("fromPop", "true");
+        }
         return ("CloseInsertOppPopup");
       }
       context.getRequest().setAttribute(
@@ -543,8 +543,8 @@ public final class Leads extends CFSModule {
    * @param context Description of Parameter
    * @return Description of the Returned Value
    */
-  
-  
+
+
   public String executeCommandSearchForm(ActionContext context) {
     Connection db = null;
     String status = null;
@@ -559,8 +559,8 @@ public final class Leads extends CFSModule {
     }
     return status;
   }
-      
-  private String executeCommandSearchForm(ActionContext context,Connection db) throws NumberFormatException, SQLException {
+
+  private String executeCommandSearchForm(ActionContext context, Connection db) throws NumberFormatException, SQLException {
     if (!hasPermission(context, "pipeline-opportunities-view")) {
       return ("PermissionError");
     }
@@ -576,69 +576,69 @@ public final class Leads extends CFSModule {
     if (vpUserId != -1 && vpUserId != userId) {
       userId = vpUserId;
     }
-      //Opportunity types drop-down menu
-      LookupList environmentSelect = systemStatus.getLookupList(
-          db, "lookup_opportunity_environment");
-      context.getRequest().setAttribute(
-          "environmentSelect", environmentSelect);
-      LookupList competitorsSelect = systemStatus.getLookupList(
-          db, "lookup_opportunity_competitors");
-      context.getRequest().setAttribute(
-          "competitorsSelect", competitorsSelect);
-      LookupList compellingEventSelect = systemStatus.getLookupList(
-          db, "lookup_opportunity_event_compelling");
-      context.getRequest().setAttribute(
-          "compellingEventSelect", compellingEventSelect);
-      LookupList budgetSelect = systemStatus.getLookupList(
-          db, "lookup_opportunity_budget");
-      context.getRequest().setAttribute("budgetSelect", budgetSelect);
-      LookupList typeSelect = new LookupList(db, "lookup_opportunity_types");
-      typeSelect.addItem(0, systemStatus.getLabel("accounts.allTypes","All Types"));
-      context.getRequest().setAttribute("TypeSelect", typeSelect);
-      //add access types
-      AccessTypeList accessTypeList = null;
-      accessTypeList = this.getSystemStatus(context).getAccessTypeList(db, AccessType.OPPORTUNITIES);
-      context.getRequest().setAttribute("accessTypeList", accessTypeList);
-      //Generate user list
-      User thisRec = this.getUser(context, userId);
-      UserList shortChildList = thisRec.getShortChildList();
-      UserList userList = thisRec.getFullChildList(
-          shortChildList, new UserList());
-      userList = UserList.sortEnabledUsers(userList, new UserList());
-      userList.setMyId(userId);
-      userList.setMyValue(thisRec.getContact().getNameLastFirst());
-      userList.setIncludeMe(true);
-      userList.setExcludeDisabledIfUnselected(true);
-      userList.setExcludeExpiredIfUnselected(true);
-      context.getRequest().setAttribute("UserList", userList);
-      //check if account/contact is already selected, if so build it
-      if (!"".equals(
-          searchOppListInfo.getSearchOptionValue("searchcodeOrgId")) && !"-1".equals(
-          searchOppListInfo.getSearchOptionValue("searchcodeOrgId"))) {
-        String orgId = searchOppListInfo.getSearchOptionValue(
-            "searchcodeOrgId");
-        Organization thisOrg = new Organization(db, Integer.parseInt(orgId));
-        context.getRequest().setAttribute("OrgDetails", thisOrg);
-      }
-      if (!"".equals(
-          searchOppListInfo.getSearchOptionValue("searchcodeContactId")) && !"-1".equals(
-          searchOppListInfo.getSearchOptionValue("searchcodeContactId"))) {
-        String id = searchOppListInfo.getSearchOptionValue(
-            "searchcodeContactId");
-        Contact thisContact = new Contact(db, Integer.parseInt(id));
-        context.getRequest().setAttribute("ContactDetails", thisContact);
-      }
-      //stage
-      LookupList stageSelect = new LookupList(db, "lookup_stage");
-      stageSelect.addItem(-1, systemStatus.getLabel("pipeline.allstages","All Stages"));
-      context.getRequest().setAttribute("StageList", stageSelect);
+    //Opportunity types drop-down menu
+    LookupList environmentSelect = systemStatus.getLookupList(
+        db, "lookup_opportunity_environment");
+    context.getRequest().setAttribute(
+        "environmentSelect", environmentSelect);
+    LookupList competitorsSelect = systemStatus.getLookupList(
+        db, "lookup_opportunity_competitors");
+    context.getRequest().setAttribute(
+        "competitorsSelect", competitorsSelect);
+    LookupList compellingEventSelect = systemStatus.getLookupList(
+        db, "lookup_opportunity_event_compelling");
+    context.getRequest().setAttribute(
+        "compellingEventSelect", compellingEventSelect);
+    LookupList budgetSelect = systemStatus.getLookupList(
+        db, "lookup_opportunity_budget");
+    context.getRequest().setAttribute("budgetSelect", budgetSelect);
+    LookupList typeSelect = new LookupList(db, "lookup_opportunity_types");
+    typeSelect.addItem(0, systemStatus.getLabel("accounts.allTypes", "All Types"));
+    context.getRequest().setAttribute("TypeSelect", typeSelect);
+    //add access types
+    AccessTypeList accessTypeList = null;
+    accessTypeList = this.getSystemStatus(context).getAccessTypeList(db, AccessType.OPPORTUNITIES);
+    context.getRequest().setAttribute("accessTypeList", accessTypeList);
+    //Generate user list
+    User thisRec = this.getUser(context, userId);
+    UserList shortChildList = thisRec.getShortChildList();
+    UserList userList = thisRec.getFullChildList(
+        shortChildList, new UserList());
+    userList = UserList.sortEnabledUsers(userList, new UserList());
+    userList.setMyId(userId);
+    userList.setMyValue(thisRec.getContact().getNameLastFirst());
+    userList.setIncludeMe(true);
+    userList.setExcludeDisabledIfUnselected(true);
+    userList.setExcludeExpiredIfUnselected(true);
+    context.getRequest().setAttribute("UserList", userList);
+    //check if account/contact is already selected, if so build it
+    if (!"".equals(
+        searchOppListInfo.getSearchOptionValue("searchcodeOrgId")) && !"-1".equals(
+        searchOppListInfo.getSearchOptionValue("searchcodeOrgId"))) {
+      String orgId = searchOppListInfo.getSearchOptionValue(
+          "searchcodeOrgId");
+      Organization thisOrg = new Organization(db, Integer.parseInt(orgId));
+      context.getRequest().setAttribute("OrgDetails", thisOrg);
+    }
+    if (!"".equals(
+        searchOppListInfo.getSearchOptionValue("searchcodeContactId")) && !"-1".equals(
+        searchOppListInfo.getSearchOptionValue("searchcodeContactId"))) {
+      String id = searchOppListInfo.getSearchOptionValue(
+          "searchcodeContactId");
+      Contact thisContact = new Contact(db, Integer.parseInt(id));
+      context.getRequest().setAttribute("ContactDetails", thisContact);
+    }
+    //stage
+    LookupList stageSelect = new LookupList(db, "lookup_stage");
+    stageSelect.addItem(-1, systemStatus.getLabel("pipeline.allstages", "All Stages"));
+    context.getRequest().setAttribute("StageList", stageSelect);
 
-      //sites lookup
-      LookupList siteList = new LookupList(db, "lookup_site_id");
-      siteList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
-      siteList.addItem(Constants.INVALID_SITE, systemStatus.getLabel("accounts.allSites"));
-      siteList.setJsEvent("onChange=\"javascript:resetSiteData(this.form);\"");
-      context.getRequest().setAttribute("SiteIdList", siteList);
+    //sites lookup
+    LookupList siteList = new LookupList(db, "lookup_site_id");
+    siteList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
+    siteList.addItem(Constants.INVALID_SITE, systemStatus.getLabel("accounts.allSites"));
+    siteList.setJsEvent("onChange=\"javascript:resetSiteData(this.form);\"");
+    context.getRequest().setAttribute("SiteIdList", siteList);
     addModuleBean(context, "Search Opportunities", "Search Opportunities");
     return ("SearchOK");
   }
@@ -682,7 +682,7 @@ public final class Leads extends CFSModule {
         htmlDialog.setHeader(systemStatus.getLabel("confirmdelete.header"));
         htmlDialog.addButton(
             systemStatus.getLabel("global.button.delete"), "javascript:window.location.href='Leads.do?command=TrashOpp&id=" + id + RequestUtils.addLinkParams(
-            context.getRequest(), "viewSource") + "'");
+                context.getRequest(), "viewSource") + "'");
         htmlDialog.addButton(
             systemStatus.getLabel("button.cancel"), "javascript:parent.window.close()");
       } else {
@@ -819,7 +819,7 @@ public final class Leads extends CFSModule {
           "cgmr", systemStatus.getLabel("pipeline.graphTypeSelect.item.CGMR"));
       graphTypeSelect.addItem(
           "cramr", systemStatus.getLabel(
-          "pipeline.graphTypeSelect.item.CRAMR"));
+              "pipeline.graphTypeSelect.item.CRAMR"));
       graphTypeSelect.setDefaultKey(graphString);
 
       //Generate the opportunities pagedList for the idToUse (builds component count and value of idToUse only), right of graph
@@ -885,7 +885,7 @@ public final class Leads extends CFSModule {
         }
         Calendar calendar = Calendar.getInstance(
             getUserTimeZone(context), UserUtils.getUserLocale(
-            context.getRequest()));
+                context.getRequest()));
         realFullOppList.setCloseDateEnd(
             new java.sql.Timestamp(
                 calendar.getTimeInMillis() + ((long) 1000 * 60 * 60 * 24 * 395)));
@@ -966,13 +966,13 @@ public final class Leads extends CFSModule {
         XYItemRenderer renderer = plot.getRenderer();
         if (renderer instanceof StandardXYItemRenderer) {
           StandardXYItemRenderer rr = (StandardXYItemRenderer) renderer;
-          rr.setPlotShapes(true);
-          rr.setShapesFilled(false);
-          rr.setItemLabelsVisible(true);
+          rr.setPlotLines(true);
+          rr.setBaseShapesFilled(false);
+          rr.setDefaultItemLabelsVisible(true);
           // Tool tip formatting using locale {1} = Date, {2} = Amount
           StandardXYToolTipGenerator ttg = new StandardXYToolTipGenerator(
               "{2} ({1})", sdf, NumberFormat.getInstance(locale));
-          rr.setToolTipGenerator(ttg);
+          rr.setSeriesToolTipGenerator(0, ttg);
         }
         //Output the chart
         if (System.getProperty("DEBUG") != null) {
@@ -995,11 +995,11 @@ public final class Leads extends CFSModule {
         ChartRenderingInfo info = new ChartRenderingInfo(
             new StandardEntityCollection());
         File imageFile = new File(filePath + fileName + ".jpg");
-        ChartUtilities.saveChartAsJPEG(
+        ChartUtils.saveChartAsJPEG(
             imageFile, 1.0f, chart, width, height, info);
         PrintWriter pw = new PrintWriter(
             new BufferedWriter(new FileWriter(filePath + fileName + ".map")));
-        ChartUtilities.writeImageMap(pw, fileName, info, false);
+        ChartUtils.writeImageMap(pw, fileName, info, false);
         pw.flush();
         pw.close();
 
@@ -1411,7 +1411,7 @@ public final class Leads extends CFSModule {
           db, "lookup_opportunity_budget");
       context.getRequest().setAttribute("budgetSelect", budgetSelect);
       LookupList typeSelect = new LookupList(db, "lookup_opportunity_types");
-      typeSelect.addItem(0, systemStatus.getLabel("accounts.allTypes","All Types"));
+      typeSelect.addItem(0, systemStatus.getLabel("accounts.allTypes", "All Types"));
       context.getRequest().setAttribute("TypeSelect", typeSelect);
       LookupList siteList = new LookupList(db, "lookup_site_id");
       siteList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
@@ -1483,7 +1483,7 @@ public final class Leads extends CFSModule {
         return ("OppListOK");
       } else {
         processErrors(context, oppList.getErrors());
-        return executeCommandSearchForm(context,db);
+        return executeCommandSearchForm(context, db);
       }
     } catch (Exception errorMessage) {
       context.getRequest().setAttribute("Error", errorMessage);
@@ -1642,14 +1642,14 @@ public final class Leads extends CFSModule {
     ViewpointInfo viewpointInfo = this.getViewpointInfo(
         context, "PipelineViewpointInfo");
     int userId = viewpointInfo.getVpUserId(this.getUserId(context));
-    
+
     //Configure the action
     addModuleBean(context, "View Opportunities", "Component Details");
-    
+
     String historyId = context.getRequest().getParameter("id");
     String componentId = context.getRequest().getParameter("componentId");
     String headerId = context.getRequest().getParameter("headerId");
-    
+
     OpportunityComponentLog thisComponentLog = null;
     OpportunityComponent component = null;
     OpportunityHeader header = null;
@@ -1657,16 +1657,16 @@ public final class Leads extends CFSModule {
     Connection db = null;
     try {
       db = this.getConnection(context);
-      
+
       thisComponentLog = new OpportunityComponentLog(db, Integer.parseInt(historyId));
-      
+
       if (componentId != null && !"".equals(componentId.trim())) {
-        if (Integer.parseInt(componentId) != -1) { 
+        if (Integer.parseInt(componentId) != -1) {
           component = new OpportunityComponent(db, Integer.parseInt(componentId));
           context.getRequest().setAttribute("opportunityComponent", component);
         }
       }
-      
+
       if (headerId != null && !"".equals(headerId.trim())) {
         header = new OpportunityHeader(db, Integer.parseInt(headerId));
         context.getRequest().setAttribute("opportunityHeader", header);
@@ -1681,7 +1681,7 @@ public final class Leads extends CFSModule {
     return ("ComponentHistoryDetailsOK");
   }
 
-  
+
   /**
    * Description of the Method
    *
@@ -1689,84 +1689,83 @@ public final class Leads extends CFSModule {
    * @return Description of the Return Value
    */
   public String executeCommandComponentHistory(ActionContext context) {
-	    if (!hasPermission(context, "pipeline-opportunities-view")) {
-	      return ("PermissionError");
-	    }
-	    int headerId = -1;
-	    int componentId = -1;
-	    
-      PagedListInfo componentHistoryListInfo = this.getPagedListInfo(
-	        context, "componentHistoryListInfo");
-	    
-      OpportunityHeader thisHeader = null;
-      OpportunityComponent thisComponent = null;
-	    OpportunityComponentLogList componentLogList = null;
-	    
-      addModuleBean(context, "View Opportunities", "View Opportunity Details");
-	    
-      //Get Viewpoints if any
-	    ViewpointInfo viewpointInfo = this.getViewpointInfo(
-	        context, "PipelineViewpointInfo");
-	    int userId = viewpointInfo.getVpUserId(this.getUserId(context));
-	    
-      //Check parameters
-	    if (context.getRequest().getParameter("headerId") != null) {
-	    	headerId = Integer.parseInt(context.getRequest().getParameter("headerId"));
-	    } else {
-	    	headerId = Integer.parseInt(
-	          (String) context.getRequest().getAttribute("headerId"));
-	    }
-	    
-      if (context.getRequest().getParameter("id") != null) {
-	    	componentId = Integer.parseInt(context.getRequest().getParameter("id"));
-	    } else if (context.getRequest().getAttribute("id") != null) {
-	    	componentId = Integer.parseInt(
-	          (String) context.getRequest().getAttribute("id"));
-	    }
-      
-	    Connection db = null;
-	    //Configure the paged list info
-	    if ("true".equals(context.getRequest().getParameter("reset"))) {
-	      context.getSession().removeAttribute("componentHistoryListInfo");
-	    }
-	    componentHistoryListInfo.setLink(
-	        "LeadsComponents.do?command=ComponentHistory" + 
-            "&headerId="+ headerId + RequestUtils.addLinkParams(
-	            context.getRequest(), "id|viewSource"));
-	    try {
-	      db = this.getConnection(context);
-        //Generate the component
-        if (componentId > -1) {
-          thisComponent = new OpportunityComponent();
-          thisComponent.queryRecord(db, componentId);
-          context.getRequest().setAttribute("opportunityComponent", thisComponent);
-        }
-        //Generate the opportunity header
-        thisHeader = new OpportunityHeader();
-        thisHeader.setBuildComponentCount(true);
-        thisHeader.queryRecord(db, headerId);
-        context.getRequest().setAttribute("opportunityHeader", thisHeader);
-	      //Generate the list of component log entries for this header
-        componentLogList = new OpportunityComponentLogList();
-        componentLogList.setPagedListInfo(componentHistoryListInfo);
-	      componentLogList.setHeaderId(thisHeader.getId());
-        if (componentId > -1) {
-          //filters the component log list to a specific component
-          componentLogList.setComponentId(componentId);
-        }
-	      componentLogList.buildList(db);
-	      context.getRequest().setAttribute("componentHistoryList", componentLogList);
-	    } catch (Exception errorMessage) {
-	      context.getRequest().setAttribute("Error", errorMessage);
-	      return ("SystemError");
-	    } finally {
-	      this.freeConnection(context, db);
-	    }
-	    return ("ComponentHistoryOK");
-	  }
+    if (!hasPermission(context, "pipeline-opportunities-view")) {
+      return ("PermissionError");
+    }
+    int headerId = -1;
+    int componentId = -1;
+
+    PagedListInfo componentHistoryListInfo = this.getPagedListInfo(
+        context, "componentHistoryListInfo");
+
+    OpportunityHeader thisHeader = null;
+    OpportunityComponent thisComponent = null;
+    OpportunityComponentLogList componentLogList = null;
+
+    addModuleBean(context, "View Opportunities", "View Opportunity Details");
+
+    //Get Viewpoints if any
+    ViewpointInfo viewpointInfo = this.getViewpointInfo(
+        context, "PipelineViewpointInfo");
+    int userId = viewpointInfo.getVpUserId(this.getUserId(context));
+
+    //Check parameters
+    if (context.getRequest().getParameter("headerId") != null) {
+      headerId = Integer.parseInt(context.getRequest().getParameter("headerId"));
+    } else {
+      headerId = Integer.parseInt(
+          (String) context.getRequest().getAttribute("headerId"));
+    }
+
+    if (context.getRequest().getParameter("id") != null) {
+      componentId = Integer.parseInt(context.getRequest().getParameter("id"));
+    } else if (context.getRequest().getAttribute("id") != null) {
+      componentId = Integer.parseInt(
+          (String) context.getRequest().getAttribute("id"));
+    }
+
+    Connection db = null;
+    //Configure the paged list info
+    if ("true".equals(context.getRequest().getParameter("reset"))) {
+      context.getSession().removeAttribute("componentHistoryListInfo");
+    }
+    componentHistoryListInfo.setLink(
+        "LeadsComponents.do?command=ComponentHistory" +
+            "&headerId=" + headerId + RequestUtils.addLinkParams(
+            context.getRequest(), "id|viewSource"));
+    try {
+      db = this.getConnection(context);
+      //Generate the component
+      if (componentId > -1) {
+        thisComponent = new OpportunityComponent();
+        thisComponent.queryRecord(db, componentId);
+        context.getRequest().setAttribute("opportunityComponent", thisComponent);
+      }
+      //Generate the opportunity header
+      thisHeader = new OpportunityHeader();
+      thisHeader.setBuildComponentCount(true);
+      thisHeader.queryRecord(db, headerId);
+      context.getRequest().setAttribute("opportunityHeader", thisHeader);
+      //Generate the list of component log entries for this header
+      componentLogList = new OpportunityComponentLogList();
+      componentLogList.setPagedListInfo(componentHistoryListInfo);
+      componentLogList.setHeaderId(thisHeader.getId());
+      if (componentId > -1) {
+        //filters the component log list to a specific component
+        componentLogList.setComponentId(componentId);
+      }
+      componentLogList.buildList(db);
+      context.getRequest().setAttribute("componentHistoryList", componentLogList);
+    } catch (Exception errorMessage) {
+      context.getRequest().setAttribute("Error", errorMessage);
+      return ("SystemError");
+    } finally {
+      this.freeConnection(context, db);
+    }
+    return ("ComponentHistoryOK");
+  }
 
 
-  
   /**
    * Description of the Method
    *
@@ -1824,7 +1823,7 @@ public final class Leads extends CFSModule {
               if (getPref(context, "OPPORTUNITY.DEFAULT_UNITS") != null && getPref(context, "OPPORTUNITY.DEFAULT_TERM") != null) {
                 readDateAdjusted.add(
                     java.util.Calendar.MONTH, +(int) (java.lang.Math.round(
-                    tempOpp.getTermsInMonths(getPref(context, "OPPORTUNITY.DEFAULT_UNITS"), getPref(context, "OPPORTUNITY.DEFAULT_TERM")))));
+                        tempOpp.getTermsInMonths(getPref(context, "OPPORTUNITY.DEFAULT_UNITS"), getPref(context, "OPPORTUNITY.DEFAULT_TERM")))));
               } else {
                 readDateAdjusted.add(java.util.Calendar.MONTH, +(int) (java.lang.Math.round(tempOpp.getTermsInMonths())));
               }
@@ -1986,20 +1985,20 @@ public final class Leads extends CFSModule {
     for (int count = 0; count < 12; count++) {
       thisLine.getGmr().setValue(
           valKeys[count], new Double(
-          primaryNode.getGmr().getValue(valKeys[count]).doubleValue() + (addToMe.getGmr().getValue(
-              valKeys[count])).doubleValue()));
+              primaryNode.getGmr().getValue(valKeys[count]).doubleValue() + (addToMe.getGmr().getValue(
+                  valKeys[count])).doubleValue()));
       thisLine.getRamr().setValue(
           valKeys[count], new Double(
-          primaryNode.getRamr().getValue(valKeys[count]).doubleValue() + (addToMe.getRamr().getValue(
-              valKeys[count])).doubleValue()));
+              primaryNode.getRamr().getValue(valKeys[count]).doubleValue() + (addToMe.getRamr().getValue(
+                  valKeys[count])).doubleValue()));
       thisLine.getCgmr().setValue(
           valKeys[count], new Double(
-          primaryNode.getCgmr().getValue(valKeys[count]).doubleValue() + (addToMe.getCgmr().getValue(
-              valKeys[count])).doubleValue()));
+              primaryNode.getCgmr().getValue(valKeys[count]).doubleValue() + (addToMe.getCgmr().getValue(
+                  valKeys[count])).doubleValue()));
       thisLine.getCramr().setValue(
           valKeys[count], new Double(
-          primaryNode.getCramr().getValue(valKeys[count]).doubleValue() + (addToMe.getCramr().getValue(
-              valKeys[count])).doubleValue()));
+              primaryNode.getCramr().getValue(valKeys[count]).doubleValue() + (addToMe.getCramr().getValue(
+                  valKeys[count])).doubleValue()));
     }
     currentLines.add(thisLine);
     return currentLines;

@@ -1,8 +1,6 @@
 Manifest-Version: 1.0
 Created-By: Concursive Corporation
-Comment: Concourse Suite Community Edition Web Application Open Source Edition Thu Feb 10 13:00:00 EST 2005
-Implementation-Title: Concourse Suite Community Edition
-Implementation-Version: 4.0
-Implementation-Vendor: Concursive Corporation
-Implementation-URL: http://www.concursive.com
-
+Implementation-Title: CRM
+Implementation-Version: 10.0
+Implementation-Vendor: Matt Rajkowski
+Implementation-URL: https://github.com/rajkowski

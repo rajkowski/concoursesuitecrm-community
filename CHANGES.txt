@@ -1,4 +1,13 @@
 ----------------------------------------------------------------------------
+CRM
+Change Log
+January 26, 2021
+----------------------------------------------------------------------------
+
+- Tomcat 8.5+, Java 10+, PostgreSQL 11+, and dependencies as needed
+
+
+----------------------------------------------------------------------------
 Concourse Suite Community Edition 4.2 Alpha
 Copyright (C) 2007 Concursive Corporation
 Change Log
@@ -385,8 +394,8 @@ August 4, 2005
 - New database abstraction features: supports sequences and reserved words
 - New source code ant targets: "upgradedb" and "copy"
 - Additional and updated translations included:
-  - Deutsch, thanks to Reinhold MŸller, menta AG
-  - Espa–ol, thanks to Tamer Muyale
+  - Deutsch, thanks to Reinhold Mï¿½ller, menta AG
+  - Espaï¿½ol, thanks to Tamer Muyale
   - Portuguese, thanks to Emerson Can?ado, Oriens Tecnologia
 
 Fixes:

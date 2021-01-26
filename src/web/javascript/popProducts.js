@@ -8,7 +8,7 @@ function popProductListSingle(hiddenFieldId, displayFieldId, params, orgId) {
   var posy = (screen.height - height)/2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + ',screenX=' + posx + ',screenY=' + posy;
   if(params != ''){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
 
   contractId = document.getElementById('contractId').value;

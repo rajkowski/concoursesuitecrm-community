@@ -143,10 +143,10 @@
 <table cellpadding="4" cellspacing="0" width="100%" class="details">
   <tr>
     <th colspan="2">
-      <dhv:evaluate if="<%="".equals(ids)|| ids == null  %>">
+      <dhv:evaluate if='<%="".equals(ids)|| ids == null  %>'>
 		    <strong><dhv:label name="button.convertToAccount">Convert to Account</dhv:label></strong>
 			</dhv:evaluate>
-      <dhv:evaluate if="<%=!"".equals(ids)&&ids != null  %>">
+      <dhv:evaluate if='<%=!"".equals(ids)&&ids != null  %>'>
 		    <dhv:evaluate if="<%="toContact".equals(action)%>">
 		    	<strong><dhv:label name="button.convertToContact">Convert to Contact</dhv:label></strong>
 				</dhv:evaluate>
@@ -268,7 +268,7 @@
           </td>
           <td>
             <input type="hidden" name="orgId" id="orgId" value="<%= contactDetails.getOrgId() %>">
-            &nbsp; [<a href="javascript:document.forms['assignLead'].account[1].checked='t';javascript:popAccountsListSingle('orgId','changeaccount', 'showMyCompany=false&filters=all|my|disabled');"><dhv:label name="accounts.accounts_add.select">Select</dhv:label></a>]
+            &nbsp; [<a href="javascript:document.forms['assignLead'].account[1].checked='t';javascript:popAccountsListSingle('orgId','changeaccount', 'showMyCompany=false&filters=all%7Cmy%7Cdisabled');"><dhv:label name="accounts.accounts_add.select">Select</dhv:label></a>]
             &nbsp; [<a href="javascript:document.forms['assignLead'].account[0].checked='t';javascript:changeDivContent('changeaccount',label('none.selected','None Selected'));javascript:resetNumericFieldValue('orgId');"><dhv:label name="accounts.accountasset_include.clear">Clear</dhv:label></a>]
           </td>
         </tr>

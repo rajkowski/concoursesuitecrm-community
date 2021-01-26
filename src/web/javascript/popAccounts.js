@@ -12,7 +12,7 @@ function popSiteAccountsListSingle(hiddenFieldId, displayFieldId, site, params) 
   var posy = (screen.height - height) / 2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + ',screenX=' + posx + ',screenY=' + posy;
   if (params != '') {
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin = window.open('AccountSelector.do?command=ListAccounts&listType=single&reset=true&siteId=' + document.getElementById(site).value + '&previousSelection=' + document.getElementById(hiddenFieldId).value + '&displayFieldId=' + displayFieldId + '&hiddenFieldId=' + hiddenFieldId + params, title, windowParams);
   newwin.focus();
@@ -32,7 +32,7 @@ function popAccountsListSingle(hiddenFieldId, displayFieldId, params) {
   var posy = (screen.height - height) / 2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + ',screenX=' + posx + ',screenY=' + posy;
   if (params != '') {
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin = window.open('AccountSelector.do?command=ListAccounts&listType=single&reset=true&previousSelection=' + document.getElementById(hiddenFieldId).value + '&displayFieldId=' + displayFieldId + '&hiddenFieldId=' + hiddenFieldId + params, title, windowParams);
   newwin.focus();
@@ -52,7 +52,7 @@ function popAccountsListSingle2(hiddenFieldId, displayFieldId, params) {
   var posy = (screen.height - height) / 2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + ',screenX=' + posx + ',screenY=' + posy;
   if (params != '') {
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin = window.open('AccountSelector.do?command=ListAccounts2&listType=single&reset=true&previousSelection=' + document.getElementById(hiddenFieldId).value + '&displayFieldId=' + displayFieldId + '&hiddenFieldId=' + hiddenFieldId + params, title, windowParams);
   newwin.focus();
@@ -73,7 +73,7 @@ function popAccountsListSingleAlert(functionName, orgId, itemId, params) {
   var posy = (screen.height - height) / 2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if (params != '') {
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   url = 'AccountSelector.do?command=ListAccounts&listType=singleAlert&reset=true&previousSelection=' + orgId;
   url += '&functionName=' + functionName;

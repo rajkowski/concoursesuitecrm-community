@@ -1,14 +1,3 @@
-<%--
- Portions Copyright 2000-2004 Matt Rajkowski
- matt.rajkowski@teamelements.com
- http://www.teamelements.com
- This source code cannot be modified, distributed or used without
- permission from Matt Rajkowski
---%>
-<%--
- Portions Copyright 2001-2004 Concursive Corporation
- Use as licensed.
---%>
 <%-- This jsp shows a calendar to the user and sends the selected date back
      to the calling form.
      NOTE: THIS JSP DOES NOT REQUIRE A USER TO BE LOGGED IN --%>

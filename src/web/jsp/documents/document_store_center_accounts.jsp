@@ -63,7 +63,7 @@
 <dhv:evaluate if="<%= !documentStore.isTrashed() %>" >
   <dhv:documentPermission name="documentcenter-accounts-add">
     <img border="0" src="images/icons/stock_link_account-16.gif" align="absmiddle">
-    <a href="javascript:popAccountsListSingle('changeaccount1','changeaccount2', 'showMyCompany=false&filters=all|my');"><dhv:label name="project.linkAnAccount">Link an Account</dhv:label></a><br>
+    <a href="javascript:popAccountsListSingle('changeaccount1','changeaccount2', 'showMyCompany=false&filters=all%7Cmy');"><dhv:label name="project.linkAnAccount">Link an Account</dhv:label></a><br>
   </dhv:documentPermission>
 </dhv:evaluate>
 <table border="0" width="100%" cellspacing="0" cellpadding="0">

@@ -259,7 +259,7 @@
     </td>
     <td>
       <dhv:evaluate
-          if="<%= (TicketDetails.getServiceContractNumber()!= null && !"".equals(TicketDetails.getServiceContractNumber())) %>">
+          if='<%= (TicketDetails.getServiceContractNumber()!= null && !"".equals(TicketDetails.getServiceContractNumber())) %>'>
         <a href="javascript:popURL('AccountsServiceContracts.do?command=View&orgId=<%= SubmitterOrgDetails.getOrgId()%>&id=<%= TicketDetails.getContractId() %>&popup=true&viewOnly=true','AccountDetails','650','500','yes','yes');"><%= toHtml(TicketDetails.getServiceContractNumber()) %>
         </a>
       </dhv:evaluate>

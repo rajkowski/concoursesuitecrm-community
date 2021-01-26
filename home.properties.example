@@ -4,10 +4,6 @@
 ## Declare the webapp server's directory to compile using web app server libraries
 ## based on the webapp type configured in build.properties
 #CATALINA_HOME=/path/to/tomcat
-#GERONIMO_HOME=/path/to/geronimo or websphere ce
-#JBOSS_HOME=/path/to/jboss
-#WEBLOGIC_HOME=/path/to/weblogic
-#WEBSPHERE_HOME=/path/to/websphere
 
 ## CENTRIC_HOME can be used to compile directly to the webapp's deployment
 ## directory (for development), or to any directory for later generating a .war

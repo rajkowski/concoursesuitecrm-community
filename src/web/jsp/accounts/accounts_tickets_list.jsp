@@ -159,7 +159,7 @@
   </td>
   <td width="10%" valign="top" class="row<%= rowid %>">
     <%= toHtml(thisTic.getSubmitterName()) %><dhv:evaluate
-      if="<%= (thisTic.getSubmitterName()==null||"".equals(thisTic.getSubmitterName())) %>">&nbsp;</dhv:evaluate>
+      if='<%= (thisTic.getSubmitterName()==null||"".equals(thisTic.getSubmitterName())) %>'>&nbsp;</dhv:evaluate>
   </td>
   <td width="150" nowrap valign="top">
     <dhv:username id="<%= thisTic.getAssignedTo() %>"

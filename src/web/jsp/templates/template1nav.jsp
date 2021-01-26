@@ -176,7 +176,7 @@
 <br />
 <center>
 <zeroio:tz timestamp="<%= new java.util.Date() %>" timeFormat="<%= DateFormat.LONG %>" timeZone="<%= User.getTimeZone()%>" /><br />
-&#169; Copyright 2000-2007 Concourse Suite Community Edition &#149; <dhv:label name="global.label.allRightsReserved">All rights reserved.</dhv:label><br />
+&#169; Copyright 2021 CRM Owner &#149; <dhv:label name="global.label.allRightsReserved">All rights reserved.</dhv:label><br />
 </div>
 <%-- Allow pages have to have a scrollTo... must be at end of html --%>
 <script language="JavaScript" type="text/javascript" src="javascript/scrollReload.js"></script>

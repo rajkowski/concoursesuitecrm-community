@@ -226,7 +226,7 @@
                  id="searchcodeSubmitterOrgId"
                  value="<%= TicListInfo.getSearchOptionValue("searchcodeSubmitterOrgId") %>">
           &nbsp;[<a
-            href="javascript:popAccountsListSingle('searchcodeSubmitterOrgId','changeaccountsubmitter', 'showMyCompany=true&siteId='+getSiteId()+'&filters=all|my|disabled');"><dhv:label
+            href="javascript:popAccountsListSingle('searchcodeSubmitterOrgId','changeaccountsubmitter', 'showMyCompany=true&siteId='+getSiteId()+'&filters=all%7Cmy%7Cdisabled');"><dhv:label
             name="accounts.accounts_add.select">Select</dhv:label></a>]
           &nbsp;[<a href="javascript:clearAccountSubmitter();"><dhv:label
             name="button.clear">Clear</dhv:label></a>]

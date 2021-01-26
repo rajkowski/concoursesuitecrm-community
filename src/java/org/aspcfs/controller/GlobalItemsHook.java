@@ -35,7 +35,7 @@ import java.util.*;
  *
  * @author mrajkowski
  * @version $Id: GlobalItemsHook.java,v 1.15 2002/12/23 16:12:28 mrajkowski
- *          Exp $
+ * Exp $
  * @created July 9, 2001
  */
 public class GlobalItemsHook implements ControllerGlobalItemsHook {
@@ -50,12 +50,12 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
    */
   public String generateItems(Servlet servlet, HttpServletRequest request) {
     ConnectionElement ce = (ConnectionElement) request.getSession().getAttribute(
-            "ConnectionElement");
+        "ConnectionElement");
     if (ce == null) {
       return null;
     }
     Hashtable systems = (Hashtable) servlet.getServletConfig().getServletContext().getAttribute(
-            "SystemStatus");
+        "SystemStatus");
     if (systems == null) {
       return null;
     }
@@ -68,7 +68,7 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
       return null;
     }
     TimeZone timeZone = TimeZone.getTimeZone(
-            thisUser.getUserRecord().getTimeZone());
+        thisUser.getUserRecord().getTimeZone());
     int userId = thisUser.getUserId();
     int departmentId = thisUser.getUserRecord().getContact().getDepartment();
     int contactId = thisUser.getUserRecord().getContact().getId();
@@ -94,19 +94,19 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
     String om = isOfflineMode ? "-offline" : "";
     if (systemStatus.hasPermission(userId, "globalitems-search-view" + om)) {
       items.append(
-              "<!-- Site Search -->" +
-                      "<table class=\"globalItem\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">" +
-                      "<form action='Search.do?command=SiteSearch' method='post'>" +
-                      "<tr><th>" + systemStatus.getLabel("search.header") + "</th></tr>" +
-                      "<tr>" +
-                      "<td nowrap>" +
-                      "<img src=\"images/icons/stock_zoom-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
-                      "<input type='text' size='10' name='searchSearchText'>" +
-                      "<input type='submit' value='" + systemStatus.getLabel("search.go") + "' name='Search'>" +
-                      "</td>" +
-                      "</tr>" +
-                      "</form>" +
-                      "</table>");
+          "<!-- Site Search -->" +
+              "<table class=\"globalItem\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">" +
+              "<form action='Search.do?command=SiteSearch' method='post'>" +
+              "<tr><th>" + systemStatus.getLabel("search.header") + "</th></tr>" +
+              "<tr>" +
+              "<td nowrap>" +
+              "<img src=\"images/icons/stock_zoom-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<input type='text' size='10' name='searchSearchText'>" +
+              "<input type='submit' value='" + systemStatus.getLabel("search.go") + "' name='Search'>" +
+              "</td>" +
+              "</tr>" +
+              "</form>" +
+              "</table>");
     }
 
     //Quick Items
@@ -114,111 +114,107 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
       if (systemStatus.hasPermission(userId, "globalitems-search-view" + om)) {
         items.append(
             "<!-- Quick Action -->" +
-            "<script language='javascript' type='text/javascript' src='javascript/popURL.js'></script>" +
-            "<script language='javascript' type='text/javascript' src='javascript/quickAction.js'></script>" +
-            "<table class=\"globalItem\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">" +
-            "<tr><th>" + systemStatus.getLabel("quickactions.header") + "</th></tr>" +
-            "<tr>" +
-            "<td nowrap>");
-      if (systemStatus.hasPermission(userId, "contacts-external_contacts-calls-add" + om)) {
-        items.append("<img src=\"images/alertcall.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
-            "<a href=\"javascript:popURL('ExternalContactsCalls.do?command=Log&contactId=-1&actionSource=GlobalItem&popup=true','Activity','630','425','yes','yes');\">"+
-            systemStatus.getLabel("quickactions.logActivity") +
-            "</a> </br>");
-      }
-
-      if (systemStatus.hasPermission(userId, "contacts-external_contacts-calls-add" + om)) {
-        items.append("<img src=\"images/box-hold.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
-            "<a href=\"javascript:popURL('ExternalContactsCalls.do?command=Schedule&contactId=-1&actionSource=GlobalItem&popup=true','Activity','630','425','yes','yes');\">"+
-            systemStatus.getLabel("quickactions.scheduleActivity") +
-            "</a> </br>");
-      }
-
-      if (systemStatus.hasPermission(userId, "contacts-external_contacts-add" + om)) {
-        items.append("<img src=\"images/icons/stock_bcard-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
-            "<a href=\"javascript:popURL('ExternalContacts.do?command=Prepare&actionSource=GlobalItem&popup=true','contact','630','425','yes','yes');\">"+
-            systemStatus.getLabel("quickactions.addContact") +
-           "</a> </br>");
-      }
-
-      if (systemStatus.hasPermission(userId, "accounts-accounts-add" + om)) {
-        items.append("<img src=\"images/icons/stock_account-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
-            "<a href=\"javascript:popURL('Accounts.do?command=Add&actionSource=GlobalItem&popup=true','Account','630','425','yes','yes');\">" +
-            systemStatus.getLabel("quickactions.addAccount") +
-            "</a> </br>");
-      }
-
-      if (systemStatus.hasPermission(userId, "myhomepage-tasks-add" + om)) {
-        items.append("<img src=\"images/box.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
-            "<a href=\"javascript:popURL('MyTasks.do?command=New&actionSource=GlobalItem&popup=true&moreFields=false','Task','600','425','yes','yes');\">"+
-            systemStatus.getLabel("quickactions.addTask") +
-           "</a> </br>");
-      }
-
-        items.append("<img src=\"images/icons/stock_data-edit-table-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
-                    "<a href=\"javascript:popURL('MyCFS.do?command=AddNote&actionSource=GlobalItem&popup=true','Note','600','500','yes','yes');\">"+
-                    systemStatus.getLabel("quickactions.addNote") +
-                   "</a> </br>");
-
-        if (systemStatus.hasPermission(userId, "contacts-external_contacts-messages-add" + om) || systemStatus.hasPermission(userId, "contacts-external_contacts-messages-view" + om))
-        {
-          items.append("<img src=\"images/icons/stock_mail-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
-                  "<a href=\"javascript:popURL('ExternalContactsMessages.do?command=PrepareQuickMessage&actionSource=GlobalItem&popup=true','contact','600','425','yes','yes');\">" +
-                  systemStatus.getLabel("quickactions.mailToContact") +
-                  "</a> </br>");
+                "<script language='javascript' type='text/javascript' src='javascript/popURL.js'></script>" +
+                "<script language='javascript' type='text/javascript' src='javascript/quickAction.js'></script>" +
+                "<table class=\"globalItem\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">" +
+                "<tr><th>" + systemStatus.getLabel("quickactions.header") + "</th></tr>" +
+                "<tr>" +
+                "<td nowrap>");
+        if (systemStatus.hasPermission(userId, "contacts-external_contacts-calls-add" + om)) {
+          items.append("<img src=\"images/alertcall.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<a href=\"javascript:popURL('ExternalContactsCalls.do?command=Log&contactId=-1&actionSource=GlobalItem&popup=true','Activity','630','425','yes','yes');\">" +
+              systemStatus.getLabel("quickactions.logActivity") +
+              "</a> </br>");
         }
 
-        items.append( "<img src=\"images/icons/stock_hyperlink-target-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
-            "<select name='quickAction' onChange='javascript:quickAction(this.options[this.selectedIndex].value);this.selectedIndex = 0'>");
+        if (systemStatus.hasPermission(userId, "contacts-external_contacts-calls-add" + om)) {
+          items.append("<img src=\"images/box-hold.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<a href=\"javascript:popURL('ExternalContactsCalls.do?command=Schedule&contactId=-1&actionSource=GlobalItem&popup=true','Activity','630','425','yes','yes');\">" +
+              systemStatus.getLabel("quickactions.scheduleActivity") +
+              "</a> </br>");
+        }
 
-        items.append(
-            "<option value='0'>" + systemStatus.getLabel(
-            "quickactions.more") + "</option>");
-      if (systemStatus.hasPermission(userId, "sales-leads-add" + om)) {
-        items.append(
-            "<option value='lead'>" + systemStatus.getLabel(
-            "quickactions.addLead") + "</option>");
-      }
+        if (systemStatus.hasPermission(userId, "contacts-external_contacts-add" + om)) {
+          items.append("<img src=\"images/icons/stock_bcard-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<a href=\"javascript:popURL('ExternalContacts.do?command=Prepare&actionSource=GlobalItem&popup=true','contact','630','425','yes','yes');\">" +
+              systemStatus.getLabel("quickactions.addContact") +
+              "</a> </br>");
+        }
 
-      if (systemStatus.hasPermission(userId, "quotes-quotes-add" + om)) {
-        items.append(
-            "<option value='quote'>" + systemStatus.getLabel(
-            "quickactions.addQuote") + "</option>");
-      }
+        if (systemStatus.hasPermission(userId, "accounts-accounts-add" + om)) {
+          items.append("<img src=\"images/icons/stock_account-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<a href=\"javascript:popURL('Accounts.do?command=Add&actionSource=GlobalItem&popup=true','Account','630','425','yes','yes');\">" +
+              systemStatus.getLabel("quickactions.addAccount") +
+              "</a> </br>");
+        }
 
-      if (systemStatus.hasPermission(userId, "tickets-tickets-add" + om)) {
-        items.append(
-            "<option value='ticket'>" + systemStatus.getLabel(
-            "quickactions.addTicket") + "</option>");
-      }
+        if (systemStatus.hasPermission(userId, "myhomepage-tasks-add" + om)) {
+          items.append("<img src=\"images/box.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<a href=\"javascript:popURL('MyTasks.do?command=New&actionSource=GlobalItem&popup=true&moreFields=false','Task','600','425','yes','yes');\">" +
+              systemStatus.getLabel("quickactions.addTask") +
+              "</a> </br>");
+        }
 
-      if (systemStatus.hasPermission(userId, "pipeline-opportunities-add" + om)) {
+        items.append("<img src=\"images/icons/stock_data-edit-table-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+            "<a href=\"javascript:popURL('MyCFS.do?command=AddNote&actionSource=GlobalItem&popup=true','Note','600','500','yes','yes');\">" +
+            systemStatus.getLabel("quickactions.addNote") +
+            "</a> </br>");
+
+        if (systemStatus.hasPermission(userId, "contacts-external_contacts-messages-add" + om) || systemStatus.hasPermission(userId, "contacts-external_contacts-messages-view" + om)) {
+          items.append("<img src=\"images/icons/stock_mail-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<a href=\"javascript:popURL('ExternalContactsMessages.do?command=PrepareQuickMessage&actionSource=GlobalItem&popup=true','contact','600','425','yes','yes');\">" +
+              systemStatus.getLabel("quickactions.mailToContact") +
+              "</a> </br>");
+        }
+
+        if (systemStatus.hasPermission(userId, "sales-leads-add" + om)) {
+          items.append("<img src=\"images/icons/stock_hyperlink-target-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<a href=\"javascript:popURL('Sales.do?command=Add&actionSource=GlobalItem&popup=true','Lead','600','500','yes','yes');\">" +
+              systemStatus.getLabel("quickactions.addLead") +
+              "</a> </br>");
+        }
+
+        if (systemStatus.hasPermission(userId, "quotes-quotes-add" + om)) {
+          items.append("<img src=\"images/icons/stock_hyperlink-target-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<a href=\"javascript:popURL('Quotes.do?command=AddQuoteForm&actionSource=GlobalItem&popup=true','Quote','600','500','yes','yes');\">" +
+              systemStatus.getLabel("quickactions.addQuote") +
+              "</a> </br>");
+        }
+
+        if (systemStatus.hasPermission(userId, "tickets-tickets-add" + om)) {
+          items.append("<img src=\"images/icons/stock_hyperlink-target-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<a href=\"javascript:popURL('TroubleTickets.do?command=Add&actionSource=GlobalItem&popup=true','Lead','600','500','yes','yes');\">" +
+              systemStatus.getLabel("quickactions.addTicket") +
+              "</a> </br>");
+        }
+
+        if (systemStatus.hasPermission(userId, "pipeline-opportunities-add" + om)) {
+          items.append("<img src=\"images/icons/stock_hyperlink-target-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+              "<a href=\"javascript:popURL('Leads.do?command=Prepare&actionSource=GlobalItem&popup=true','Opportunity','600','500','yes','yes');\">" +
+              systemStatus.getLabel("quickactions.addOpportunity") +
+              "</a> </br>");
+        }
         items.append(
-            "<option value='opportunity'>" + systemStatus.getLabel(
-            "quickactions.addOpportunity") + "</option>");
-      }
-        items.append(
-            "</select>" +
             "</td>" +
-            "</tr>" +
-            "</form>" +
-            "</table>");
+                "</tr>" +
+                "</form>" +
+                "</table>");
       }
     }
 
     //My Items
     if (systemStatus.hasPermission(userId, "globalitems-myitems-view" + om)) {
       ConnectionPool sqlDriver = (ConnectionPool) servlet.getServletConfig().getServletContext().getAttribute(
-              "ConnectionPool");
+          "ConnectionPool");
       Connection db = null;
 
       //Output
       items.append(
-              "<!-- My Items -->" +
-                      "<table class=\"globalItem\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">" +
-                      "<tr><th>" + systemStatus.getLabel("myitems.header") + "</th></tr>" +
-                      "<tr>" +
-                      "<td nowrap>");
+          "<!-- My Items -->" +
+              "<table class=\"globalItem\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">" +
+              "<tr><th>" + systemStatus.getLabel("myitems.header") + "</th></tr>" +
+              "<tr>" +
+              "<td nowrap>");
 
       try {
         int myItems = 0;
@@ -229,18 +225,18 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
 
         //External Contact Calls
         if (systemStatus.hasPermission(
-                userId, "contacts-external_contacts-calls-view" + om)) {
+            userId, "contacts-external_contacts-calls-view" + om)) {
           int callCount = 0;
           sql =
-                  "SELECT COUNT(*) as callcount " +
-                          "FROM call_log " +
-                          "WHERE alertdate >= ? " +
-                          "AND alertdate < ? " +
-                          "AND enteredby = ?";
+              "SELECT COUNT(*) as callcount " +
+                  "FROM call_log " +
+                  "WHERE alertdate >= ? " +
+                  "AND alertdate < ? " +
+                  "AND enteredby = ?";
           pst = db.prepareStatement(sql);
           pst.setTimestamp(1, new java.sql.Timestamp(today.getTimeInMillis()));
           pst.setTimestamp(
-                  2, new java.sql.Timestamp(tomorrow.getTimeInMillis()));
+              2, new java.sql.Timestamp(tomorrow.getTimeInMillis()));
           pst.setInt(3, userId);
           rs = pst.executeQuery();
           if (rs.next()) {
@@ -253,8 +249,8 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
           pst.close();
           if (callCount > 0) {
             items.append(
-                    "<a href='MyCFS.do?command=Home' class='s'>" + systemStatus.getLabel(
-                            "myitems.pendingActivities") + "</a> (" + paint(callCount) + ")<br>");
+                "<a href='MyCFS.do?command=Home' class='s'>" + systemStatus.getLabel(
+                    "myitems.pendingActivities") + "</a> (" + paint(callCount) + ")<br>");
             ++myItems;
           }
         }
@@ -263,10 +259,10 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
         if (systemStatus.hasPermission(userId, "projects-view" + om)) {
           int activityCount = 0;
           sql =
-                  "SELECT count(*) as activitycount " +
-                          "FROM project_assignments " +
-                          "WHERE complete_date IS NULL " +
-                          "AND user_assign_id = ?";
+              "SELECT count(*) as activitycount " +
+                  "FROM project_assignments " +
+                  "WHERE complete_date IS NULL " +
+                  "AND user_assign_id = ?";
           pst = db.prepareStatement(sql);
           pst.setInt(1, userId);
           rs = pst.executeQuery();
@@ -274,16 +270,16 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
             activityCount = rs.getInt("activitycount");
             if (System.getProperty("DEBUG") != null) {
               System.out.println(
-                      "GlobalItemsHook-> Activities: " + activityCount);
+                  "GlobalItemsHook-> Activities: " + activityCount);
             }
           }
           rs.close();
           pst.close();
           if (activityCount > 0) {
             items.append(
-                    "<a href='ProjectManagement.do?command=Overview' class='s'>" + systemStatus.getLabel(
-                            "myitems.assignedActivities") + "</a> (" + paint(
-                            activityCount) + ")<br>");
+                "<a href='ProjectManagement.do?command=Overview' class='s'>" + systemStatus.getLabel(
+                    "myitems.assignedActivities") + "</a> (" + paint(
+                    activityCount) + ")<br>");
             ++myItems;
           }
         }
@@ -306,8 +302,8 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
           pst.close();
           if (ticketCount > 0) {
             items.append(
-                    "<a href='TroubleTickets.do?command=Home' class='s'>" + systemStatus.getLabel(
-                            "myitems.assignedTickets") + "</a> (" + paint(ticketCount) + ")<br>");
+                "<a href='TroubleTickets.do?command=Home' class='s'>" + systemStatus.getLabel(
+                    "myitems.assignedTickets") + "</a> (" + paint(ticketCount) + ")<br>");
             ++myItems;
           }
         }
@@ -317,22 +313,22 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
           int i = 0;
           int planCount = 0;
           sql =
-                  "SELECT count(*) AS plancount " +
-                          "FROM action_plan_work apw " +
-                          "WHERE apw.enabled = ? " +
-                          "AND apw.plan_work_id IN (SELECT aphw.plan_work_id FROM action_phase_work aphw " +
-                          "WHERE aphw.phase_work_id IN (SELECT phase_work_id FROM action_item_work aiw " +
-                          "WHERE aiw.start_date IS NOT NULL " +
-                          "AND aiw.end_date IS NULL " +
-                          "AND (aiw.owner = ? " +
-                          "OR aiw.action_step_id IN (SELECT s.step_id FROM action_step s " +
-                          "WHERE (s.permission_type = ? AND s.role_id IN (SELECT role_id FROM " + DatabaseUtils.addQuotes(db, "access") + " WHERE user_id = ? ))) " +
-                          "OR aiw.action_step_id IN (SELECT s.step_id FROM action_step s " +
-                          "WHERE s.permission_type = ? AND s.department_id IN (SELECT department FROM contact WHERE user_id = ? )) " +
-                          "OR aiw.action_step_id IN (SELECT s.step_id FROM action_step s " +
-                          "WHERE s.permission_type = ? AND s.group_id IN (SELECT group_id from user_group_map WHERE user_id = ? )) " +
-                          ")) " +
-                          "AND aphw.start_date IS NOT NULL AND aphw.end_date IS NULL AND aphw.status_id IS NULL ) ";
+              "SELECT count(*) AS plancount " +
+                  "FROM action_plan_work apw " +
+                  "WHERE apw.enabled = ? " +
+                  "AND apw.plan_work_id IN (SELECT aphw.plan_work_id FROM action_phase_work aphw " +
+                  "WHERE aphw.phase_work_id IN (SELECT phase_work_id FROM action_item_work aiw " +
+                  "WHERE aiw.start_date IS NOT NULL " +
+                  "AND aiw.end_date IS NULL " +
+                  "AND (aiw.owner = ? " +
+                  "OR aiw.action_step_id IN (SELECT s.step_id FROM action_step s " +
+                  "WHERE (s.permission_type = ? AND s.role_id IN (SELECT role_id FROM " + DatabaseUtils.addQuotes(db, "access") + " WHERE user_id = ? ))) " +
+                  "OR aiw.action_step_id IN (SELECT s.step_id FROM action_step s " +
+                  "WHERE s.permission_type = ? AND s.department_id IN (SELECT department FROM contact WHERE user_id = ? )) " +
+                  "OR aiw.action_step_id IN (SELECT s.step_id FROM action_step s " +
+                  "WHERE s.permission_type = ? AND s.group_id IN (SELECT group_id from user_group_map WHERE user_id = ? )) " +
+                  ")) " +
+                  "AND aphw.start_date IS NOT NULL AND aphw.end_date IS NULL AND aphw.status_id IS NULL ) ";
 
           pst = db.prepareStatement(sql);
           pst.setBoolean(++i, true);
@@ -348,16 +344,16 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
             planCount = rs.getInt("plancount");
             if (System.getProperty("DEBUG") != null) {
               System.out.println(
-                      "GlobalItemsHook-> Action Plans: " + planCount);
+                  "GlobalItemsHook-> Action Plans: " + planCount);
             }
           }
           rs.close();
           pst.close();
           if (planCount > 0) {
             items.append(
-                    "<a href='MyActionPlans.do?command=View' class='s'>" + systemStatus.getLabel(
-                            "actionPlan.myWaitingActionPlans") + "</a> (" + paint(
-                            planCount) + ")<br>");
+                "<a href='MyActionPlans.do?command=View' class='s'>" + systemStatus.getLabel(
+                    "actionPlan.myWaitingActionPlans") + "</a> (" + paint(
+                    planCount) + ")<br>");
             ++myItems;
           }
         }
@@ -366,7 +362,7 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
         if (systemStatus.hasPermission(userId, "tickets-view" + om)) {
           int ticketCount = 0;
           sql =
-                  "SELECT COUNT(*) as ticketcount FROM ticket WHERE assigned_to = ? AND closed IS NULL AND ticketid IN (SELECT ticket_id FROM ticketlink_project) ";
+              "SELECT COUNT(*) as ticketcount FROM ticket WHERE assigned_to = ? AND closed IS NULL AND ticketid IN (SELECT ticket_id FROM ticketlink_project) ";
           pst = db.prepareStatement(sql);
           pst.setInt(1, userId);
           rs = pst.executeQuery();
@@ -380,9 +376,9 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
           pst.close();
           if (ticketCount > 0) {
             items.append(
-                    "<a href='ProjectManagement.do?' class='s'>" + systemStatus.getLabel(
-                            "myitems.assignedProjectTickets") + "</a> (" + paint(
-                            ticketCount) + ")<br>");
+                "<a href='ProjectManagement.do?' class='s'>" + systemStatus.getLabel(
+                    "myitems.assignedProjectTickets") + "</a> (" + paint(
+                    ticketCount) + ")<br>");
             ++myItems;
           }
         }
@@ -391,12 +387,12 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
         if (systemStatus.hasPermission(userId, "tickets-view" + om)) {
           int ticketCount = 0;
           sql =
-                  "SELECT COUNT(*) as ticketcount " +
-                          "FROM ticket " +
-                          "WHERE (assigned_to = -1 OR assigned_to IS NULL) " +
-                          "AND closed IS NULL " +
-                          "AND (department_code = ? OR department_code in (0, -1)) " +
-                          "AND ticketid NOT IN (SELECT ticket_id FROM ticketlink_project) ";
+              "SELECT COUNT(*) as ticketcount " +
+                  "FROM ticket " +
+                  "WHERE (assigned_to = -1 OR assigned_to IS NULL) " +
+                  "AND closed IS NULL " +
+                  "AND (department_code = ? OR department_code in (0, -1)) " +
+                  "AND ticketid NOT IN (SELECT ticket_id FROM ticketlink_project) ";
           pst = db.prepareStatement(sql);
           pst.setInt(1, departmentId);
           rs = pst.executeQuery();
@@ -404,16 +400,16 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
             ticketCount = rs.getInt("ticketcount");
             if (System.getProperty("DEBUG") != null) {
               System.out.println(
-                      "GlobalItemsHook-> Tickets (Unassigned): " + ticketCount);
+                  "GlobalItemsHook-> Tickets (Unassigned): " + ticketCount);
             }
           }
           rs.close();
           pst.close();
           if (ticketCount > 0) {
             items.append(
-                    "<a href='TroubleTickets.do?command=Home' class='s'>" + systemStatus.getLabel(
-                            "myitems.unassignedTickets") + "</a> (" + paint(
-                            ticketCount) + ")<br>");
+                "<a href='TroubleTickets.do?command=Home' class='s'>" + systemStatus.getLabel(
+                    "myitems.unassignedTickets") + "</a> (" + paint(
+                    ticketCount) + ")<br>");
             ++myItems;
           }
         }
@@ -422,9 +418,9 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
         if (systemStatus.hasPermission(userId, "myhomepage-inbox-view" + om)) {
           int inboxCount = 0;
           sql =
-                  "SELECT COUNT(*) as inboxcount " +
-                          "FROM cfsinbox_message m, cfsinbox_messagelink ml " +
-                          "WHERE m.id = ml.id AND ml.sent_to = ? AND m.delete_flag = ? AND ml.status IN (0) ";
+              "SELECT COUNT(*) as inboxcount " +
+                  "FROM cfsinbox_message m, cfsinbox_messagelink ml " +
+                  "WHERE m.id = ml.id AND ml.sent_to = ? AND m.delete_flag = ? AND ml.status IN (0) ";
           pst = db.prepareStatement(sql);
           pst.setInt(1, contactId);
           pst.setBoolean(2, false);
@@ -436,9 +432,9 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
           pst.close();
           if (inboxCount > 0) {
             items.append(
-                    "<a href='MyCFSInbox.do?command=Inbox&return=1' class='s'>" + systemStatus.getLabel(
-                            "myitems.inbox") + "</a> (" + paint(inboxCount) + " " + systemStatus.getLabel(
-                            "myitems.inbox.new") + ")<br>");
+                "<a href='MyCFSInbox.do?command=Inbox&return=1' class='s'>" + systemStatus.getLabel(
+                    "myitems.inbox") + "</a> (" + paint(inboxCount) + " " + systemStatus.getLabel(
+                    "myitems.inbox.new") + ")<br>");
             ++myItems;
           }
         }
@@ -448,9 +444,9 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
           int taskCount = TaskList.queryPendingCount(db, userId);
           if (taskCount > 0) {
             items.append(
-                    "<a href='MyTasks.do?command=ListTasks' class='s'>" + systemStatus.getLabel(
-                            "myitems.tasks") + "</a> (" + paint(taskCount) + " " + systemStatus.getLabel(
-                            "myitems.tasks.incomplete") + ")<br>");
+                "<a href='MyTasks.do?command=ListTasks' class='s'>" + systemStatus.getLabel(
+                    "myitems.tasks") + "</a> (" + paint(taskCount) + " " + systemStatus.getLabel(
+                    "myitems.tasks.incomplete") + ")<br>");
             ++myItems;
           }
         }
@@ -458,7 +454,7 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
         //Default no items
         if (myItems == 0) {
           items.append(
-                  systemStatus.getLabel("myitems.noItems") + "<br />&nbsp;<br />");
+              systemStatus.getLabel("myitems.noItems") + "<br />&nbsp;<br />");
         }
       } catch (Exception e) {
         System.out.println("GlobalItemsHook Error-> " + e.toString());
@@ -467,22 +463,22 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
       sqlDriver.free(db);
 
       items.append(
-              "</td>" +
-                      "</tr>" +
-                      "</table>");
+          "</td>" +
+              "</tr>" +
+              "</table>");
     }
 
     //Recent Items
     if (systemStatus.hasPermission(userId, "globalitems-recentitems-view" + om)) {
       items.append(
-              "<!-- Recent Items -->" +
-                      "<table class=\"globalItem\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">" +
-                      "<tr><th>" + systemStatus.getLabel("myitems.recentItems") + "</th></tr>" +
-                      "<tr>" +
-                      "<td>");
+          "<!-- Recent Items -->" +
+              "<table class=\"globalItem\" width=\"100%\" cellpadding=\"0\" cellspacing=\"0\">" +
+              "<tr><th>" + systemStatus.getLabel("myitems.recentItems") + "</th></tr>" +
+              "<tr>" +
+              "<td>");
 
       ArrayList recentItems = (ArrayList) request.getSession().getAttribute(
-              "RecentItems");
+          "RecentItems");
       if (recentItems != null) {
         Iterator i = recentItems.iterator();
         while (i.hasNext()) {
@@ -495,13 +491,13 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
         }
       } else {
         items.append(
-                systemStatus.getLabel("myitems.noRecentItems") + "<br>&nbsp;<br>");
+            systemStatus.getLabel("myitems.noRecentItems") + "<br>&nbsp;<br>");
       }
 
       items.append(
-              "</td>" +
-                      "</tr>" +
-                      "</table>");
+          "</td>" +
+              "</tr>" +
+              "</table>");
     }
 
     if (items.length() > 0) {

@@ -12,7 +12,7 @@ function popProductCategoriesListSingle(hiddenFieldId, displayFieldId, params) {
 	var posy = (screen.width - width)/2;
 	var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
 	if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin=window.open('ProductCategorySelector.do?command=ListProductCategories&displayFieldId='+displayFieldId+'&hiddenFieldId='+hiddenFieldId+'&categoryId=-1'+ params, title, windowParams);
   newwin.focus();
@@ -50,7 +50,7 @@ function popProductCategoriesListSingleExclude(excludeIds, hiddenFieldId, displa
 	var posy = (screen.width - width)/2;
 	var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
 	if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var ignoreIds = "";
   for (count=0; count < excludeIds.length; ++count) {
@@ -77,7 +77,7 @@ function popProductCategoriesListMultiple(existingIds, params) {
   var posy = (screen.height - height)/2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var selectedIds = "";
   for (count=0; count < existingIds.length; ++count) {

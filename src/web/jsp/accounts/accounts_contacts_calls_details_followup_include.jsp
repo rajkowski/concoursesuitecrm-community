@@ -61,7 +61,7 @@
      <dhv:label name="accounts.accountasset_include.Contact">Contact</dhv:label>
     </td>
     <td>
-      <dhv:evaluate if="<%= CallDetails.getFollowupContactName() != null && !"".equals(CallDetails.getFollowupContactName()) %>">
+      <dhv:evaluate if='<%= CallDetails.getFollowupContactName() != null && !"".equals(CallDetails.getFollowupContactName()) %>'>
         <%= CallDetails.getFollowupContactName() %>
       </dhv:evaluate>
     </td>

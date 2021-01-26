@@ -16,7 +16,6 @@
 package org.aspcfs.controller;
 
 import com.darkhorseventures.database.ConnectionPool;
-
 import org.apache.log4j.Logger;
 import org.aspcfs.apps.workFlowManager.WorkflowManager;
 import org.jcrontab.Crontab;
@@ -36,11 +35,11 @@ import java.util.Iterator;
  *
  * @author matt rajkowski
  * @version $Id: ContextListener.java,v 1.4 2002/12/23 19:59:31 mrajkowski Exp
- *          $
+ * $
  * @created November 11, 2002
  */
 public class ContextListener implements ServletContextListener {
-  
+
   private final static Logger log = Logger.getLogger(org.aspcfs.controller.ContextListener.class);
 
   public final static String fs = System.getProperty("file.separator");
@@ -60,6 +59,10 @@ public class ContextListener implements ServletContextListener {
    * @param event Description of the Parameter
    */
   public void contextInitialized(ServletContextEvent event) {
+
+    // System properties
+    System.setProperty("java.awt.headless", "true");
+
     ServletContext context = event.getServletContext();
     log.info("Initializing");
     //Start the ConnectionPool with default params, these can be adjusted

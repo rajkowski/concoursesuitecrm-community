@@ -31,10 +31,10 @@
                       <%= toHtml(thisItemWork.getContact().getNameLastFirst()) %>
                     </dhv:evaluate>
                     <dhv:evaluate if="<%= thisItemWork.getContact() == null %>">                 
-                      <dhv:evaluate if="<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>">
+                      <dhv:evaluate if='<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>'>
                              <%=toHtml(thisItemWork.getLabel())%>
                     </dhv:evaluate>
-                    <dhv:evaluate if="<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>">
+                    <dhv:evaluate if='<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>'>
                       <dhv:label name="actionPlan.attachContact">Attach Contact</dhv:label>
                     </dhv:evaluate>
                     </dhv:evaluate>
@@ -50,10 +50,10 @@
                       <%= toHtml(CurrencyFormat.getCurrencyString(thisItemWork.getComponent().getGuess(), User.getLocale(), applicationPrefs.get("SYSTEM.CURRENCY")) + " " + NumberFormat.getPercentInstance().format(thisItemWork.getComponent().getCloseProb())) %>
                     </dhv:evaluate>
                     <dhv:evaluate if="<%= thisItemWork.getComponent() == null %>">
-                      <dhv:evaluate if="<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>">
+                      <dhv:evaluate if='<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>'>
                              <%=toHtml(thisItemWork.getLabel())%>
                     </dhv:evaluate>
-                    <dhv:evaluate if="<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>">
+                    <dhv:evaluate if='<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>'>
                       <dhv:label name="actionPlans.attachOpportunity.text">Attach Opportunity</dhv:label>
                     </dhv:evaluate>
                     </dhv:evaluate>
@@ -69,10 +69,10 @@
                             <%= toHtml(thisItemWork.getFileItem().getSubject()) %>                        
                     </dhv:evaluate>
                     <dhv:evaluate if="<%= thisItemWork.getFileItem() == null %>">                          
-                      <dhv:evaluate if="<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>">
+                      <dhv:evaluate if='<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>'>
                              <%=toHtml(thisItemWork.getLabel())%>
                     </dhv:evaluate>
-                    <dhv:evaluate if="<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>">
+                    <dhv:evaluate if='<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>'>
                       <dhv:label name="actionPlans.attachDocument.text">Attach Document</dhv:label>
                     </dhv:evaluate>
                     </dhv:evaluate>
@@ -95,10 +95,10 @@
                       <zeroio:tz timestamp="<%=  thisItemWork.getNote().getSubmitted() %>" timeZone="<%= User.getUserRecord().getTimeZone() %>" dateOnly="true"/>
                     </dhv:evaluate>
                     <dhv:evaluate if="<%= thisItemWork.getNote() == null %>">
-                      <dhv:evaluate if="<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>">
+                      <dhv:evaluate if='<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>'>
                              <%=toHtml(thisItemWork.getLabel())%>
                     </dhv:evaluate>
-                    <dhv:evaluate if="<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>">
+                    <dhv:evaluate if='<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>'>
                       <dhv:label name="actionPlans.attachDate.text">Attach Date</dhv:label>
                     </dhv:evaluate>
                     </dhv:evaluate>
@@ -114,10 +114,10 @@
                       <zeroio:tz timestamp="<%=  thisItemWork.getNote().getSubmitted() %>" timeZone="<%= User.getUserRecord().getTimeZone() %>" dateOnly="true"/>
                     </dhv:evaluate>
                     <dhv:evaluate if="<%= thisItemWork.getNote() == null %>">
-                      <dhv:evaluate if="<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>">
+                      <dhv:evaluate if='<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>'>
                              <%=toHtml(thisItemWork.getLabel())%>
                     </dhv:evaluate>
-                    <dhv:evaluate if="<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>">
+                    <dhv:evaluate if='<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>'>
                       <dhv:label name="actionPlans.attachNote.text">Attach Note</dhv:label>
                     </dhv:evaluate>
                     </dhv:evaluate>
@@ -133,10 +133,10 @@
                       <%= toHtml(thisItemWork.getSelectionList().getDisplayHtml()) %>
                     </dhv:evaluate>
                     <dhv:evaluate if="<%= thisItemWork.getSelectionList() == null %>">
-                      <dhv:evaluate if="<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>">
+                      <dhv:evaluate if='<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>'>
                              <%=toHtml(thisItemWork.getLabel())%>
                     </dhv:evaluate>
-                    <dhv:evaluate if="<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>">
+                    <dhv:evaluate if='<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>'>
                       <dhv:label name="actionPlans.attachItems.text">Attach Items</dhv:label>
                     </dhv:evaluate>
                     </dhv:evaluate>
@@ -152,10 +152,10 @@
                       <%= toHtml(thisItemWork.getRelationshipList().getDisplayHtml()) %>
                     </dhv:evaluate>
                     <dhv:evaluate if="<%= thisItemWork.getRelationshipList() == null %>">
-                      <dhv:evaluate if="<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>">
+                      <dhv:evaluate if='<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>'>
                              <%=toHtml(thisItemWork.getLabel())%>
                     </dhv:evaluate>
-                    <dhv:evaluate if="<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>">
+                    <dhv:evaluate if='<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>'>
                       <dhv:label name="actionPlans.addRelationships.text">Add Relationship</dhv:label>
                     </dhv:evaluate>
                     </dhv:evaluate>
@@ -167,10 +167,10 @@
               <nobr>
                     <%= toHtml(thisStep.getPlanListLabel()) %>: 
                     <img border="0" src="images/icons/stock_account-16.gif" align="absmiddle" />
-                      <dhv:evaluate if="<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>">
+                      <dhv:evaluate if='<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>'>
                              <%=toHtml(thisItemWork.getLabel())%>
                     </dhv:evaluate>
-                    <dhv:evaluate if="<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>">
+                    <dhv:evaluate if='<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>'>
                       <dhv:label name="actionPlans.reviewAccount.text">Review Account</dhv:label>
                     </dhv:evaluate>
               </nobr>
@@ -195,10 +195,10 @@
                 </dhv:evaluate>
                 <dhv:evaluate if="<%= thisItemWork.getCustomFieldCategory() == null %>">
                   <img border="0" src="images/icons/stock_bcard-16.gif" align="absmiddle" />
-                      <dhv:evaluate if="<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>">
+                      <dhv:evaluate if='<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>'>
                              <%=toHtml(thisItemWork.getLabel())%>
                     </dhv:evaluate>
-                    <dhv:evaluate if="<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>">
+                    <dhv:evaluate if='<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>'>
                       <dhv:label name="actionPlan.attachFolder">Attach Folder</dhv:label>
                     </dhv:evaluate>
                 </dhv:evaluate>
@@ -215,10 +215,10 @@
                         (<dhv:label name="accounts.accounts_contacts_messages_details.Campaign">Campaign</dhv:label>)
                     </dhv:evaluate>
                     <dhv:evaluate if="<%= thisItemWork.getContact() == null %>">                          
-                      <dhv:evaluate if="<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>">
+                      <dhv:evaluate if='<%= thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel()) %>'>
                              <%=toHtml(thisItemWork.getLabel())%>
                     </dhv:evaluate>
-                    <dhv:evaluate if="<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>">
+                    <dhv:evaluate if='<%= !(thisItemWork.getLabel() != null  && !"".equals(thisItemWork.getLabel())) %>'>
                       <dhv:label name="campaigns.addRecipient">Add Recipient</dhv:label>
                     </dhv:evaluate>
                         (<dhv:label name="accounts.accounts_contacts_messages_details.Campaign">Campaign</dhv:label>)

@@ -144,7 +144,7 @@
     </td>
     <td width="18%" valign="top">
       <%= toHtml(assignedTic.getSubmitterName() + "") %><dhv:evaluate
-        if="<%= !(assignedTic.getSubmitterName()!=null&&!"".equals(assignedTic.getSubmitterName())) %>">&nbsp;</dhv:evaluate>
+        if='<%= !(assignedTic.getSubmitterName()!=null&&!"".equals(assignedTic.getSubmitterName())) %>'>&nbsp;</dhv:evaluate>
     </td>
     <td width="20%" nowrap valign="top">
       <dhv:username id="<%= assignedTic.getAssignedTo() %>"
@@ -267,7 +267,7 @@
     </td>
     <td width="18%" valign="top" class="row<%= rowid %>">
       <%= toHtml(openTic.getSubmitterName()) %><dhv:evaluate
-        if="<%= !(openTic.getSubmitterName()!=null&&!"".equals(openTic.getSubmitterName())) %>">&nbsp;</dhv:evaluate>
+        if='<%= !(openTic.getSubmitterName()!=null&&!"".equals(openTic.getSubmitterName())) %>'>&nbsp;</dhv:evaluate>
     </td>
 
     <td width="20%" nowrap valign="top" class="row<%= rowid %>">
@@ -398,7 +398,7 @@
     </td>
     <td width="18%" valign="top" class="row<%= rowid %>">
       <%= toHtml(thisTic.getSubmitterName()) %><dhv:evaluate
-        if="<%= !(thisTic.getSubmitterName()!=null&&!"".equals(thisTic.getSubmitterName())) %>">&nbsp;</dhv:evaluate>
+        if='<%= !(thisTic.getSubmitterName()!=null&&!"".equals(thisTic.getSubmitterName())) %>'>&nbsp;</dhv:evaluate>
     </td>
     <td width="20%" nowrap valign="top">
       <dhv:evaluate if="<%= thisTic.isAssigned() %>">
@@ -529,7 +529,7 @@
     </td>
     <td width="18%" valign="top" class="row<%= rowid %>">
       <%= toHtml(thisTic.getSubmitterName()) %><dhv:evaluate
-        if="<%= !(thisTic.getSubmitterName()!=null&&!"".equals(thisTic.getSubmitterName())) %>">&nbsp;</dhv:evaluate>
+        if='<%= !(thisTic.getSubmitterName()!=null&&!"".equals(thisTic.getSubmitterName())) %>'>&nbsp;</dhv:evaluate>
     </td>
 
     <td width="20%" nowrap valign="top">
@@ -662,7 +662,7 @@
     </td>
     <td width="18%" valign="top" class="row<%= rowid %>">
       <%= toHtml(thisTic.getSubmitterName()) %><dhv:evaluate
-        if="<%= !(thisTic.getSubmitterName()!=null&&!"".equals(thisTic.getSubmitterName())) %>">&nbsp;</dhv:evaluate>
+        if='<%= !(thisTic.getSubmitterName()!=null&&!"".equals(thisTic.getSubmitterName())) %>'>&nbsp;</dhv:evaluate>
     </td>
     <td width="20%" nowrap valign="top">
       <dhv:evaluate if="<%= thisTic.isAssigned() %>">

@@ -28,13 +28,15 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 import java.util.ArrayList;
+
 import org.aspcfs.modules.base.Constants;
+
 /**
  * Useful methods for working with multiple databases and database fields
  *
  * @author matt rajkowski
  * @version $Id: DatabaseUtils.java,v 1.13 2002/11/04 13:21:16 mrajkowski Exp
- *          $
+ * $
  * @created March 18, 2002
  */
 public class DatabaseUtils {
@@ -99,7 +101,7 @@ public class DatabaseUtils {
       case DatabaseUtils.DERBY:
         return "'1'";
       case DatabaseUtils.INTERBASE:
-    	  return "true";
+        return "true";
       default:
         return "true";
     }
@@ -177,42 +179,7 @@ public class DatabaseUtils {
    * @return The type value
    */
   public static int getType(Connection db) {
-    String databaseName = db.getClass().getName();
-    if (databaseName.indexOf("postgresql") > -1) {
-      return POSTGRESQL;
-    } else if ("net.sourceforge.jtds.jdbc.ConnectionJDBC3".equals(
-        databaseName)) {
-      return MSSQL;
-    } else if ("net.sourceforge.jtds.jdbc.TdsConnectionJDBC3".equals(
-        databaseName)) {
-      return MSSQL;
-    } else if (databaseName.indexOf("sqlserver") > -1) {
-      return MSSQL;
-    } else if ("net.sourceforge.jtds.jdbc.TdsConnection".equals(databaseName)) {
-      return MSSQL;
-    } else if ("org.firebirdsql.jdbc.FBConnection".equals(databaseName)) {
-      return FIREBIRD;
-    } else if ("org.firebirdsql.jdbc.FBDriver".equals(databaseName)) {
-      return FIREBIRD;
-    } else if ("oracle.jdbc.driver.OracleConnection".equals(databaseName)) {
-      return ORACLE;
-    } else if (databaseName.indexOf("oracle") > -1) {
-      return ORACLE;
-    } else
-    if ("in.co.daffodil.db.jdbc.DaffodilDBConnection".equals(databaseName)) {
-      return DAFFODILDB;
-    } else if (databaseName.indexOf("db2") > -1) {
-      return DB2;
-    } else if (databaseName.indexOf("mysql") > -1) {
-      return MYSQL;
-    } else if (databaseName.indexOf("derby") > -1) {
-      return DERBY;
-    } else if ("interbase.interclient.Connection".equals(databaseName)) {
-      return INTERBASE;
-    } else {
-      System.out.println("DatabaseUtils-> Unkown Connection Class: " + databaseName);
-      return -1;
-    }
+    return POSTGRESQL;
   }
 
 
@@ -223,28 +190,7 @@ public class DatabaseUtils {
    * @return The typeName value
    */
   public static String getTypeName(Connection db) {
-    switch (getType(db)) {
-      case POSTGRESQL:
-        return "postgresql";
-      case MSSQL:
-        return "mssql";
-      case FIREBIRD:
-        return "firebird";
-      case ORACLE:
-        return "oracle";
-      case DAFFODILDB:
-        return "daffodildb";
-      case DB2:
-        return "db2";
-      case MYSQL:
-        return "mysql";
-      case DERBY:
-        return "derby";
-      case INTERBASE:
-        return "interbase";
-      default:
-        return "unknown";
-    }
+    return "postgresql";
   }
 
 
@@ -267,12 +213,12 @@ public class DatabaseUtils {
         return ("DATE(" + date + ")");
       case DatabaseUtils.ORACLE:
         return ("TO_DATE(" + date + ",'dd/mm/yyyy')");
-        //case DatabaseUtils.ORACLE:
-        //  return ("CAST(" + date + " AS DATE)");
+      //case DatabaseUtils.ORACLE:
+      //  return ("CAST(" + date + " AS DATE)");
       case DatabaseUtils.DB2:
         return ("CAST(" + date + " AS DATE)");
-        //case DatabaseUtils.ORACLE:
-        //  return ("CAST(" + date + " AS DATE)");
+      //case DatabaseUtils.ORACLE:
+      //  return ("CAST(" + date + " AS DATE)");
       case DatabaseUtils.MYSQL:
         return ("DATE(" + date + ")");
       case DatabaseUtils.DERBY:
@@ -1729,14 +1675,14 @@ public class DatabaseUtils {
   }
 
   /**
-   *  Gets the maxId attribute of the DatabaseUtils class
+   * Gets the maxId attribute of the DatabaseUtils class
    *
-   * @param  db                Description of the Parameter
-   * @param  origTableName         Description of the Parameter
-   * @param  origSequenceName  Description of the Parameter
-   * @param  uniqueField       Description of the Parameter
-   * @return                   The maxId value
-   * @exception  SQLException  Description of the Exception
+   * @param db               Description of the Parameter
+   * @param origTableName    Description of the Parameter
+   * @param origSequenceName Description of the Parameter
+   * @param uniqueField      Description of the Parameter
+   * @return The maxId value
+   * @throws SQLException Description of the Exception
    */
   public static int getMaxId(Connection db, String origTableName, String origSequenceName, String uniqueField) throws SQLException {
     //TODO: Verify the working of this method for all supported databases
@@ -1790,7 +1736,7 @@ public class DatabaseUtils {
    * @return
    * @throws SQLException Description of the Returned Value
    */
-  public static ResultSet executeQuery(Connection db, PreparedStatement pst) throws SQLException{
+  public static ResultSet executeQuery(Connection db, PreparedStatement pst) throws SQLException {
     return executeQuery(db, pst, null);
   }
 
@@ -1803,7 +1749,7 @@ public class DatabaseUtils {
    * @return
    * @throws SQLException Description of the Returned Value
    */
-  public static ResultSet executeQuery(Connection db, PreparedStatement pst, PagedListInfo pagedListInfo) throws SQLException{
+  public static ResultSet executeQuery(Connection db, PreparedStatement pst, PagedListInfo pagedListInfo) throws SQLException {
     ResultSet rs = null;
     long milies = System.currentTimeMillis();
     if (pagedListInfo != null) {
@@ -1827,51 +1773,52 @@ public class DatabaseUtils {
   }
 
 
- /**
-  *	This function is used to create "?" for CreateFilter()
-  * This function inerts AND or OR for columns with string types
-  * @param list ArrayList,for which to create the number of params
-  * @return String A series of ? to be used as parameters for CreateFilter Prepared Statement
-  */
-  public static String createParams(ArrayList list,String column,Connection db,String option,String dataType) throws SQLException{
+  /**
+   * This function is used to create "?" for CreateFilter()
+   * This function inerts AND or OR for columns with string types
+   *
+   * @param list ArrayList,for which to create the number of params
+   * @return String A series of ? to be used as parameters for CreateFilter Prepared Statement
+   */
+  public static String createParams(ArrayList list, String column, Connection db, String option, String dataType) throws SQLException {
     String qStr = null;
     StringBuffer str = null;
-    if(Constants.STRING.equals(dataType.toLowerCase())){
-  	    qStr = DatabaseUtils.toLowerCase(db) + column + " LIKE " + DatabaseUtils.toLowerCase(db) + " (?) ";
-  	}else if(Constants.INT.equals(dataType.toLowerCase())){
-  		qStr = column + " = ? ";
-  	}else{
-		throw new SQLException("DatabaseUtils.java -> In createParams() for datatType parameter only Constants.INT or Constants.STRING can be used");
-  	}
-	str = new StringBuffer(" ( "+ qStr);
-  for(int count=1;count<list.size();count++){
-  	if(option.equals(Constants.ALL)){
-  		str.append(" AND ");
-  	}
-  	else{
-  		str.append(" OR ");
-  	}
-  	str.append(qStr);
-   }
+    if (Constants.STRING.equals(dataType.toLowerCase())) {
+      qStr = DatabaseUtils.toLowerCase(db) + column + " LIKE " + DatabaseUtils.toLowerCase(db) + " (?) ";
+    } else if (Constants.INT.equals(dataType.toLowerCase())) {
+      qStr = column + " = ? ";
+    } else {
+      throw new SQLException("DatabaseUtils.java -> In createParams() for datatType parameter only Constants.INT or Constants.STRING can be used");
+    }
+    str = new StringBuffer(" ( " + qStr);
+    for (int count = 1; count < list.size(); count++) {
+      if (option.equals(Constants.ALL)) {
+        str.append(" AND ");
+      } else {
+        str.append(" OR ");
+      }
+      str.append(qStr);
+    }
     str.append(" ) ");
-	return str.toString();
+    return str.toString();
   }
 
   /**
    * This function is used to create "?" for CreateFilter()
    * This function does intersection between the queries
+   *
    * @param list ArrayList,for which to create the number of params
    * @return String A series of ? to be used as parameters for CreateFilter Prepared Statement
    */
-   public static String createParams(ArrayList list,String column){
-   String qStr = column;
-   StringBuffer str = new StringBuffer(" ( "+ qStr);
-   for(int count=1;count<list.size();count++){
-  	str.append(" INTERSECT ");
-  	str.append(qStr);
-   }
+  public static String createParams(ArrayList list, String column) {
+    String qStr = column;
+    StringBuffer str = new StringBuffer(" ( " + qStr);
+    for (int count = 1; count < list.size(); count++) {
+      str.append(" INTERSECT ");
+      str.append(qStr);
+    }
     str.append(" ) ");
     return str.toString();
- }
+  }
 
 }

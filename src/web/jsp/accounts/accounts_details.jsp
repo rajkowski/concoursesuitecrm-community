@@ -364,7 +364,7 @@ parent.opener.window.location.href='<%=refreshUrl%><%= request.getAttribute("act
 </dhv:evaluate>
 </dhv:include>
 <dhv:include name="organization.comments" none="true">
-  <dhv:evaluate if="<%= (OrgDetails.getComments() != null) && !"".equals(OrgDetails.getComments().trim()) %>">
+  <dhv:evaluate if='<%= (OrgDetails.getComments() != null) && !"".equals(OrgDetails.getComments().trim()) %>'>
     <tr class="containerBody">
       <td nowrap class="formLabel">
         Comments

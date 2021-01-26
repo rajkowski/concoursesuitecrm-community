@@ -8,7 +8,7 @@ function popServiceContractListSingle(hiddenFieldId, displayFieldId, params, org
   var posy = (screen.height - height) / 2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + ',screenX=' + posx + ',screenY=' + posy;
   if (params != '') {
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   if (!orgId || orgId == '-1') {
     orgId = document.getElementById('orgId').value;
@@ -35,7 +35,7 @@ function popServiceContractListSingle2(hiddenFieldId, displayFieldId, params, or
   var posy = (screen.height - height) / 2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + ',screenX=' + posx + ',screenY=' + posy;
   if (params != '') {
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   if (!orgId || orgId == '-1') {
     orgId = document.getElementById('orgId').value;

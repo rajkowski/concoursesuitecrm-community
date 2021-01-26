@@ -277,9 +277,7 @@
         name="accounts.accountasset_include.Description">Description</dhv:label>
   </td>
   <td>
-    <textarea name="description" rows="3"
-              cols="50"><%= toString(serviceContract.getDescription()) %>
-    </textarea>
+    <textarea name="description" rows="3" cols="50"><%= toString(serviceContract.getDescription()) %></textarea>
   </td>
 </tr>
 <tr class="containerBody">
@@ -287,9 +285,7 @@
     <dhv:label name="account.sc.billingNotes">Billing Notes</dhv:label>
   </td>
   <td>
-    <textarea name="contractBillingNotes" rows="3"
-              cols="50"><%= toString(serviceContract.getContractBillingNotes()) %>
-    </textarea>
+    <textarea name="contractBillingNotes" rows="3" cols="50"><%= toString(serviceContract.getContractBillingNotes()) %></textarea>
   </td>
 </tr>
 </table>
@@ -480,9 +476,7 @@
         Notes</dhv:label>
     </td>
     <td>
-      <textarea name="serviceModelNotes" rows="3"
-                cols="50"><%= toString(serviceContract.getServiceModelNotes()) %>
-      </textarea>
+      <textarea name="serviceModelNotes" rows="3" cols="50"><%= toString(serviceContract.getServiceModelNotes()) %></textarea>
     </td>
   </tr>
   <input type="hidden" name="modified"

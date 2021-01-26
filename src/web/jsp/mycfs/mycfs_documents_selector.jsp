@@ -129,7 +129,7 @@
   <tr>
     <td align="left" valign="center">
       <select size="1" name="moduleId" onChange="javascript:document.listForm.submit();">
-    <dhv:evaluate if="<%= (!"".equals(contactId) && !"".equals(orgId))%>">
+    <dhv:evaluate if='<%= (!"".equals(contactId) && !"".equals(orgId))%>'>
       <dhv:evaluate if="<%=!"-1".equals(orgId) %>">
         <dhv:permission name="accounts-accounts-documents-view">
        		<option value="<%= Constants.ACCOUNTS %>" <dhv:evaluate if="<%= moduleId == Constants.ACCOUNTS %>">selected</dhv:evaluate>><dhv:label name="accounts.accounts">Accounts</dhv:label></option>
@@ -300,7 +300,7 @@
       </dhv:evaluate>
       <dhv:evaluate if="<%= thisDocumentStore.getCloseDate() != null %>">
         <font color="blue">
-        <dhv:label name="documents.details.archivedMessage" param="<%= "time="+getTime(pageContext,thisDocumentStore.getCloseDate(),User.getTimeZone(),DateFormat.SHORT,true,false,false,"&nbsp;") %>">This document store was archived on&nbsp;<zeroio:tz timestamp="<%= thisDocumentStore.getCloseDate() %>" default="&nbsp;" timeZone="<%= User.getTimeZone() %>" showTimeZone="true"/></dhv:label>
+        <dhv:label name="documents.details.archivedMessage" param='<%= "time="+getTime(pageContext,thisDocumentStore.getCloseDate(),User.getTimeZone(),DateFormat.SHORT,true,false,false,"&nbsp;") %>'>This document store was archived on&nbsp;<zeroio:tz timestamp="<%= thisDocumentStore.getCloseDate() %>" default="&nbsp;" timeZone="<%= User.getTimeZone() %>" showTimeZone="true"/></dhv:label>
         </font>
       </dhv:evaluate>
       <dhv:evaluate if="<%= thisDocumentStore.getCloseDate() == null %>">
@@ -308,7 +308,7 @@
           <font color="red"><dhv:label name="documents.details.unapprovedMessage">This document store is currently under review and has not been approved</dhv:label></font>
         </dhv:evaluate>
         <dhv:evaluate if="<%= thisDocumentStore.getApprovalDate() != null %>">
-          <font color="darkgreen"><dhv:label name="documents.details.approvedMessage" param="<%= "time="+getTime(pageContext,thisDocumentStore.getApprovalDate(),User.getTimeZone(),DateFormat.SHORT,true,false,false,"&nbsp;")  %>">This document store was approved on&nbsp; <zeroio:tz timestamp="<%= thisDocumentStore.getApprovalDate() %>" default="&nbsp;" timeZone="<%= User.getTimeZone() %>" showTimeZone="true"/></dhv:label></font>
+          <font color="darkgreen"><dhv:label name="documents.details.approvedMessage" param='<%= "time="+getTime(pageContext,thisDocumentStore.getApprovalDate(),User.getTimeZone(),DateFormat.SHORT,true,false,false,"&nbsp;")  %>'>This document store was approved on&nbsp; <zeroio:tz timestamp="<%= thisDocumentStore.getApprovalDate() %>" default="&nbsp;" timeZone="<%= User.getTimeZone() %>" showTimeZone="true"/></dhv:label></font>
         </dhv:evaluate>
       </dhv:evaluate>
       </td>
@@ -387,12 +387,12 @@
         </dhv:evaluate>
         <dhv:evaluate if="<%= requirements.getPlanActivityCount() > 0 %>">
           <% if (requirements.getPlanActivityCount() == 1) { %>
-          <dhv:label name="project.oneOfOneActivityComplete.text" param="<%= "closedCount="+requirements.getPlanClosedCount()+"|activityCount="+requirements.getPlanActivityCount() %>">(<%= requirements.getPlanClosedCount() %> of <%= requirements.getPlanActivityCount() %> activity is complete)</dhv:label>
+          <dhv:label name="project.oneOfOneActivityComplete.text" param='<%= "closedCount="+requirements.getPlanClosedCount()+"|activityCount="+requirements.getPlanActivityCount() %>'>(<%= requirements.getPlanClosedCount() %> of <%= requirements.getPlanActivityCount() %> activity is complete)</dhv:label>
           <%} else {%>
             <% if (requirements.getPlanClosedCount() == 1) { %>
-          <dhv:label name="project.oneOfSeveralActivitiesComplete.text" param="<%= "closedCount="+requirements.getPlanClosedCount()+"|activityCount="+requirements.getPlanActivityCount() %>">(<%= requirements.getPlanClosedCount() %> of <%= requirements.getPlanActivityCount() %> activities is complete)</dhv:label>
+          <dhv:label name="project.oneOfSeveralActivitiesComplete.text" param='<%= "closedCount="+requirements.getPlanClosedCount()+"|activityCount="+requirements.getPlanActivityCount() %>'>(<%= requirements.getPlanClosedCount() %> of <%= requirements.getPlanActivityCount() %> activities is complete)</dhv:label>
             <%} else {%>
-          <dhv:label name="project.numberofSeveralActivitiesComplete.text" param="<%= "closedCount="+requirements.getPlanClosedCount()+"|activityCount="+requirements.getPlanActivityCount() %>">(<%= requirements.getPlanClosedCount() %> of <%= requirements.getPlanActivityCount() %> activities are complete)</dhv:label>
+          <dhv:label name="project.numberofSeveralActivitiesComplete.text" param='<%= "closedCount="+requirements.getPlanClosedCount()+"|activityCount="+requirements.getPlanActivityCount() %>'>(<%= requirements.getPlanClosedCount() %> of <%= requirements.getPlanActivityCount() %> activities are complete)</dhv:label>
           <%}%>
           <%}%>
         </dhv:evaluate>
@@ -422,7 +422,7 @@
 <% boolean hasPermissions = false; %>
 <dhv:evaluate if="<%= linkItemId != -1%>">
   <dhv:evaluate if="<%= (moduleId==Constants.ACCOUNTS || moduleId==Constants.CONTACTS)%>">
-    <dhv:permission name="<%= "accounts-accounts-documents-add"+","+ "accounts-accounts-contacts-documents-add"+","+ "contacts-external_contacts-documents-add"%>" all="false">
+    <dhv:permission name='<%= "accounts-accounts-documents-add"+","+ "accounts-accounts-contacts-documents-add"+","+ "contacts-external_contacts-documents-add"%>' all="false">
       <%hasPermissions = true; %>
     </dhv:permission>
   </dhv:evaluate>  

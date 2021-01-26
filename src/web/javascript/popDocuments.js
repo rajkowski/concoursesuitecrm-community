@@ -8,7 +8,7 @@ function popAccountFileItemList(hiddenFieldId, displayFieldId, params) {
   var posy = (screen.height - height)/2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin=window.open('AccountsDocuments.do?command=View&popup=true&displayFieldId='+displayFieldId+'&hiddenFieldId='+hiddenFieldId + params, title, windowParams);
   newwin.focus();
@@ -36,7 +36,7 @@ function popDocumentsListSingle(hiddenFieldId, displayFieldId, moduleId, params)
   var posy = (screen.height - height)/2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin=window.open('DocumentSelector.do?command=ListDocuments&popup=true&displayFieldId='+displayFieldId+'&hiddenFieldId='+hiddenFieldId + '&moduleId='+moduleId + params, title, windowParams);
   newwin.focus();
@@ -66,7 +66,7 @@ function popDocumentsListMultiple(hiddenFieldId, displayFieldId, moduleId, param
   var posy = (screen.height - height)/2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var selectedIds = "";
   for (count=0; count<(document.getElementById(displayFieldId).length); count++) {

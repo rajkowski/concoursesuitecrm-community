@@ -35,7 +35,7 @@
 <%-- End Trails --%>
 <%= toHtml(version) %>
 <br/><br/>
-<dhv:evaluate if="<%= hasText(applicationPrefs.get("SUPPORT.TEXT")) %>">
+<dhv:evaluate if='<%= hasText(applicationPrefs.get("SUPPORT.TEXT")) %>'>
 	<%= toHtml(applicationPrefs.get("SUPPORT.TEXT")) %>
 	<br/><br />
 	<a href="javascript:window.opener.open('<%= applicationPrefs.get("SUPPORT.URL")%>','_new')" ><%= applicationPrefs.get("SUPPORT.IMAGE") %></a>

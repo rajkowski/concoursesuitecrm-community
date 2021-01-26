@@ -23,7 +23,7 @@
 <script language="JavaScript" TYPE="text/javascript" SRC="javascript/submit.js"></script>
 
 <dhv:evaluate if="<%= PreviousCallDetails.getId() > 0 %>">
-<dhv:evaluate if="<%= PreviousCallDetails.getSubject()!=null && !"".equals(PreviousCallDetails.getSubject())%>">
+<dhv:evaluate if='<%= PreviousCallDetails.getSubject()!=null && !"".equals(PreviousCallDetails.getSubject())%>'>
 <table cellpadding="4" cellspacing="0" border="0" width="100%" class="details">
   <tr>
     <th colspan="2">

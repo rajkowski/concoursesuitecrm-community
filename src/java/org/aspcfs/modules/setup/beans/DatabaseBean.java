@@ -34,8 +34,8 @@ public class DatabaseBean extends GenericBean {
   private String driver = null;
   private String ip = "127.0.0.1";
   private int port = 0;
-  private String name = "centric_crm";
-  private String user = "centric_crm";
+  private String name = "crm-platform";
+  private String user = "postgres";
   private String password = null;
   private String path = "";
 

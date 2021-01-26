@@ -31,14 +31,9 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
-// Determine a safe URL for accessing the file resource
-URL mapFileURL = new URL(prefsURL.toString() + "cfs/transfer/import-mappings.xml");
-if ("file".equals(mapFileURL.getProtocol())) {
-  File file = new File(mapFileURL.getPath());
-  if (!file.exists()) {
-    mapFileURL = new URL(prefsURL.toString() + "import-mappings.xml");
-  }
-}
+print("Inserting sync mappings from... " + setupURL + "init/import-mappings.xml");
+
+URL mapFileURL = new URL(setupURL.toString() + "init/import-mappings.xml");
 
 void insertLookupMapping(Connection db, String id) {
   SyncTable baseMap = new SyncTable();
@@ -72,7 +67,7 @@ void insertCustomLookupMapping(Connection db, String id) {
   print("Added Mapping-> ID: " + id + "List, CLASS: org.aspcfs.utils.web.CustomLookupList");
 }
 
-
+print("Getting system...");
 int systemId = SyncSystem.getSystemId(db, "CFSHttpXMLWriter");
 print("System: " + systemId);
 XMLUtils xml = new XMLUtils(mapFileURL);
@@ -124,3 +119,4 @@ while (mapItems.hasNext()) {
     }
   }
 }
+print("Finished sync mappings.");

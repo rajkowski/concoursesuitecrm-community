@@ -18,6 +18,7 @@ package org.aspcfs.modules.setup.actions;
 import com.darkhorseventures.framework.actions.ActionContext;
 import com.darkhorseventures.framework.hooks.CustomHook;
 import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.lang3.SystemUtils;
 import org.apache.log4j.Logger;
 import org.aspcfs.controller.ApplicationPrefs;
 import org.aspcfs.modules.accounts.base.Organization;
@@ -25,7 +26,6 @@ import org.aspcfs.modules.actions.CFSModule;
 import org.aspcfs.modules.admin.base.User;
 import org.aspcfs.modules.contacts.base.Contact;
 import org.aspcfs.modules.contacts.base.ContactEmailAddress;
-import org.aspcfs.modules.service.base.SyncClient;
 import org.aspcfs.modules.setup.beans.DatabaseBean;
 import org.aspcfs.modules.setup.beans.ServerBean;
 import org.aspcfs.modules.setup.beans.UserSetupBean;
@@ -51,9 +51,6 @@ import java.util.TimeZone;
 public class Setup extends CFSModule {
 
   static Logger log = Logger.getLogger(org.aspcfs.modules.setup.actions.Setup.class);
-
-  public final static String os = System.getProperty("os.name");
-
 
   /**
    * The user is going to the setup page
@@ -156,20 +153,20 @@ public class Setup extends CFSModule {
       } else {
         instanceName = "centric";
       }
-      if (os.startsWith("Windows")) {
+      if (SystemUtils.IS_OS_WINDOWS) {
         //Windows
         path = "c:\\CentricCRM\\fileLibrary\\" + instanceName + "\\";
-      } else if (os.startsWith("Mac")) {
+      } else if (SystemUtils.IS_OS_MAC) {
         //Mac OSX
-        path = "/Library/Application Support/CentricCRM/fileLibrary/" + instanceName + "/";
+        path = SystemUtils.getUserHome() + "/crm-platform/fileLibrary/" + instanceName + "/";
       } else {
         File testDirectory = new File("/opt");
         if (testDirectory.exists()) {
           //Linux, Solaris, SunOS, OS/2, HP-UX, AIX, FreeBSD, etc
-          path = "/opt/centric_crm/fileLibrary/" + instanceName + "/";
+          path = "/opt/crm-platform/fileLibrary/" + instanceName + "/";
         } else {
           //Linux, Solaris, SunOS, OS/2, HP-UX, AIX, FreeBSD, etc
-          path = "/var/lib/centric_crm/fileLibrary/" + instanceName + "/";
+          path = "/var/lib/crm-platform/fileLibrary/" + instanceName + "/";
         }
       }
     }
@@ -194,7 +191,7 @@ public class Setup extends CFSModule {
     if (fileLibrary == null || fileLibrary.trim().length() == 0) {
       context.getRequest().setAttribute(
           "actionError", prefs.getLabel(
-          "object.validation.incorrectTargetDirectoryName", prefs.get("SYSTEM.LANGUAGE")));
+              "object.validation.incorrectTargetDirectoryName", prefs.get("SYSTEM.LANGUAGE")));
       return "ConfigureDirectoryERROR";
     }
     try {
@@ -291,7 +288,7 @@ public class Setup extends CFSModule {
     if (userFileLibrary == null || !userLibraryPath.isDirectory()) {
       context.getRequest().setAttribute(
           "actionError", prefs.getLabel(
-          "object.validation.actionError.fileLibraryPathNotConfigured", prefs.get("SYSTEM.LANGUAGE")));
+              "object.validation.actionError.fileLibraryPathNotConfigured", prefs.get("SYSTEM.LANGUAGE")));
       return "ConfigureDirectoryERROR";
     }
     try {
@@ -306,7 +303,7 @@ public class Setup extends CFSModule {
     } catch (Exception e) {
       context.getRequest().setAttribute(
           "actionError", prefs.getLabel(
-          "object.validation.actionError.incorrectDirectoryRWPermissions", prefs.get("SYSTEM.LANGUAGE")));
+              "object.validation.actionError.incorrectDirectoryRWPermissions", prefs.get("SYSTEM.LANGUAGE")));
       return "ConfigureDirectoryERROR";
     }
     return "ConfigureDirectoryCompleteOK";
@@ -406,7 +403,7 @@ public class Setup extends CFSModule {
       //Append the database prefs to be saved when everything is complete
       prefs.add(
           "GATEKEEPER.APPCODE", (String) context.getServletContext().getAttribute(
-          "SiteCode"));
+              "SiteCode"));
       prefs.add("GATEKEEPER.DBTYPE", bean.getTypeValue());
       prefs.add("GATEKEEPER.DRIVER", bean.getDriver());
       prefs.add("GATEKEEPER.URL", bean.getUrl());
@@ -426,7 +423,7 @@ public class Setup extends CFSModule {
           "actionError",
           getLabel(
               map, prefs.getLabel(
-              "object.validation.actionError.databaseConnectionError", prefs.get("SYSTEM.LANGUAGE"))));
+                  "object.validation.actionError.databaseConnectionError", prefs.get("SYSTEM.LANGUAGE"))));
       return "ConfigureDatabaseERROR";
     } finally {
       DriverManager.setLoginTimeout(timeout);
@@ -506,7 +503,7 @@ public class Setup extends CFSModule {
           "actionError",
           getLabel(
               map, prefs.getLabel(
-              "object.validation.actionError.databaseCreationError", prefs.get("SYSTEM.LANGUAGE"))));
+                  "object.validation.actionError.databaseCreationError", prefs.get("SYSTEM.LANGUAGE"))));
       return "ConfigureDatabaseCreateERROR";
     } finally {
       if (db != null) {
@@ -640,7 +637,7 @@ public class Setup extends CFSModule {
           "actionError",
           getLabel(
               map, prefs.getLabel(
-              "object.validation.actionError.preferencesSaveError", prefs.get("SYSTEM.LANGUAGE"))));
+                  "object.validation.actionError.preferencesSaveError", prefs.get("SYSTEM.LANGUAGE"))));
       return "ConfigureServerERROR";
     }
   }
@@ -722,7 +719,7 @@ public class Setup extends CFSModule {
           "actionError",
           getLabel(
               map, prefs.getLabel(
-              "object.validation.actionError.databaseVerificationError", prefs.get("SYSTEM.LANGUAGE"))));
+                  "object.validation.actionError.databaseVerificationError", prefs.get("SYSTEM.LANGUAGE"))));
       return "ConfigureUserDatabaseERROR";
     } finally {
       if (db != null) {
@@ -814,7 +811,7 @@ public class Setup extends CFSModule {
           "actionError",
           getLabel(
               map, prefs.getLabel(
-              "object.validation.actionError.adminAddError", prefs.get("SYSTEM.LANGUAGE"))));
+                  "object.validation.actionError.adminAddError", prefs.get("SYSTEM.LANGUAGE"))));
       return "ConfigureUserERROR";
     } finally {
       if (db != null) {

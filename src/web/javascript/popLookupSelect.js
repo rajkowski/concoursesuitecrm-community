@@ -204,7 +204,7 @@ function popUserGroupsListSingle(hiddenFieldId, displayFieldId, params) {
   var posy = (screen.height - height) / 2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if (params != null && params != "") {
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin = window.open('UserGroups.do?command=PopupSingleSelector&listType=single&flushtemplist=true&selectedIds=' + document.getElementById(hiddenFieldId).value + '&displayFieldId=' + displayFieldId + '&hiddenFieldId=' + hiddenFieldId + params, title, windowParams);
   newwin.focus();
@@ -224,7 +224,7 @@ function popPortfolioCategoryListSingle(hiddenFieldId, displayFieldId, params) {
   var posy = (screen.height - height) / 2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if (params != null && params != "") {
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin = window.open('PortfolioEditor.do?command=PopupSingleSelector&listType=single&flushtemplist=true&selectedIds=' + document.getElementById(hiddenFieldId).value + '&displayFieldId=' + displayFieldId + '&hiddenFieldId=' + hiddenFieldId + params, title, windowParams);
   newwin.focus();
@@ -314,7 +314,7 @@ function popFolderGraphMajorAxisSelect(folderId, hiddenFieldId, displayFieldId, 
     var posy = (screen.height - height) / 2;
     var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
     if (params != null && params != "") {
-      params = '&' + params;
+      params = '&' + params.replaceAll('|','%7C');
     }
     var newwin = window.open('FolderAndFieldSelector.do?command=FieldSelect&listType=single&flushtemplist=true&folderId=' + folderId + '&displayFieldId=' + displayFieldId + '&hiddenFieldId=' + hiddenFieldId + params, title, windowParams);
     newwin.focus();
@@ -338,7 +338,7 @@ function popFolderGraphMinorAxisSelect(folderId, hiddenFieldId, displayFieldId, 
     var posy = (screen.height - height) / 2;
     var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
     if (params != null && params != "") {
-      params = '&' + params;
+      params = '&' + params.replaceAll('|','%7C');
     }
     var newwin = window.open('FolderAndFieldSelector.do?command=FieldListAndType&listType=single&flushtemplist=true&folderId=' + folderId + '&displayFieldId=' + displayFieldId + '&hiddenFieldId=' + hiddenFieldId + params, title, windowParams);
     newwin.focus();

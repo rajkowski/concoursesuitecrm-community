@@ -2,7 +2,7 @@
  $Id$
 
  Notes:
-   This script builds the Centric Suite
+   This script builds the CRM web application
 
    The easiest way to get started is to run "ant deploy"
 
@@ -14,9 +14,9 @@
    made by the installation and you will be notified of the file to modify.
 
    The build process needs write access to the destination web-app folder and
-   the fileLibrary configured in Concourse Suite Community Edition
+   the fileLibrary configured
 -->
-<project name="Concourse Suite Community Edition" default="usage" basedir=".">
+<project name="CRM" default="usage" basedir=".">
 
   <!-- enable environment variables -->
   <property environment="env"/>
@@ -59,7 +59,7 @@
     <echo message="ant upgradedb: upgrades database with a specified script file"/>
     <echo message="ant docs: generate JavaDocs for all packages"/>
     <echo message="ant test: compile deployed JSPs to check for errors"/>
-    <echo message="ant war: generate a .war file for manual deployment"/>
+    <echo message="ant package: generate a .war file for manual deployment"/>
     <echo message="ant clean: delete the temporary build folder used by the install"/>
     <echo message="ant ws: registers web services with apache axis webapp"/>
   </target>
@@ -101,38 +101,8 @@
     <condition property="TYPE.CATALINA">
       <equals arg1="${WEBSERVER.TYPE}" arg2="catalina"/>
     </condition>
-    <condition property="TYPE.WEBLOGIC">
-      <equals arg1="${WEBSERVER.TYPE}" arg2="weblogic"/>
-    </condition>
-    <condition property="TYPE.GERONIMO">
-      <equals arg1="${WEBSERVER.TYPE}" arg2="geronimo"/>
-    </condition>
-    <condition property="TYPE.WEBSPHERE">
-      <equals arg1="${WEBSERVER.TYPE}" arg2="websphere"/>
-    </condition>
-    <condition property="TYPE.JBOSS">
-      <equals arg1="${WEBSERVER.TYPE}" arg2="jboss"/>
-    </condition>
   </target>
-  <!-- Tomcat 4 -->
-  <target name="init.servlet4.exists" depends="init.environment" if="TYPE.CATALINA">
-    <available file="${CATALINA_HOME}/common/lib/servlet.jar" property="build.servlet4.present"/>
-  </target>
-  <target name="init.servlet4.set" depends="init.servlet4.exists" if="build.servlet4.present">
-    <property name="servletJar" value="${CATALINA_HOME}${fs}common${fs}lib${fs}servlet.jar"/>
-    <echo message="Web Server: Tomcat 4.x"/>
-  </target>
-  <!-- Tomcat 5.x -->
-  <target name="init.servlet5.exists" depends="init.environment" if="TYPE.CATALINA">
-    <available file="${CATALINA_HOME}/common/lib/servlet-api.jar" property="build.servlet5.present"/>
-  </target>
-  <target name="init.servlet5.set" depends="init.servlet5.exists" if="build.servlet5.present">
-    <property name="servletJar" value="${CATALINA_HOME}${fs}common${fs}lib${fs}servlet-api.jar"/>
-    <property name="jspJar" value="${CATALINA_HOME}${fs}common${fs}lib${fs}jsp-api.jar"/>
-    <property name="namingJar" value="${CATALINA_HOME}${fs}common${fs}lib${fs}naming-resources.jar"/>
-    <echo message="Web Server: Tomcat 5.x"/>
-  </target>
-  <!-- Tomcat 6.x -->
+  <!-- Tomcat -->
   <target name="init.servlet6.exists" depends="init.environment" if="TYPE.CATALINA">
     <available file="${CATALINA_HOME}/lib/servlet-api.jar" property="build.servlet6.present"/>
   </target>
@@ -141,55 +111,6 @@
     <property name="jspJar" value="${CATALINA_HOME}${fs}lib${fs}jsp-api.jar"/>
     <property name="namingJar" value="${CATALINA_HOME}${fs}lib${fs}catalina.jar"/>
     <echo message="Web Server: Tomcat 6.x"/>
-  </target>
-  <!-- Weblogic -->
-  <target name="init.weblogic.exists" depends="init.environment" if="TYPE.WEBLOGIC">
-    <available file="${WEBLOGIC_HOME}${fs}server${fs}lib${fs}weblogic.jar" property="build.weblogic.present"/>
-  </target>
-  <target name="init.weblogic.set" depends="init.weblogic.exists" if="build.weblogic.present">
-    <property name="servletJar" value="${WEBLOGIC_HOME}${fs}server${fs}lib${fs}weblogic.jar"/>
-    <property name="jspJar" value="${WEBLOGIC_HOME}${fs}server${fs}lib${fs}weblogic.jar"/>
-    <echo message="Web Server: WebLogic"/>
-  </target>
-  <!-- Geronimo 1.0 -->
-  <target name="init.geronimo10.exists" depends="init.environment" if="TYPE.GERONIMO">
-    <available file="${GERONIMO_HOME}/repository/org.apache.geronimo.specs/jars/geronimo-servlet_2.4_spec-1.0.jar" property="build.geronimo10.present"/>
-  </target>
-  <target name="init.geronimo10.set" depends="init.geronimo10.exists" if="build.geronimo10.present">
-    <property name="servletJar" value="${GERONIMO_HOME}/repository/org.apache.geronimo.specs/jars/geronimo-servlet_2.4_spec-1.0.jar"/>
-    <property name="jspJar" value="${GERONIMO_HOME}/repository/org.apache.geronimo.specs/jars/geronimo-jsp_2.0_spec-1.0.jar"/>
-    <property name="namingJar" value="${GERONIMO_HOME}/repository/tomcat/jars/naming-resources-5.5.9.jar"/>
-    <echo message="Web Server: Geronimo 1.0"/>
-  </target>
-  <!-- Geronimo 1.1 -->
-  <target name="init.geronimo11.exists" depends="init.environment" if="TYPE.GERONIMO">
-    <available file="${GERONIMO_HOME}/repository/org/apache/geronimo/specs/geronimo-servlet_2.4_spec/1.0.1/geronimo-servlet_2.4_spec-1.0.1.jar" property="build.geronimo11.present"/>
-  </target>
-  <target name="init.geronimo11.set" depends="init.geronimo11.exists" if="build.geronimo11.present">
-    <property name="servletJar" value="${GERONIMO_HOME}/repository/org/apache/geronimo/specs/geronimo-servlet_2.4_spec/1.0.1/geronimo-servlet_2.4_spec-1.0.1.jar"/>
-    <property name="jspJar" value="${GERONIMO_HOME}/repository/org/apache/geronimo/specs/geronimo-jsp_2.0_spec/1.0.1/geronimo-jsp_2.0_spec-1.0.1.jar"/>
-    <available file="${GERONIMO_HOME}/repository/tomcat/naming-resources/5.5.15/naming-resources-5.5.15.jar" property="namingJar" value="${GERONIMO_HOME}/repository/tomcat/naming-resources/5.5.15/naming-resources-5.5.15.jar"/>
-    <available file="${GERONIMO_HOME}/repository/tomcat/naming-resources/5.5.15-142/naming-resources-5.5.15-142.jar" property="namingJar" value="${GERONIMO_HOME}/repository/tomcat/naming-resources/5.5.15-142/naming-resources-5.5.15-142.jar"/>
-    <echo message="Web Server: Geronimo 1.1+"/>
-  </target>
-  <!-- JBoss -->
-  <target name="init.jboss24.exists" depends="init.environment" if="TYPE.JBOSS">
-    <available file="${JBOSS_HOME}/server/all/lib/javax.servlet.jar" property="build.jboss24.present"/>
-  </target>
-  <target name="init.jboss24.set" depends="init.jboss24.exists" if="build.jboss24.present">
-    <property name="servletJar" value="${JBOSS_HOME}/server/all/lib/javax.servlet.jar"/>
-    <property name="jspJar" value="${JBOSS_HOME}/server/all/lib/javax.servlet.jsp.jar"/>
-    <property name="namingJar" value="${JBOSS_HOME}/server/all/deploy/jbossweb-tomcat55.sar/naming-resources.jar"/>
-    <echo message="Web Server: JBoss using Servlet 2.4 API"/>
-  </target>
-  <!-- IBM WebSphere -->
-  <target name="init.websphere.exists" depends="init.environment" if="TYPE.WEBSPHERE">
-    <available file="${WEBSPHERE_HOME}{fs}lib{fs}j2ee.jar" property="build.websphere.present"/>
-  </target>
-  <target name="init.websphere.set" depends="init.websphere.exists" if="TYPE.WEBSPHERE">
-    <property name="servletJar" value="${WEBSPHERE_HOME}/lib/j2ee.jar"/>
-    <echo message="Servlet jar: ${servletJar}"/>
-    <echo message="Web Server: WebSphere"/>
   </target>
 
   <!-- See where the build.properties file exists -->
@@ -342,58 +263,6 @@
         <available file="${CATALINA_HOME}"/>
       </and>
     </condition>
-    <!-- Use the environment variable if available -->
-    <condition property="WEBLOGIC_HOME" value="${env.WEBLOGIC_HOME}">
-      <and>
-        <equals arg1="${WEBSERVER.TYPE}" arg2="weblogic"/>
-        <available file="${env.WEBLOGIC_HOME}"/>
-      </and>
-    </condition>
-    <condition property="SERVLET_CONTAINER_EXISTS">
-      <and>
-        <equals arg1="${WEBSERVER.TYPE}" arg2="weblogic"/>
-        <available file="${WEBLOGIC_HOME}"/>
-      </and>
-    </condition>
-    <!-- Use the environment variable if available -->
-    <condition property="WEBSPHERE_HOME" value="${env.WEBSPHERE_HOME}">
-      <and>
-        <equals arg1="${WEBSERVER.TYPE}" arg2="websphere"/>
-        <available file="${env.WEBSPHERE_HOME}"/>
-      </and>
-    </condition>
-    <condition property="SERVLET_CONTAINER_EXISTS">
-      <and>
-        <equals arg1="${WEBSERVER.TYPE}" arg2="websphere"/>
-        <available file="${WEBSPHERE_HOME}"/>
-      </and>
-    </condition>
-    <!-- Use the environment variable if available -->
-    <condition property="GERONIMO_HOME" value="${env.GERONIMO_HOME}">
-      <and>
-        <equals arg1="${WEBSERVER.TYPE}" arg2="geronimo"/>
-        <available file="${env.GERONIMO_HOME}"/>
-      </and>
-    </condition>
-    <condition property="SERVLET_CONTAINER_EXISTS">
-      <and>
-        <equals arg1="${WEBSERVER.TYPE}" arg2="geronimo"/>
-        <available file="${GERONIMO_HOME}"/>
-      </and>
-    </condition>
-    <!-- Use the environment variable if available -->
-    <condition property="JBOSS_HOME" value="${env.JBOSS_HOME}">
-      <and>
-        <equals arg1="${WEBSERVER.TYPE}" arg2="jboss"/>
-        <available file="${env.JBOSS_HOME}"/>
-      </and>
-    </condition>
-    <condition property="SERVLET_CONTAINER_EXISTS">
-      <and>
-        <equals arg1="${WEBSERVER.TYPE}" arg2="jboss"/>
-        <available file="${JBOSS_HOME}"/>
-      </and>
-    </condition>
     <fail>Initialization aborted
       <condition>
         <and>
@@ -420,113 +289,6 @@
       Ex. "export CATALINA_HOME=/path/to/apache-tomcat"
       Ex. "Using System in Control Panel set CATALINA_HOME=c:\Program
       Files\Apache Software Foundation\Tomcat 5.5"
-    </fail>
-    <fail>Initialization aborted
-      <condition>
-        <and>
-          <not>
-            <isset property="SERVLET_CONTAINER_EXISTS"/>
-          </not>
-          <equals arg1="${WEBSERVER.TYPE}" arg2="weblogic"/>
-        </and>
-      </condition>
-      SOLUTION:
-
-      Either...
-
-      1. Create a file called "home.properties" in this directory with the
-      WEBLOGIC_HOME property:
-
-      WEBLOGIC_HOME=/path/to/weblogic
-
-      or...
-
-      2. Create an environment variable WEBLOGIC_HOME which points to WebLogic's
-      directory.
-
-      Ex. "export WEBLOGIC_HOME=/path/to/weblogic"
-      Ex. "Using System in Control Panel set WEBLOGIC_HOME=c:\bea\weblogic92"
-    </fail>
-    <fail>Initialization aborted
-      <condition>
-        <and>
-          <not>
-            <isset property="SERVLET_CONTAINER_EXISTS"/>
-          </not>
-          <equals arg1="${WEBSERVER.TYPE}" arg2="websphere"/>
-        </and>
-      </condition>
-      SOLUTION:
-
-      Either...
-
-      1. Create a file called "home.properties" in this directory with the
-      WEBSPHERE_HOME property:
-
-      WEBSPHERE_HOME=/path/to/websphere
-
-      or...
-
-      2. Create an environment variable WEBSPHERE_HOME which points to
-      Websphere's
-      directory.
-
-      Ex. "export WEBSPHERE_HOME=/path/to/websphere"
-      Ex. "Using System in Control Panel set WEBSPHERE_HOME=c:\ibm\websphere"
-    </fail>
-    <fail>Initialization aborted
-      <condition>
-        <and>
-          <not>
-            <isset property="SERVLET_CONTAINER_EXISTS"/>
-          </not>
-          <equals arg1="${WEBSERVER.TYPE}" arg2="geronimo"/>
-        </and>
-      </condition>
-      SOLUTION:
-
-      Either...
-
-      1. Create a file called "home.properties" in this directory with the
-      GERONIMO_HOME property:
-
-      GERONIMO_HOME=/path/to/apache-geronimo or /path/to/ibm/websphere-ce
-
-      or...
-
-      2. Create an environment variable GERONIMO_HOME which points to Geronimo's
-      directory.
-
-      Ex. "export GERONIMO_HOME=/path/to/apache-geronimo or
-      /path/to/ibm/websphere-ce"
-      Ex. "Using System in Control Panel set GERONIMO_HOME=c:\Program
-      Files\IBM\WebSphere"
-    </fail>
-    <fail>Initialization aborted
-      <condition>
-        <and>
-          <not>
-            <isset property="SERVLET_CONTAINER_EXISTS"/>
-          </not>
-          <equals arg1="${WEBSERVER.TYPE}" arg2="jboss"/>
-        </and>
-      </condition>
-      SOLUTION:
-
-      Either...
-
-      1. Create a file called "home.properties" in this directory with the
-      JBOSS_HOME property:
-
-      JBOSS_HOME=/path/to/jboss
-
-      or...
-
-      2. Create an environment variable JBOSS_HOME which points to JBoss's
-      directory.
-
-      Ex. "export JBOSS_HOME=/path/to/jboss"
-      Ex. "Using System in Control Panel set JBOSS_HOME=c:\Program Files\JBoss"
     </fail>
     <fail unless="build.config.present">Initialization aborted
 
@@ -561,7 +323,7 @@
 
   <!-- Configure classpath as both object and a property -->
   <target name="init.classpath"
-          depends="init.classpath.uptodate,init.servlet.type,init.servlet6.set,init.servlet4.set,init.servlet5.set,init.weblogic.set,init.geronimo10.set,init.geronimo11.set,init.jboss24.set,init.websphere.set">
+          depends="init.classpath.uptodate,init.servlet.type,init.servlet6.set">
     <path id="cfs2.classpath">
       <pathelement location="${servletJar}"/>
       <pathelement location="${jspJar}"/>
@@ -678,8 +440,13 @@
   <!-- Compile the Java source code -->
   <target name="compile" description="Compile all .java source files" depends="init,compile.delete" unless="classes.uptodate">
     <!-- Compile the code -->
-    <echo message="Setting memory to 168m for compile"/>
-    <javac srcdir="${src.classes.dir}" destdir="${build.classes.dir}" verbose="off" deprecation="off" fork="true" memoryInitialSize="168m" memoryMaximumSize="168m" debug="${DEBUG}" debuglevel="${DEBUGLEVEL}">
+    <javac srcdir="${src.classes.dir}" destdir="${build.classes.dir}" 
+           verbose="off" 
+           deprecation="on" 
+           optimize="on" 
+           source="10" target="10"
+           includeantruntime="true"
+           debug="off">
       <classpath>
         <path refid="cfs2.classpath"/>
       </classpath>
@@ -838,7 +605,9 @@
       <fileset dir="${CENTRIC_HOME}/WEB-INF/reports" includes="*.jasper"/>
     </delete>
     <!-- Compile the reports -->
+   <!-- @todo fails
     <compileJasperReport srcdir="${CENTRIC_HOME}/WEB-INF/reports" destdir="${CENTRIC_HOME}/WEB-INF/reports"/>
+   --> 
   </target>
 
   <target name="deploy.jasper" depends="deploy.jasper.status" unless="build.config.war">
@@ -1006,10 +775,10 @@
 
   <target name="war.setup">
     <property name="build.config.war" value="true"/>
-    <property name="archive.filename" value="centric_war.zip"/>
+    <property name="archive.filename" value="crm.zip"/>
   </target>
 
-  <target name="war"
+  <target name="package"
           description="Compile, build, and generate web archive"
           depends="war.setup,war.create">
   </target>
@@ -1034,12 +803,7 @@
         <include name="*.jar"/>
         <exclude name="commons-logging*.jar" if="for.offline"/>
         <exclude name="log4j-*.jar" if="for.offline"/>
-        <exclude name="oracle-*.jar" if="for.offline"/>
-        <exclude name="jtds-*.jar" if="for.offline"/>
-        <exclude name="jaybird-*.jar" if="for.offline"/>
-        <exclude name="DaffodilDB*.jar" if="for.offline"/>
         <exclude name="postgresql-*.jar" if="for.offline"/>
-        <exclude name="derby-*.jar" if="for.offline"/>
       </fileset>
     </copy>
     <!-- Copy the .jars -->
@@ -1097,14 +861,6 @@
         <exclude name="init/**"/>
         <!-- Drop if="for.offline" for exclude DB scripts from war -->
         <exclude name="postgresql/**" if="for.offline"/>
-        <exclude name="mssql/**" if="for.offline"/>
-        <exclude name="daffodildb/**" if="for.offline"/>
-        <exclude name="db2/**" if="for.offline"/>
-        <exclude name="firebird/**" if="for.offline"/>
-        <exclude name="oracle/**" if="for.offline"/>
-        <exclude name="mysql/**" if="for.offline"/>
-        <exclude name="interbase/**" if="for.offline"/>
-        <!-- Derby needs always:  exclude name="mysql/**" / -->
         <include name="**/*"/>
       </fileset>
     </copy>
@@ -1136,6 +892,7 @@
       </fileset>
     </copy>
     <!-- Copy and compile the reports -->
+    <!--
     <mkdir dir="${dist.dir}/cfs/WEB-INF/reports"/>
     <copy todir="${dist.dir}/cfs/WEB-INF/reports">
       <fileset dir="${src.dir}/jasper_reports">
@@ -1148,6 +905,7 @@
     <delete>
       <fileset dir="${dist.dir}/cfs/WEB-INF/reports" includes="*.xml"/>
     </delete>
+    -->
     <!-- Copy the language files -->
     <mkdir dir="${dist.dir}/cfs/WEB-INF/languages"/>
     <copy todir="${dist.dir}/cfs/WEB-INF/languages">
@@ -1169,7 +927,7 @@
       </fileset>
     </copy>
     <!-- Archive the folder -->
-    <war destfile="${dist.dir}/centric.war"
+    <war destfile="${dist.dir}/crm.war"
          webxml="${src.web.dir}/WEB-INF/web.xml"
          basedir="${dist.dir}/cfs"
          compress="true"
@@ -1180,11 +938,11 @@
       <fileset dir="${doc.dir}" includes="Binary*EULA.rtf"/>
       <fileset dir="${doc.dir}" includes="CRM*Installation*and*Setup.pdf"/>
       <fileset dir="${base.dir}" includes="CHANGES.txt"/>
-      <fileset dir="${dist.dir}" includes="centric.war"/>
+      <fileset dir="${dist.dir}" includes="crm.war"/>
     </zip>
     <!-- Cleanup files -->
     <delete dir="${dist.dir}/cfs"/>
-    <echo message=".war file created: ${dist.dir}${fs}centric.war"/>
+    <echo message=".war file created: ${dist.dir}${fs}crm.war"/>
   </target>
 
   <!-- Create sourcecode distribution -->
@@ -1237,23 +995,6 @@
       <!-- sub directories: src/sql -->
       <zipfileset dir="src/sql/postgresql" includes="new_*.sql" prefix="${zip.dir}/src/sql/postgresql"/>
       <zipfileset dir="src/sql/postgresql/upgrade" includes="*.sql,*.txt" prefix="${zip.dir}/src/sql/postgresql/upgrade"/>
-      <zipfileset dir="src/sql/mssql" includes="new_*.sql" prefix="${zip.dir}/src/sql/mssql"/>
-      <zipfileset dir="src/sql/mssql/upgrade" includes="*.sql,*.txt" prefix="${zip.dir}/src/sql/mssql/upgrade"/>
-      <zipfileset dir="src/sql/firebird" includes="new_*.sql" prefix="${zip.dir}/src/sql/firebird"/>
-      <zipfileset dir="src/sql/firebird/upgrade" includes="*.sql,*.txt" prefix="${zip.dir}/src/sql/firebird/upgrade"/>
-      <zipfileset dir="src/sql/oracle" includes="new_*.sql" prefix="${zip.dir}/src/sql/oracle"/>
-      <!--
-      <zipfileset
-        dir="src/sql/oracle/upgrade"
-        includes="*.sql,*.txt"
-        prefix="${zip.dir}/src/sql/oracle/upgrade"/>
-      -->
-      <zipfileset dir="src/sql/daffodildb" includes="new_*.sql" prefix="${zip.dir}/src/sql/daffodildb"/>
-      <zipfileset dir="src/sql/daffodildb/upgrade" includes="*.sql,*.txt" prefix="${zip.dir}/src/sql/daffodildb/upgrade"/>
-      <zipfileset dir="src/sql/mysql" includes="new_*.sql" prefix="${zip.dir}/src/sql/mysql"/>
-      <zipfileset dir="src/sql/mysql/upgrade" includes="*.sql,*.txt" prefix="${zip.dir}/src/sql/mysql/upgrade"/>
-      <zipfileset dir="src/sql/derby" includes="new_*.sql" prefix="${zip.dir}/src/sql/derby"/>
-      <zipfileset dir="src/sql/derby/upgrade" includes="*.sql,*.txt" prefix="${zip.dir}/src/sql/derby/upgrade"/>
       <zipfileset dir="src/sql/init" includes="*.sql, *.xml, *.bsh" prefix="${zip.dir}/src/sql/init"/>
       <zipfileset dir="src/sql/upgrade" includes="*.bsh" prefix="${zip.dir}/src/sql/upgrade"/>
       <!-- sub directories: src/web/images -->
@@ -1332,7 +1073,8 @@
     <mkdir dir="${dist.dir}/files/classes"/>
     <javac srcdir="${dist.dir}/files/src/java"
            destdir="${dist.dir}/files/classes" verbose="off" deprecation="off"
-           fork="true" memoryInitialSize="168m" memoryMaximumSize="168m">
+           source="10" target="10"
+           includeantruntime="true">
       <classpath>
         <path refid="cfs2.classpath"/>
       </classpath>

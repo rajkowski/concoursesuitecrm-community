@@ -39,12 +39,11 @@ import org.aspcfs.modules.contacts.base.*;
 import org.aspcfs.modules.contacts.utils.QualifiedLeadsCount;
 import org.aspcfs.modules.contacts.utils.QualifiedLeadsCounter;
 import org.aspcfs.modules.login.beans.UserBean;
-import org.aspcfs.modules.pipeline.base.OpportunityHeaderList;
 import org.aspcfs.utils.*;
 import org.aspcfs.utils.web.*;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartRenderingInfo;
-import org.jfree.chart.ChartUtilities;
+import org.jfree.chart.ChartUtils;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.DateAxis;
 import org.jfree.chart.axis.NumberAxis;
@@ -68,15 +67,15 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
-import java.util.*;
 import java.util.List;
+import java.util.*;
 
 /**
  * Description of the Class
  *
  * @author partha
  * @version $Id: Sales.java 14202 2006-02-07 15:05:58 -0500 (Tue, 07 Feb 2006)
- *          partha@darkhorseventures.com $
+ * partha@darkhorseventures.com $
  * @created March 4, 2005
  */
 public final class Sales extends CFSModule {
@@ -258,7 +257,7 @@ public final class Sales extends CFSModule {
         realFullLeadList.setBuildDetails(false);
         realFullLeadList.buildList(db);
       }
-      
+
       BatchInfo batchInfo = new BatchInfo("listView");
       batchInfo.setAction("Sales.do?command=ProcessBatch");
       batchInfo.setSize(leads.size());
@@ -279,8 +278,10 @@ public final class Sales extends CFSModule {
     } finally {
       this.freeConnection(context, db);
     }
+
     // TODO:: Graph related code
     try {
+      db = getConnection(context);
       // Determine if a graph has to be generated
       if (checkFileName != null) {
         // Existing graph is good
@@ -340,12 +341,12 @@ public final class Sales extends CFSModule {
         XYItemRenderer renderer = plot.getRenderer();
         if (renderer instanceof StandardXYItemRenderer) {
           StandardXYItemRenderer rr = (StandardXYItemRenderer) renderer;
-          rr.setPlotShapes(true);
-          rr.setShapesFilled(false);
-          rr.setItemLabelsVisible(true);
+          rr.setPlotLines(true);
+          rr.setBaseShapesFilled(false);
+          rr.setDefaultItemLabelsVisible(true);
           // Tool tip formatting using locale {1} = Date, {2} = Amount
           StandardXYToolTipGenerator ttg = new StandardXYToolTipGenerator("{2} ({1})", sdf, NumberFormat.getInstance(locale));
-          rr.setToolTipGenerator(ttg);
+          rr.setSeriesToolTipGenerator(0, ttg);
         }
         // Output the chart
         if (System.getProperty("DEBUG") != null) {
@@ -364,9 +365,9 @@ public final class Sales extends CFSModule {
 
         ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection());
         File imageFile = new File(filePath + fileName + ".jpg");
-        ChartUtilities.saveChartAsJPEG(imageFile, 1.0f, chart, width, height, info);
+        ChartUtils.saveChartAsJPEG(imageFile, 1.0f, chart, width, height, info);
         PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(filePath + fileName + ".map")), true);
-        ChartUtilities.writeImageMap(pw, fileName, info, false);
+        ChartUtils.writeImageMap(pw, fileName, info, false);
         // Update the cached filename
         if (graphString.equals("lccr")) {
           thisRec.getLccr().setLastFileName(fileName);
@@ -378,6 +379,8 @@ public final class Sales extends CFSModule {
       context.getRequest().setAttribute("Error", e);
       System.out.println("Sales-> GraphicsError exception occurred here");
       return ("GraphicsError");
+    } finally {
+      this.freeConnection(context, db);
     }
     context.getRequest().setAttribute("ShortChildList", shortChildList);
     return "DashboardOK";
@@ -400,41 +403,41 @@ public final class Sales extends CFSModule {
       return ("SystemError");
     } finally {
       this.freeConnection(context, db);
-    }    
+    }
     return status;
   }
-    
-  private String executeCommandSearchForm(ActionContext context,Connection db) throws SQLException {
+
+  private String executeCommandSearchForm(ActionContext context, Connection db) throws SQLException {
     if (!(hasPermission(context, "sales-view"))) {
       return ("PermissionError");
     }
     SystemStatus systemStatus = this.getSystemStatus(context);
-      // Create the paged list info to store the search form
-      PagedListInfo salesListInfo = this.getPagedListInfo(context, "SalesListInfo");
-      salesListInfo.setCurrentLetter("");
-      salesListInfo.setCurrentOffset(0);
-      // salesListInfo.setItemsPerPage(100);
+    // Create the paged list info to store the search form
+    PagedListInfo salesListInfo = this.getPagedListInfo(context, "SalesListInfo");
+    salesListInfo.setCurrentLetter("");
+    salesListInfo.setCurrentOffset(0);
+    // salesListInfo.setItemsPerPage(100);
 
-      // Lookup Lists in the dashboard
-      LookupList sources = new LookupList(db, "lookup_contact_source");
-      if (sources.size() > 0) {
-        sources.addItem(-1, systemStatus.getLabel("pipeline.any"));
-      }
-      context.getRequest().setAttribute("SourceList", sources);
-      LookupList ratings = new LookupList(db, "lookup_contact_rating");
-      if (ratings.size() > 0) {
-        ratings.addItem(-1, systemStatus.getLabel("pipeline.any"));
-      }
-      context.getRequest().setAttribute("RatingList", ratings);
-      CountrySelect countrySelect = new CountrySelect(systemStatus.getLabel("pipeline.any"));
-      context.getRequest().setAttribute("countrySelect", countrySelect);
-      context.getRequest().setAttribute("listForm", "" + true);
-      LookupList siteList = new LookupList(db, "lookup_site_id");
-      if (siteList.size() > 0) {
-        siteList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
-        siteList.addItem(Constants.INVALID_SITE, systemStatus.getLabel("accounts.allSites"));
-      }
-      context.getRequest().setAttribute("SiteIdList", siteList);
+    // Lookup Lists in the dashboard
+    LookupList sources = new LookupList(db, "lookup_contact_source");
+    if (sources.size() > 0) {
+      sources.addItem(-1, systemStatus.getLabel("pipeline.any"));
+    }
+    context.getRequest().setAttribute("SourceList", sources);
+    LookupList ratings = new LookupList(db, "lookup_contact_rating");
+    if (ratings.size() > 0) {
+      ratings.addItem(-1, systemStatus.getLabel("pipeline.any"));
+    }
+    context.getRequest().setAttribute("RatingList", ratings);
+    CountrySelect countrySelect = new CountrySelect(systemStatus.getLabel("pipeline.any"));
+    context.getRequest().setAttribute("countrySelect", countrySelect);
+    context.getRequest().setAttribute("listForm", "" + true);
+    LookupList siteList = new LookupList(db, "lookup_site_id");
+    if (siteList.size() > 0) {
+      siteList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
+      siteList.addItem(Constants.INVALID_SITE, systemStatus.getLabel("accounts.allSites"));
+    }
+    context.getRequest().setAttribute("SiteIdList", siteList);
     addModuleBean(context, "Leads", "Leads");
     return "SearchOK";
   }
@@ -469,40 +472,40 @@ public final class Sales extends CFSModule {
     if (addAnother == null || "".equals(addAnother.trim())) {
       thisContact = (Contact) context.getFormBean();
     } else {
-       thisContact = new Contact();
+      thisContact = new Contact();
     }
     SystemStatus systemStatus = this.getSystemStatus(context);
-      // prepare userList for reassigning owner
-      UserBean thisUser = (UserBean) context.getSession().getAttribute("User");
-      User thisRec = thisUser.getUserRecord();
-      UserList shortChildList = thisRec.getShortChildList();
-      UserList userList = thisRec.getFullChildList(shortChildList, new UserList());
-      userList.setMyId(getUserId(context));
-      userList.setMyValue(thisUser.getContact().getNameLastFirst());
-      userList.setIncludeMe(true);
-      userList.setExcludeDisabledIfUnselected(true);
-      userList.setExcludeExpiredIfUnselected(true);
+    // prepare userList for reassigning owner
+    UserBean thisUser = (UserBean) context.getSession().getAttribute("User");
+    User thisRec = thisUser.getUserRecord();
+    UserList shortChildList = thisRec.getShortChildList();
+    UserList userList = thisRec.getFullChildList(shortChildList, new UserList());
+    userList.setMyId(getUserId(context));
+    userList.setMyValue(thisUser.getContact().getNameLastFirst());
+    userList.setIncludeMe(true);
+    userList.setExcludeDisabledIfUnselected(true);
+    userList.setExcludeExpiredIfUnselected(true);
 
-      LookupList stageList = systemStatus.getLookupList(db, "lookup_contact_stage");
-      stageList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
-      context.getRequest().setAttribute("StageList", stageList);
-      LookupList siteList = new LookupList(db, "lookup_site_id");
-      siteList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
-      // siteList.addItem(Constants.INVALID_SITE,
-      // systemStatus.getLabel("accounts.allSites"));
-      context.getRequest().setAttribute("SiteIdList", siteList);
-      LookupList industryList = new LookupList(db, "lookup_industry");
-      industryList.addItem(-1, systemStatus.getLabel("accounts.accounts_contacts_calls_details_followup_include.None"));
-      context.getRequest().setAttribute("IndustryList", industryList);
-      context.getRequest().setAttribute("UserList", userList);
-      if (thisContact != null) {
-        context.getRequest().setAttribute("ContactDetails", thisContact);
-      }
-   if (context.getRequest().getParameter("actionSource") != null) {
-       return getReturn(context, "AddLeads");
+    LookupList stageList = systemStatus.getLookupList(db, "lookup_contact_stage");
+    stageList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
+    context.getRequest().setAttribute("StageList", stageList);
+    LookupList siteList = new LookupList(db, "lookup_site_id");
+    siteList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
+    // siteList.addItem(Constants.INVALID_SITE,
+    // systemStatus.getLabel("accounts.allSites"));
+    context.getRequest().setAttribute("SiteIdList", siteList);
+    LookupList industryList = new LookupList(db, "lookup_industry");
+    industryList.addItem(-1, systemStatus.getLabel("accounts.accounts_contacts_calls_details_followup_include.None"));
+    context.getRequest().setAttribute("IndustryList", industryList);
+    context.getRequest().setAttribute("UserList", userList);
+    if (thisContact != null) {
+      context.getRequest().setAttribute("ContactDetails", thisContact);
     }
-   if (context.getRequest().getParameter("actionSource") != null) {
-       return getReturn(context, "AddLeads");
+    if (context.getRequest().getParameter("actionSource") != null) {
+      return getReturn(context, "AddLeads");
+    }
+    if (context.getRequest().getParameter("actionSource") != null) {
+      return getReturn(context, "AddLeads");
     }
     addModuleBean(context, "Leads", "Leads");
     return "PrepareOK";
@@ -529,8 +532,8 @@ public final class Sales extends CFSModule {
     return status;
   }
 
-  
-  private String executeCommandModify(ActionContext context,Connection db) throws NumberFormatException, SQLException {
+
+  private String executeCommandModify(ActionContext context, Connection db) throws NumberFormatException, SQLException {
     if (!(hasPermission(context, "sales-leads-add"))) {
       return ("PermissionError");
     }
@@ -544,33 +547,33 @@ public final class Sales extends CFSModule {
     thisContact = (Contact) context.getFormBean();
     SystemStatus systemStatus = this.getSystemStatus(context);
 
-      if (reset == null || !"true".equals(reset)) {
-        thisContact = new Contact();
-        thisContact.setBuildDetails(true);
-        thisContact.queryRecord(db, Integer.parseInt(contactId));
-      }
-      // prepare userList for reassigning owner
-      UserBean thisUser = (UserBean) context.getSession().getAttribute("User");
-      User thisRec = thisUser.getUserRecord();
-      UserList shortChildList = thisRec.getShortChildList();
-      UserList userList = thisRec.getFullChildList(shortChildList, new UserList());
-      userList.setMyId(getUserId(context));
-      userList.setMyValue(thisUser.getContact().getNameLastFirst());
-      userList.setIncludeMe(true);
-      userList.setExcludeDisabledIfUnselected(true);
-      userList.setExcludeExpiredIfUnselected(true);
+    if (reset == null || !"true".equals(reset)) {
+      thisContact = new Contact();
+      thisContact.setBuildDetails(true);
+      thisContact.queryRecord(db, Integer.parseInt(contactId));
+    }
+    // prepare userList for reassigning owner
+    UserBean thisUser = (UserBean) context.getSession().getAttribute("User");
+    User thisRec = thisUser.getUserRecord();
+    UserList shortChildList = thisRec.getShortChildList();
+    UserList userList = thisRec.getFullChildList(shortChildList, new UserList());
+    userList.setMyId(getUserId(context));
+    userList.setMyValue(thisUser.getContact().getNameLastFirst());
+    userList.setIncludeMe(true);
+    userList.setExcludeDisabledIfUnselected(true);
+    userList.setExcludeExpiredIfUnselected(true);
 
-      LookupList stageList = new LookupList(db, "lookup_contact_stage");
-      stageList.addItem(-1, systemStatus.getLabel("accounts.accounts_contacts_calls_details_followup_include.None"));
-      context.getRequest().setAttribute("StageList", stageList);
-      LookupList siteList = new LookupList(db, "lookup_site_id");
-      siteList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
-      context.getRequest().setAttribute("SiteIdList", siteList);
-      LookupList industryList = new LookupList(db, "lookup_industry");
-      industryList.addItem(-1, systemStatus.getLabel("accounts.accounts_contacts_calls_details_followup_include.None"));
-      context.getRequest().setAttribute("IndustryList", industryList);
-      context.getRequest().setAttribute("UserList", userList);
-      context.getRequest().setAttribute("ContactDetails", thisContact);
+    LookupList stageList = new LookupList(db, "lookup_contact_stage");
+    stageList.addItem(-1, systemStatus.getLabel("accounts.accounts_contacts_calls_details_followup_include.None"));
+    context.getRequest().setAttribute("StageList", stageList);
+    LookupList siteList = new LookupList(db, "lookup_site_id");
+    siteList.addItem(-1, systemStatus.getLabel("calendar.none.4dashes"));
+    context.getRequest().setAttribute("SiteIdList", siteList);
+    LookupList industryList = new LookupList(db, "lookup_industry");
+    industryList.addItem(-1, systemStatus.getLabel("accounts.accounts_contacts_calls_details_followup_include.None"));
+    context.getRequest().setAttribute("IndustryList", industryList);
+    context.getRequest().setAttribute("UserList", userList);
+    context.getRequest().setAttribute("ContactDetails", thisContact);
     addModuleBean(context, "Leads", "Leads");
     return "PrepareOK";
   }
@@ -636,9 +639,9 @@ public final class Sales extends CFSModule {
         }
       } else {
         if (thisContact.getId() > -1) {
-          return executeCommandModify(context,db);
+          return executeCommandModify(context, db);
         } else {
-          return executeCommandAdd(context,db);
+          return executeCommandAdd(context, db);
         }
       }
     } catch (Exception e) {
@@ -655,8 +658,7 @@ public final class Sales extends CFSModule {
         context.getRequest().removeAttribute("ContactDetails");
         context.getRequest().setAttribute("addAnother", "" + true);
         return executeCommandAdd(context);
-      } else
-      if ("true".equals((String) context.getRequest().getParameter("saveAndClone"))) {
+      } else if ("true".equals((String) context.getRequest().getParameter("saveAndClone"))) {
         return "SaveOK";
       }
     } else if (resultCount != -1) {
@@ -761,7 +763,7 @@ public final class Sales extends CFSModule {
       context.getRequest().setAttribute("systemStatus", systemStatus);
       if (!fetchedList) {
         processErrors(context, contacts.getErrors());
-        return executeCommandSearchForm(context,db);
+        return executeCommandSearchForm(context, db);
       }
       BatchInfo batchInfo = new BatchInfo("batchLeads");
       batchInfo.setAction("Sales.do?command=ProcessBatch");
@@ -845,7 +847,7 @@ public final class Sales extends CFSModule {
       LookupList stages = new LookupList(db, "lookup_contact_stage");
       stages.addItem(-1, systemStatus.getLabel("accounts.accounts_contacts_calls_details_followup_include.None"));
       context.getRequest().setAttribute("StageList", stages);
-      
+
       LookupList sources = new LookupList(db, "lookup_contact_source");
       sources.addItem(-1, systemStatus.getLabel("accounts.accounts_contacts_calls_details_followup_include.None"));
       context.getRequest().setAttribute("SourceList", sources);
@@ -962,10 +964,10 @@ public final class Sales extends CFSModule {
     String readStatusString = (String) context.getRequest().getAttribute("readStatus");
     String contactId = null;
     String[] id = null;
-    String[] leadId  = null;
-    String leadIdsCopy  = "";
-    if (action!= null && !"".equals(action)){
-      context.getRequest().setAttribute("action",action);
+    String[] leadId = null;
+    String leadIdsCopy = "";
+    if (action != null && !"".equals(action)) {
+      context.getRequest().setAttribute("action", action);
       String ids = (String) context.getRequest().getParameter("ids");
       leadId = ids.split(",");
       Connection db = null;
@@ -974,11 +976,11 @@ public final class Sales extends CFSModule {
         try {
           db = getConnection(context);
           thisContact = new Contact(db, leadId[i]);
-          if (thisContact.getIsLead()){
-            if ("".equals(leadIdsCopy)){
+          if (thisContact.getIsLead()) {
+            if ("".equals(leadIdsCopy)) {
               leadIdsCopy = leadId[i];
-            }else{
-              leadIdsCopy = leadIdsCopy +","+ leadId[i];
+            } else {
+              leadIdsCopy = leadIdsCopy + "," + leadId[i];
             }
           }
         } catch (Exception e) {
@@ -987,9 +989,9 @@ public final class Sales extends CFSModule {
           return ("SystemError");
         } finally {
           this.freeConnection(context, db);
-        }  
+        }
       }
-      if ("".equals(leadIdsCopy)||(leadIdsCopy == null)){
+      if ("".equals(leadIdsCopy) || (leadIdsCopy == null)) {
         if (from != null && !"list".equals(from)) {
           context.getRequest().setAttribute("refreshUrl", "Sales.do?command=Dashboard" + RequestUtils.addLinkParams(context.getRequest(), "actionId"));
         } else {
@@ -999,9 +1001,9 @@ public final class Sales extends CFSModule {
         return "ToAccountsOk";
       }
       ids = leadIdsCopy;
-      context.getRequest().setAttribute("ids",ids);
+      context.getRequest().setAttribute("ids", ids);
       id = ids.split(",");
-    }else{
+    } else {
       contactId = (String) context.getRequest().getAttribute("contactId");
       if (contactId == null || "".equals(contactId)) {
         contactId = (String) context.getRequest().getParameter("contactId");
@@ -1012,8 +1014,8 @@ public final class Sales extends CFSModule {
     Connection db = null;
     try {
       db = getConnection(context);
-      if (action!= null && !"".equals(action)){
-      }else{
+      if (action != null && !"".equals(action)) {
+      } else {
         if (nextValue != null && !"".equals(nextValue.trim())) {
           contactId = "" + LeadUtils.getNextLead(db, Integer.parseInt(contactId), contacts, this.getUserSiteId(context), true);
         }
@@ -1030,16 +1032,16 @@ public final class Sales extends CFSModule {
 
       if (readStatusString == null || "".equals(readStatusString.trim())) {
         if (hasPermission(context, "sales-leads-edit")) {
-          if (action!= null && !"".equals(action)){
+          if (action != null && !"".equals(action)) {
             int i = -1;
-            while (i < id.length -1 ) {
+            while (i < id.length - 1) {
               i = i + 1;
-              int user = readStatus = LeadUtils.setReadStatus(db, Integer.parseInt(id[i]), this.getUserId(context));          
+              int user = readStatus = LeadUtils.setReadStatus(db, Integer.parseInt(id[i]), this.getUserId(context));
             }
-          }else{
-          readStatus = LeadUtils.setReadStatus(db, Integer.parseInt(contactId), this.getUserId(context));
+          } else {
+            readStatus = LeadUtils.setReadStatus(db, Integer.parseInt(contactId), this.getUserId(context));
+          }
         }
-        }  
       } else {
         try {
           readStatus = Integer.parseInt(readStatusString);
@@ -1047,24 +1049,24 @@ public final class Sales extends CFSModule {
         }
       }
       context.getRequest().setAttribute("readStatus", "" + readStatus);
-      if (action!= null && !"".equals(action)){
-      }else{
-      if (contactId != null && !"".equals(contactId) && Integer.parseInt(contactId) != -1) {
-        contact = new Contact(db, contactId);
-        context.getRequest().setAttribute("contactDetails", contact);
+      if (action != null && !"".equals(action)) {
+      } else {
+        if (contactId != null && !"".equals(contactId) && Integer.parseInt(contactId) != -1) {
+          contact = new Contact(db, contactId);
+          context.getRequest().setAttribute("contactDetails", contact);
 
-        // build a list of "Action Plans" mapped to "Accounts"
-        ActionPlanList actionPlanList = new ActionPlanList();
-        actionPlanList.setIncludeOnlyApproved(Constants.TRUE);
-        actionPlanList.setEnabled(Constants.TRUE);
-        actionPlanList.setSiteId(contact.getSiteId());
-        actionPlanList.setLinkObjectId(ActionPlan.getMapIdGivenConstantId(db, ActionPlan.ACCOUNTS));
-        actionPlanList.buildList(db);
-        HtmlSelect actionPlanSelect = new HtmlSelect();
-        actionPlanSelect.addItem(-1, systemStatus.getLabel("calendar.none.4dashes", "-- None --"));
-        actionPlanSelect.addItems(actionPlanList.getHtmlSelectObj());
-        context.getRequest().setAttribute("actionPlanSelect", actionPlanSelect);
-      }
+          // build a list of "Action Plans" mapped to "Accounts"
+          ActionPlanList actionPlanList = new ActionPlanList();
+          actionPlanList.setIncludeOnlyApproved(Constants.TRUE);
+          actionPlanList.setEnabled(Constants.TRUE);
+          actionPlanList.setSiteId(contact.getSiteId());
+          actionPlanList.setLinkObjectId(ActionPlan.getMapIdGivenConstantId(db, ActionPlan.ACCOUNTS));
+          actionPlanList.buildList(db);
+          HtmlSelect actionPlanSelect = new HtmlSelect();
+          actionPlanSelect.addItem(-1, systemStatus.getLabel("calendar.none.4dashes", "-- None --"));
+          actionPlanSelect.addItems(actionPlanList.getHtmlSelectObj());
+          context.getRequest().setAttribute("actionPlanSelect", actionPlanSelect);
+        }
       }
     } catch (Exception e) {
       context.getRequest().setAttribute("Error", e);
@@ -1193,7 +1195,7 @@ public final class Sales extends CFSModule {
     return "WorkLeadOK";
   }
 
-  
+
   /**
    * Description of the Method
    *
@@ -1207,7 +1209,7 @@ public final class Sales extends CFSModule {
     Connection db = null;
     addModuleBean(context, "Add Account", "Add Account");
     String contactId = (String) context.getRequest().getParameter("id");
-    if (contactId == null || "".equals(contactId)||"-1".equals(contactId)){
+    if (contactId == null || "".equals(contactId) || "-1".equals(contactId)) {
       contactId = (String) context.getRequest().getAttribute("id");
     }
     String rating = (String) context.getRequest().getParameter("rating");
@@ -1471,9 +1473,9 @@ public final class Sales extends CFSModule {
     }
     context.getRequest().setAttribute("nextValue", nextValue != null ? nextValue : "");
     String ids = context.getRequest().getParameter("ids");
-    if ((ids!=null) && (!"".equals(ids))){
+    if ((ids != null) && (!"".equals(ids))) {
       String[] id = ids.split(",");
-      
+
       int orgId = -1;
       if (context.getRequest().getParameter("orgId") != null) {
         orgId = Integer.parseInt((String) context.getRequest().getParameter("orgId"));
@@ -1487,7 +1489,7 @@ public final class Sales extends CFSModule {
       Connection db = null;
       try {
         db = getConnection(context);
-        if ((orgId==-1)&&(orgName != null)) {
+        if ((orgId == -1) && (orgName != null)) {
           User assigned = null;
           User manager = null;
           ActionPlanWork actionPlanWork = new ActionPlanWork();
@@ -1528,9 +1530,9 @@ public final class Sales extends CFSModule {
             }
           }
         }
-        
+
         int i = -1;
-        while (i < id.length -1 ) {
+        while (i < id.length - 1) {
           i = i + 1;
           Contact contact = new Contact(db, id[i]);
           Contact oldContact = new Contact(db, id[i]);
@@ -1555,7 +1557,7 @@ public final class Sales extends CFSModule {
       } finally {
         this.freeConnection(context, db);
       }
-    }else{
+    } else {
       contactId = context.getRequest().getParameter("contactId");
       String owner = (String) context.getRequest().getParameter("owner");
       String leadStatus = (String) context.getRequest().getParameter("leadStatus");
@@ -1565,22 +1567,22 @@ public final class Sales extends CFSModule {
       String action = (String) context.getRequest().getParameter("action");
       Contact thisContact = null;
       Connection db = null;
-    
+
       String[] leadId = null;
       String leadIdsCopy = "";
       if (contactId == null || "-1".equals(contactId)) {
         if (leadIds != null && !"".equals(leadIds)) {
-          if ("assign".equals(action)){
+          if ("assign".equals(action)) {
             leadId = leadIds.split(",");
             for (int i = 0; i < leadId.length; i++) {
               try {
                 db = getConnection(context);
                 thisContact = new Contact(db, leadId[i]);
-                if ((thisContact.getOwner()==-1)||(!thisContact.getIsLead())){
-                  if ("".equals(leadIdsCopy)){
+                if ((thisContact.getOwner() == -1) || (!thisContact.getIsLead())) {
+                  if ("".equals(leadIdsCopy)) {
                     leadIdsCopy = leadId[i];
-                  }else{
-                    leadIdsCopy = leadIdsCopy +","+ leadId[i];
+                  } else {
+                    leadIdsCopy = leadIdsCopy + "," + leadId[i];
                   }
                 }
               } catch (Exception e) {
@@ -1589,20 +1591,20 @@ public final class Sales extends CFSModule {
                 return ("SystemError");
               } finally {
                 this.freeConnection(context, db);
-              }  
+              }
             }
           }
-          if ("reassign".equals(action)){
+          if ("reassign".equals(action)) {
             leadId = leadIds.split(",");
             for (int i = 0; i < leadId.length; i++) {
               try {
                 db = getConnection(context);
                 thisContact = new Contact(db, leadId[i]);
-                if (thisContact.getOwner()!=-1){
-                  if ("".equals(leadIdsCopy)){
+                if (thisContact.getOwner() != -1) {
+                  if ("".equals(leadIdsCopy)) {
                     leadIdsCopy = leadId[i];
-                  }else{
-                    leadIdsCopy = leadIdsCopy +","+ leadId[i];
+                  } else {
+                    leadIdsCopy = leadIdsCopy + "," + leadId[i];
                   }
                 }
               } catch (Exception e) {
@@ -1611,10 +1613,10 @@ public final class Sales extends CFSModule {
                 return ("SystemError");
               } finally {
                 this.freeConnection(context, db);
-              }  
+              }
             }
           }
-          if ("".equals(leadIdsCopy)||(leadIdsCopy == null)){
+          if ("".equals(leadIdsCopy) || (leadIdsCopy == null)) {
             if (from != null && "dashboard".equals(from)) {
               return executeCommandDashboard(context);
             } else {
@@ -1628,7 +1630,7 @@ public final class Sales extends CFSModule {
       }
       for (int i = 0; i < leadId.length; i++) {
         contactId = leadId[i];
-        
+
         try {
           db = getConnection(context);
           thisContact = new Contact(db, contactId);
@@ -1660,61 +1662,61 @@ public final class Sales extends CFSModule {
             resultCount = thisContact.update(db, context);
           }
           if (isValid && resultCount == 1) {
-          if (oldContact.getOwner() != thisContact.getOwner()) {
-            this.sendEmail(context, db, thisContact, thisContact.getOwner(), "leads.assigned");
+            if (oldContact.getOwner() != thisContact.getOwner()) {
+              this.sendEmail(context, db, thisContact, thisContact.getOwner(), "leads.assigned");
+            }
+            processUpdateHook(context, oldContact, thisContact);
+            thisContact = new Contact(db, thisContact.getId());
+            context.getRequest().setAttribute("ContactDetails", thisContact);
+            context.getRequest().setAttribute("contactId", "" + thisContact.getId());
+
           }
-          processUpdateHook(context, oldContact, thisContact);
-          thisContact = new Contact(db, thisContact.getId());
-          context.getRequest().setAttribute("ContactDetails", thisContact);
-          context.getRequest().setAttribute("contactId", "" + thisContact.getId());
-  
+        } catch (Exception e) {
+          context.getRequest().setAttribute("Error", e);
+          e.printStackTrace();
+          return ("SystemError");
+        } finally {
+          this.freeConnection(context, db);
         }
-      } catch (Exception e) {
-        context.getRequest().setAttribute("Error", e);
-        e.printStackTrace();
-        return ("SystemError");
-      } finally {
-        this.freeConnection(context, db);
-      }
-      if (isValid && resultCount == 1) {
-        String next = context.getRequest().getParameter("next");
-        String leadAssignment = context.getRequest().getParameter("leadAssignment");
-        if (next != null && "assignaccount".equals(next)) {
-          // TODO: The following should not be executed in this Action because now
-          // this request is using an additional database connection without
-          // closing the first!
-          // it could be moved down below to fix this
-          if (from != null && !"list".equals(from)) {
-            context.getRequest().setAttribute("refreshUrl", "Sales.do?command=Dashboard" + RequestUtils.addLinkParams(context.getRequest(), "actionId"));
-          } else {
-            context.getRequest().setAttribute("refreshUrl", "Sales.do?command=List" + RequestUtils.addLinkParams(context.getRequest(), "actionId|listForm|from"));
+        if (isValid && resultCount == 1) {
+          String next = context.getRequest().getParameter("next");
+          String leadAssignment = context.getRequest().getParameter("leadAssignment");
+          if (next != null && "assignaccount".equals(next)) {
+            // TODO: The following should not be executed in this Action because now
+            // this request is using an additional database connection without
+            // closing the first!
+            // it could be moved down below to fix this
+            if (from != null && !"list".equals(from)) {
+              context.getRequest().setAttribute("refreshUrl", "Sales.do?command=Dashboard" + RequestUtils.addLinkParams(context.getRequest(), "actionId"));
+            } else {
+              context.getRequest().setAttribute("refreshUrl", "Sales.do?command=List" + RequestUtils.addLinkParams(context.getRequest(), "actionId|listForm|from"));
+            }
+            if (leadAssignment == null || !"true".equals(leadAssignment)) {
+              executeCommandWorkAccount(context);
+            } else {
+              context.getRequest().setAttribute("id", contactId);
+              return "CloseOK";
+            }
+            return getReturn(context, "WorkAccount");
           }
-          if (leadAssignment == null || !"true".equals(leadAssignment)) {
-            executeCommandWorkAccount(context);
-          } else {
-            context.getRequest().setAttribute("id", contactId);
-            return "CloseOK";
-          }
-          return getReturn(context, "WorkAccount");
         }
       }
-    }
     }
     addModuleBean(context, "Leads", "Update Lead");
     // decide what happend with the processing
-    if ((ids==null) || ("".equals(ids))){
-    if (from != null && "dashboard".equals(from)) {
-      return executeCommandDashboard(context);
+    if ((ids == null) || ("".equals(ids))) {
+      if (from != null && "dashboard".equals(from)) {
+        return executeCommandDashboard(context);
+      } else {
+        return executeCommandList(context);
+      }
     } else {
-      return executeCommandList(context);
-    }
-    }else{
       if (from != null && !"list".equals(from)) {
         context.getRequest().setAttribute("refreshUrl", "Sales.do?command=Dashboard" + RequestUtils.addLinkParams(context.getRequest(), "actionId"));
       } else {
         context.getRequest().setAttribute("refreshUrl", "Sales.do?command=List" + RequestUtils.addLinkParams(context.getRequest(), "actionId|listForm|from"));
       }
-      
+
       return "ToAccountsOk";
     }
   }
@@ -1848,6 +1850,7 @@ public final class Sales extends CFSModule {
     addModuleBean(context, "Leads", "Leads");
     return "DeleteOK";
   }
+
   /**
    * Description of the Method
    *
@@ -1868,64 +1871,64 @@ public final class Sales extends CFSModule {
       String action = (String) context.getRequest().getParameter("action");
       String ids = context.getRequest().getParameter("ids");
       String[] leadId = null;
-      if ((ids!=null) && (!"".equals(ids))){
+      if ((ids != null) && (!"".equals(ids))) {
         leadId = ids.split(",");
       }
-      
-    for (int i = 0; i < leadId.length; i++) {
-      int id = Integer.parseInt(leadId[i]);
-      contact = new Contact(db, id);
-      if (action != null) {
-        if ("delete".equals(action)) {
-          if (!(hasPermission(context, "sales-leads-delete"))) {
-            return ("PermissionError");
-          }
-          int userId =this.getUserId(context);
-          boolean assignStatus = false;
-          if (contact.getOwner()!= -1) {
-            assignStatus = LeadUtils.tryToAssignLead(db, id, userId, contact.getOwner());
-            contact.setOwner(userId);
-          } else {
-            assignStatus = LeadUtils.tryToAssignLead(db, id, userId);
-            contact.setOwner(userId);
-          }
-          int size = LeadUtils.cleanUpContact(db, contact.getId(), this.getUserId(context));  
-          if (!hasAuthority(context, contact.getOwner())) {
-            return "PermissionError";
-          }
-          contact.updateStatus(db, context, true, this.getUserId(context));
-          String returnType = (String) context.getRequest().getParameter("from");
-          if (returnType != null && !"list".equals(returnType)) {
-            context.getRequest().setAttribute("refreshUrl", "Sales.do?command=Dashboard" + RequestUtils.addLinkParams(context.getRequest(), "actionId"));
-          } else {
-            context.getRequest().setAttribute("refreshUrl", "Sales.do?command=List" + RequestUtils.addLinkParams(context.getRequest(), "actionId|listForm|from"));
-          }
-        }
-        if (("toAccount".equals(action))&&(contact.getIsLead())) {
-          if (!isRecordAccessPermitted(context, contact)) {
-            return ("PermissionError");
-          }
-          int resultCount= -1;
-          Contact oldContact = new Contact(db, id);
-          contact.setModifiedBy(getUserId(context));
-          contact.setIsLead(true);
-          isValid = validateObject(context, db, contact);
-          if (isValid) {
-            resultCount = contact.update(db, context);
-          }
-          if (isValid && resultCount == 1) {
-            if (oldContact.getOwner() != contact.getOwner()) {
-              this.sendEmail(context, db, contact, contact.getOwner(), "leads.assigned");
+
+      for (int i = 0; i < leadId.length; i++) {
+        int id = Integer.parseInt(leadId[i]);
+        contact = new Contact(db, id);
+        if (action != null) {
+          if ("delete".equals(action)) {
+            if (!(hasPermission(context, "sales-leads-delete"))) {
+              return ("PermissionError");
             }
-            processUpdateHook(context, oldContact, contact);
-            context.getRequest().setAttribute("ContactDetails", contact);
-            context.getRequest().setAttribute("id", "" + contact.getId());
+            int userId = this.getUserId(context);
+            boolean assignStatus = false;
+            if (contact.getOwner() != -1) {
+              assignStatus = LeadUtils.tryToAssignLead(db, id, userId, contact.getOwner());
+              contact.setOwner(userId);
+            } else {
+              assignStatus = LeadUtils.tryToAssignLead(db, id, userId);
+              contact.setOwner(userId);
+            }
+            int size = LeadUtils.cleanUpContact(db, contact.getId(), this.getUserId(context));
+            if (!hasAuthority(context, contact.getOwner())) {
+              return "PermissionError";
+            }
+            contact.updateStatus(db, context, true, this.getUserId(context));
+            String returnType = (String) context.getRequest().getParameter("from");
+            if (returnType != null && !"list".equals(returnType)) {
+              context.getRequest().setAttribute("refreshUrl", "Sales.do?command=Dashboard" + RequestUtils.addLinkParams(context.getRequest(), "actionId"));
+            } else {
+              context.getRequest().setAttribute("refreshUrl", "Sales.do?command=List" + RequestUtils.addLinkParams(context.getRequest(), "actionId|listForm|from"));
+            }
           }
-          Contact thisContact = new Contact(db, id);
-          User assigned = null;
-          User manager = null;
-          ActionPlanWork actionPlanWork = new ActionPlanWork();
-          Organization thisOrg = null;
+          if (("toAccount".equals(action)) && (contact.getIsLead())) {
+            if (!isRecordAccessPermitted(context, contact)) {
+              return ("PermissionError");
+            }
+            int resultCount = -1;
+            Contact oldContact = new Contact(db, id);
+            contact.setModifiedBy(getUserId(context));
+            contact.setIsLead(true);
+            isValid = validateObject(context, db, contact);
+            if (isValid) {
+              resultCount = contact.update(db, context);
+            }
+            if (isValid && resultCount == 1) {
+              if (oldContact.getOwner() != contact.getOwner()) {
+                this.sendEmail(context, db, contact, contact.getOwner(), "leads.assigned");
+              }
+              processUpdateHook(context, oldContact, contact);
+              context.getRequest().setAttribute("ContactDetails", contact);
+              context.getRequest().setAttribute("id", "" + contact.getId());
+            }
+            Contact thisContact = new Contact(db, id);
+            User assigned = null;
+            User manager = null;
+            ActionPlanWork actionPlanWork = new ActionPlanWork();
+            Organization thisOrg = null;
             // insert an account if company name exists
             boolean status = false;
             if (thisContact.getOwner() == -1) {
@@ -1934,10 +1937,10 @@ public final class Sales extends CFSModule {
             if (thisContact.getLeadStatus() != Contact.LEAD_ASSIGNED) {
               thisContact.setLeadStatus(Contact.LEAD_ASSIGNED);
             }
-              thisOrg = new Organization();
-              thisOrg.setEnteredBy(this.getUserId(context));
-              thisOrg.setName(thisContact.getNameLastFirst());
-            
+            thisOrg = new Organization();
+            thisOrg.setEnteredBy(this.getUserId(context));
+            thisOrg.setName(thisContact.getNameLastFirst());
+
             thisOrg.setNotes(thisContact.getNotes());
             thisOrg.setComments(thisContact.getComments());
             thisOrg.setSiteId(thisContact.getSiteId());
@@ -2056,14 +2059,14 @@ public final class Sales extends CFSModule {
               organizationPhoneNumber.setPrimaryNumber(contactPhoneNumber.getPrimaryNumber());
               thisOrg.getPhoneNumberList().add(organizationPhoneNumber);
             }
-              status = thisOrg.insert(db);
+            status = thisOrg.insert(db);
             if (status) {
               this.addRecentItem(context, thisOrg);
               context.getRequest().setAttribute("orgId", String.valueOf(thisOrg.getOrgId()));
             }
             thisContact.setOrgId(thisOrg.getOrgId());
             thisContact.setOrgName(thisOrg.getName());
-            
+
             if (status) {
               thisContact.setIsLead(false);
               thisContact.setConversionDate(new Timestamp(Calendar.getInstance().getTimeInMillis()));
@@ -2111,9 +2114,9 @@ public final class Sales extends CFSModule {
               context.getRequest().setAttribute("refreshUrl", "Sales.do?command=List" + RequestUtils.addLinkParams(context.getRequest(), "actionId|listForm|from"));
             }
             return "ToAccountsOk";
+          }
         }
       }
-    } 
     } catch (Exception e) {
       context.getRequest().setAttribute("Error", e);
       e.printStackTrace();
@@ -2122,12 +2125,12 @@ public final class Sales extends CFSModule {
       this.freeConnection(context, db);
     }
     addModuleBean(context, "Leads", "Leads");
-    if ("list".equals(from)){
+    if ("list".equals(from)) {
       return executeCommandList(context);
-    } else{
+    } else {
       return executeCommandDashboard(context);
     }
-      
+
   }
 
   /**
@@ -2183,9 +2186,9 @@ public final class Sales extends CFSModule {
   /**
    * Description of the Method
    *
-   * @param pertainsTo            Description of the Parameter
-   * @param usersToGraph          Description of the Parameter
-   * @param gqlc Description of the Parameter
+   * @param pertainsTo   Description of the Parameter
+   * @param usersToGraph Description of the Parameter
+   * @param gqlc         Description of the Parameter
    * @return Description of the Return Value
    */
   private UserList prepareLines(User pertainsTo, UserList usersToGraph, QualifiedLeadsCounter gqlc) {

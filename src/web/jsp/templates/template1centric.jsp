@@ -74,13 +74,13 @@
       <br />
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td align="center">&#169; Copyright 2000-2007 Concourse Suite Community Edition &#149; <dhv:label name="global.label.allRightsReserved">All rights reserved</dhv:label> &#149; <dhv:label name="templates.variousTrademarksHeldByTheirRespectiveOwners">Various trademarks held by their respective owners.</dhv:label></td>
+          <td align="center">&#169; Copyright 2021 CRM Owner &#149; <dhv:label name="global.label.allRightsReserved">All rights reserved</dhv:label> &#149; <dhv:label name="templates.variousTrademarksHeldByTheirRespectiveOwners">Various trademarks held by their respective owners.</dhv:label></td>
         </tr>
       </table>
       <br />
       <table width="100%" border="0" cellspacing="0" cellpadding="0">
         <tr>
-          <td align="center"><a href="http://www.concursive.com" target="_blank"><img src="images/centric/concourseSuiteCommunity.gif" width="218" height="50" border="0" alt="Power of Concourse Suite Community Edition" /></a><br /><br /><br /><br />
+          <td align="center"><img src="images/centric/concourseSuiteCommunity.gif" width="218" height="50" border="0" /><br /><br /><br /><br />
           <br /><br /><br /><br /></td>
         </tr>
       </table>

@@ -1,4 +1,4 @@
-Concourse Suite Community Edition Community Edition; build: @BUILD.NUMBER@; @BUILD.DATE@
+CRM; build: @BUILD.NUMBER@; @BUILD.DATE@
 $Id$
 
 ----------------------------------------------------------------------------
@@ -30,7 +30,7 @@ DAMAGES RELATING TO THE SOFTWARE.
 | INTRODUCTION                                                             |
 ----------------------------------------------------------------------------
 
-This distribution includes the required Concourse Suite Community Edition 3rd party libraries:
+This distribution includes the required CRM 3rd party libraries:
 
   activation-1.1.jar
   asterisk-java-0.2.jar
@@ -44,14 +44,7 @@ This distribution includes the required Concourse Suite Community Edition 3rd pa
   commons-digester-1.7.jar
   commons-logging-api.jar
   commons-logging.jar
-  DaffodilDB_402_Common.jar
-  DaffodilDB_402_Embedded.jar
-  db2jcc-9.0.jar
-  db2jcc_license_cu-9.0.jar
-  derby-10.2.2.jar
   iTextAsian.jar
-  iijdbc.jar
-  interclient.jar
   itext-2.0.2.jar
   jasperreports-1.3.4.jar
   javamail-dsn-1.4.jar
@@ -60,19 +53,15 @@ This distribution includes the required Concourse Suite Community Edition 3rd pa
   javamail-mailapi-1.4.jar
   javamail-pop3-1.4.jar
   javamail-smtp-1.4.jar
-  jaybird-full-2.1.0.jar
   jcommon-1.0.10.jar
   jdt-compiler.jar
   jfreechart-1.0.6.jar
   jsr173_1.0_api.jar
   jstl-1.1.2.jar
-  jtds-1.2.2.jar
   junit-4.1.jar
   log4j-1.2.9.jar
   lucene-1.4.3.jar
-  mysql-connector-java-commercial-5.0.7-bin.jar
   nekohtml.jar
-  oracle-10.2.0.1.0-jdbc14.jar
   PDFBox-0.6.7.jar
   poi-3.0.1-FINAL-20070705.jar
   poi-scratchpad-3.0.1-FINAL-20070705.jar
@@ -93,10 +82,7 @@ This distribution includes the required Concourse Suite Community Edition 3rd pa
 | ABOUT THIS SOFTWARE                                                      |
 ----------------------------------------------------------------------------
 
-Concourse Suite Community Edition licenses libraries and code from the following projects, some
-are proprietary in which Concursive Corporation has been granted a license
-to redistribute, some are Open Source and are used according to the project
-license:
+This software uses the following projects:
 
 Project Name                      License
 --------------------------------  -----------------------------------------
@@ -104,29 +90,20 @@ Asterisk-Java                     Apache Software License
 Batik                             Apache Software License
 Bean Shell                        Sun Public License
 Bouncy Castle Crypto API          Bouncy Castle Open Source License
-DaffodilDB (One$DB Embedded)      LGPL
-FirebirdSQL JDBC (Jaybird)        LGPL
 gnu.regexp                        LGPL
 HTMLArea                          BSD style
 HTTPMultiPartParser               iSavvix Public License
-Ingres JDBC Driver                Ingres License
-InterBase JDBC Driver             InterBase Public License
 iText                             LGPL
 JFreeChart                        LGPL
 Jakarta Commons                   Apache Software License
 Jasper Reports                    LGPL
-Java Activitation Framework       Sun License
+Java Activation Framework         Sun License
 Java Mail                         Sun License
-Jaybird FirebirdSQL JDBC          LGPL
 Jcrontab                          LGPL
-jTDS                              LGPL
 Kafenio                           LGPL
 Log4J                             Apache Software License
 Lucene                            Apache Software License
-MySQL Enterprise Connector/J      MySQL Enterprise Driver Software License
 NekoHTML                          Apache style
-Oracle JDBC Driver                Oracle Technology Network Development and
-                                  Distribution License
 PDFBox                            BSD
 POI                               Apache Software License
 PostgreSQL JDBC Driver            BSD
@@ -138,4 +115,3 @@ TMExtractors                      Apache style
 Xerces                            Apache Software License
 Ximian Icons                      LGPL
 ypSlideOutMenu                    Creative Commons Attribution 2.0 license
-

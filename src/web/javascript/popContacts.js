@@ -8,7 +8,7 @@ function popContactsListSingle(hiddenFieldId, displayFieldId, params) {
   var posy = (screen.height - height)/2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if (params != null && params != "") {
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin=window.open('ContactsList.do?command=ContactList&listType=single&flushtemplist=true&selectedIds='+document.getElementById(hiddenFieldId).value+'&displayFieldId='+displayFieldId+'&hiddenFieldId='+hiddenFieldId + params, title, windowParams);
   newwin.focus();
@@ -40,7 +40,7 @@ function popContactsListMultiple(displayFieldId, highLightedId, params, hiddenFi
   }
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin=window.open('ContactsList.do?command=ContactList&previousSelection=' + selectedIds + '&previousSelectionDisplay=' + selectedDisplays + '&listType=list&flushtemplist=true&selectedIds='+highLightedId+'&displayFieldId='+displayFieldId + '&hiddenFieldId='+hiddenFieldId +params, title, windowParams);
   newwin.focus();
@@ -146,7 +146,7 @@ function popContactsListMultipleCampaign(displayFieldId,highLightedId, params) {
     }
   }
   if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }else{
     params = '';
   }

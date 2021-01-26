@@ -304,16 +304,16 @@
     <dhv:include name="actionPlan.weeklyPotential" none="true">
     <td align="center">
       <dhv:evaluate if="<%= actionPlanWork.getOrganization() != null %>">
-        <zeroio:currency value="<%= actionPlanWork.getOrganization().getPotential() %>" code="<%= applicationPrefs.get("SYSTEM.CURRENCY") %>" locale="<%= User.getLocale() %>" default="&nbsp;"/>
+        <zeroio:currency value="<%= actionPlanWork.getOrganization().getPotential() %>" code='<%= applicationPrefs.get("SYSTEM.CURRENCY") %>' locale="<%= User.getLocale() %>" default="&nbsp;"/>
       </dhv:evaluate>
       <dhv:evaluate if="<%= actionPlanWork.getOrganization() == null %>">
         <dhv:evaluate if="<%= actionPlanWork.getContact() != null %>">
-          <zeroio:currency value="<%= actionPlanWork.getContact().getPotential() %>" code="<%= applicationPrefs.get("SYSTEM.CURRENCY") %>" locale="<%= User.getLocale() %>" default="&nbsp;"/>
+          <zeroio:currency value="<%= actionPlanWork.getContact().getPotential() %>" code='<%= applicationPrefs.get("SYSTEM.CURRENCY") %>' locale="<%= User.getLocale() %>" default="&nbsp;"/>
         </dhv:evaluate>
       </dhv:evaluate>
       <dhv:evaluate if="<%= actionPlanWork.getOrganization() == null %>">
         <dhv:evaluate if="<%= actionPlanWork.getLead() != null %>">
-          <zeroio:currency value="<%= actionPlanWork.getLead().getPotential() %>" code="<%= applicationPrefs.get("SYSTEM.CURRENCY") %>" locale="<%= User.getLocale() %>" default="&nbsp;"/>
+          <zeroio:currency value="<%= actionPlanWork.getLead().getPotential() %>" code='<%= applicationPrefs.get("SYSTEM.CURRENCY") %>' locale="<%= User.getLocale() %>" default="&nbsp;"/>
         </dhv:evaluate>
       </dhv:evaluate>
     </td>

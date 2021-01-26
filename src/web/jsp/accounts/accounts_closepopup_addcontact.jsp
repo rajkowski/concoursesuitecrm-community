@@ -38,10 +38,10 @@
       opener.changeDivContent(displayId, "<%= StringUtils.jsStringEscape(ContactDetails.getValidName()) %>");
       opener.attachContact(itemId);
     } else {
-    <dhv:evaluate if="<%= request.getParameter("fieldName")!=null && !"".equals(request.getParameter("fieldName"))%>">
+    <dhv:evaluate if='<%= request.getParameter("fieldName")!=null && !"".equals(request.getParameter("fieldName"))%>'>
       var fieldName = '<%=request.getParameter("fieldName")%>';
     </dhv:evaluate>
-    <dhv:evaluate if="<%= request.getParameter("fieldName")==null || "".equals(request.getParameter("fieldName"))%>">
+    <dhv:evaluate if='<%= request.getParameter("fieldName")==null || "".equals(request.getParameter("fieldName"))%>'>
       var fieldName = "contactId";
     </dhv:evaluate>
       addContact("<%= StringUtils.jsStringEscape(ContactDetails.getValidName()) %>", '<%= ContactDetails.getId() %>', fieldName);

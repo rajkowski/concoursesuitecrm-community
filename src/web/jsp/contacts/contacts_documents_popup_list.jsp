@@ -58,7 +58,7 @@
 <dhv:evaluate if="<%= fileItem.getId() == -1 %>">
   <body onLoad="document.inputForm.subject.focus();">
 </dhv:evaluate>
-<dhv:container name="contacts" selected="documents" object="ContactDetails" hideContainer="<%= "true".equals(request.getParameter("actionplan")) %>" param="<%= "id=" + ContactDetails.getId() %>" appendToUrl="<%= addLinkParams(request, "popup|popupType|actionId|actionplan") %>">
+<dhv:container name="contacts" selected="documents" object="ContactDetails" hideContainer='<%= "true".equals(request.getParameter("actionplan")) %>' param="<%= "id=" + ContactDetails.getId() %>" appendToUrl="<%= addLinkParams(request, "popup|popupType|actionId|actionplan") %>">
   <%
    String permission_doc_folders_add ="contacts-external_contacts-documents-add";
     String permission_doc_files_upload = "contacts-external_contacts-documents-add";

@@ -127,6 +127,7 @@ public class SetupUtils {
     script.set("dbFileLibraryPath", dbFileLibraryPath);
     script.set("locale", locale);
     script.set("prefsURL", null);
+    script.set("setupURL", setupURL);
     script.set("libURL", new URL(setupURL + "../lib/"));
     // TODO: Fix downstream
     //script.set("prefsPath", setupPath + "init" + fs);

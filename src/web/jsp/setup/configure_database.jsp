@@ -115,14 +115,6 @@
           <td>
             <select name="type" onChange="configureDB();">
               <option value="none">-- None -- </option>
-              <option value="Derby"<%= "Derby".equals(database.getType()) ? " selected" : "" %>><dhv:label name="setup.derby">Apache Derby (Embedded)</dhv:label></option>
-              <option value="DaffodilDB"<%= "DaffodilDB".equals(database.getType()) ? " selected" : "" %>><dhv:label name="setup.DaffodilDB">DaffodilDB/One$DB (Embedded)</dhv:label></option>
-              <option value="Firebird"<%= "Firebird".equals(database.getType()) ? " selected" : "" %>><dhv:label name="setup.firebird">Firebird</dhv:label></option>
-              <option value="InterBase"<%= "InterBase".equals(database.getType()) ? " selected" : "" %>><dhv:label name="setup.interbase">InterBase</dhv:label></option>
-              <option value="DB2"<%= "DB2".equals(database.getType()) ? " selected" : "" %>><dhv:label name="setup.db2">IBM DB2</dhv:label></option>
-              <option value="MSSQL"<%= "MSSQL".equals(database.getType()) ? " selected" : "" %>><dhv:label name="setup.sqlServer">Microsoft SQL Server</dhv:label></option>
-              <option value="MySQL"<%= "MySQL".equals(database.getType()) ? " selected" : "" %>><dhv:label name="setup.mysql">MySQL</dhv:label></option>
-              <option value="Oracle"<%= "Oracle".equals(database.getType()) ? " selected" : "" %>><dhv:label name="setup.oracle">Oracle</dhv:label></option>
               <option value="PostgreSQL"<%= "PostgreSQL".equals(database.getType()) ? " selected" : "" %>><dhv:label name="setup.postgreSQL">PostgreSQL</dhv:label></option>
             </select>
             <font color="red">*</font>

@@ -8,7 +8,7 @@ function popCampaignListSingle(hiddenFieldId, displayFieldId, params) {
   var posy = (screen.height - height)/2;
   var windowParams = 'WIDTH=' + width + ',HEIGHT=' + height + ',RESIZABLE=' + resize + ',SCROLLBARS=' + bars + ',STATUS=0,LEFT=' + posx + ',TOP=' + posy + 'screenX=' + posx + ',screenY=' + posy;
   if(params != null && params != ""){
-    params = '&' + params;
+    params = '&' + params.replaceAll('|','%7C');
   }
   var newwin=window.open('CampaignSelector.do?command=List&displayFieldId='+displayFieldId+'&hiddenFieldId='+hiddenFieldId + params, title, windowParams);
   newwin.focus();

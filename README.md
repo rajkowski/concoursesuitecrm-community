@@ -1,6 +1,6 @@
-# ConcourseSuite CRM 5.0
+# CRM
 
-ConcourseSuite CRM is a web application for Customer Relationship Management.
+CRM is a web application for Customer Relationship Management.
 
 The application is written in Java and runs on Apache Tomcat using PostgreSQL.
 
@@ -11,6 +11,9 @@ The features include:
 * Accounts
 * Contacts
 * Leads
+* Projects
+* Help Desk
+* Document Stores
 
 ## About the Code
 

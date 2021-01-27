@@ -96,6 +96,7 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
+  <!--
   <servlet>
     <servlet-name>Webdav</servlet-name>
     <display-name>Webdav</display-name>
@@ -114,7 +115,7 @@
     </init-param>
     <load-on-startup>1</load-on-startup>
   </servlet>
-
+  -->
   <servlet>
     <servlet-name>URL</servlet-name>
     <servlet-class>org.aspcfs.servlets.url.URLServlet</servlet-class>
@@ -140,10 +141,12 @@
        This also overcomes a number of issues with some webdav clients
        (including MS Webfolders) that do not respond correctly
        to the redirects (302) that result from using a mapping of / -->
+  <!--
   <servlet-mapping>
     <servlet-name>Webdav</servlet-name>
     <url-pattern>/files/*</url-pattern>
   </servlet-mapping>
+  -->
 
   <!-- The mapping for the URL servlet -->
   <servlet-mapping>

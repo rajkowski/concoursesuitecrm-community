@@ -29,7 +29,6 @@
 <table width="100%" border="0">
   <tr>
     <td colspan="2" align="right">
-      <img src="images/icons/stock_print-16.gif" border="0" align="absmiddle" height="16" width="16"/>
       <a href="TroubleTickets.do?command=PrintReport&id=<%= thisTicket.getId() %>"><dhv:label name="accounts.tickets.print">Printable Ticket Form</dhv:label></a>
     </td>
   </tr>

@@ -32,19 +32,8 @@
     ClientType clientType = new ClientType(request);
     User.setClientType(clientType);
   }
-  //Based on Red Hat releases, RH9 Mozilla 1.2.1 was the first to use XFT
-  if ("moz".equals(User.getBrowserId()) &&
-      ("linux".equals(User.getClientType().getOsString()) && 
-       User.getBrowserVersion() < 1.2 )) {
 %>
 <link rel="stylesheet" href="css/<%= applicationPrefs.get("LAYOUT.TEMPLATE") %>-10pt.css" type="text/css" media="screen">
-<%
-  } else {
-%>
-<link rel="stylesheet" href="css/<%= applicationPrefs.get("LAYOUT.TEMPLATE") %>-8pt.css" type="text/css" media="screen">
-<%  
-  }
-%>
 <link rel="stylesheet" href="css/<%= applicationPrefs.get("LAYOUT.TEMPLATE") %>.css?1" type="text/css">
 <link rel="stylesheet" href="css/print.css" type="text/css" media="print">
 <%-- Use the system's language if not specified at user --%>

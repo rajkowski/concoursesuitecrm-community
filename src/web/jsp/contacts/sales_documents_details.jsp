@@ -42,7 +42,7 @@
 </table>
 <%-- End Trails --%>
 </dhv:evaluate>
-<dhv:container name="leads" selected="documents" object="ContactDetails" hideContainer='<%= "true".equals(request.getParameter("actionplan")) %>' param="<%= "id=" + ContactDetails.getId() %>" appendToUrl="<%= addLinkParams(request, "popup|popupType|actionId|actionplan") %>">
+<dhv:container name="leads" selected="documents" object="ContactDetails" hideContainer='<%= "true".equals(request.getParameter("actionplan")) %>' param='<%= "id=" + ContactDetails.getId() %>' appendToUrl='<%= addLinkParams(request, "popup|popupType|actionId|actionplan") %>'>
   <table border="0" cellpadding="4" cellspacing="0" width="100%">
     <tr class="subtab">
       <td>

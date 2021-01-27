@@ -140,7 +140,7 @@
        		<option value="<%= Constants.CONTACTS %>" <dhv:evaluate if="<%= moduleId == Constants.CONTACTS %>">selected</dhv:evaluate>><dhv:label name="contacts">Contacts</dhv:label></option>
 		 </dhv:permission>
        </dhv:evaluate>
-       <dhv:evaluate if="<%="-1".equals(orgId) %>">
+       <dhv:evaluate if='<%="-1".equals(orgId) %>'>
        	 <dhv:permission name="contacts-external_contacts-documents-view">
        		<option value="<%= Constants.CONTACTS %>" <dhv:evaluate if="<%= moduleId == Constants.CONTACTS %>">selected</dhv:evaluate>><dhv:label name="contacts">Contacts</dhv:label></option>
 		 </dhv:permission>

@@ -151,7 +151,6 @@
 <table width="100%" border="0" celldpadding="4" cellspacing="4">
   <tr>
     <td nowrap>
-      <img src="images/icons/stock_internet-16.gif" title="Calendar" border="0" align="absMiddle">
       <a href="javascript:showMessage('<%= toHtml(SelectedUser.getContact().getNameFirstLast()) %>', '<%= toHtml(User.getUserRecord().getUsername()) %>');"><dhv:label name="calendar.subscribe">Subscribe to web calendar</dhv:label></a>
     </td>
   </tr>

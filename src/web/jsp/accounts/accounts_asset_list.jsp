@@ -69,7 +69,7 @@
 <% }} %>
   <dhv:evaluate if="<%= !OrgDetails.isTrashed() %>">
     <dhv:permission name="accounts-assets-add">
-      <a href="AccountsAssets.do?command=Add&orgId=<%=OrgDetails.getOrgId()%>&parentId=<%= (parent != null?parent.getId():-1) %>"><dhv:label name="accounts.accounts_asset_list.AddAnAsset">Add an Asset</dhv:label></a>
+      <a href="AccountsAssets.do?command=Add&orgId=<%= OrgDetails.getOrgId() + (isPopup(request)?"&popup=true":"") %>&parentId=<%= (parent != null?parent.getId():-1) %>"><dhv:label name="accounts.accounts_asset_list.AddAnAsset">Add an Asset</dhv:label></a>
     </dhv:permission>
   </dhv:evaluate>
   <dhv:pagedListStatus title='<%= showError(request, "actionError") %>' object="AssetListInfo"/>

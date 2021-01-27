@@ -56,11 +56,9 @@
       </table>
     </td>
     <th align="right" valign="top" nowrap>
-      <img src="images/icons/stock_print-16.gif" border="0" align="absmiddle" height="16" width="16"/>
       <a href="javascript:window.print()" class="s"><dhv:label name="global.button.Print">Print</dhv:label></a>
       |
       <dhv:permission name="help-view">
-      <img src="images/icons/stock_help-16.gif" border="0" align="absmiddle" height="16" width="16" />
       <a href="javascript:popURL('Help.do?module=<%= request.getAttribute("moduleAction") %><%= request.getAttribute("moduleCommand") != null ? "&section=" + (String) request.getAttribute("moduleCommand") : ""%><%= request.getAttribute("moduleSection") != null ? "&sub=" + (String) request.getAttribute("moduleSection") : "" %>&popup=true','CRM_Help','790','500','yes','yes');" class="s" onMouseOver="window.status='Pop-up Help';return true;" onMouseOut="window.status='';return true;"><dhv:label name="global.button.Help">Help</dhv:label></a>
       |</dhv:permission>
       <%--
@@ -70,18 +68,15 @@
       |</dhv:permission>
       --%>
       <dhv:permission name="qa-view">
-      <img src="images/icons/stock_glue-16.gif" border="0" align="absmiddle" height="16" width="16" />
       <dhv:label name="admin.qa.colon">QA:</dhv:label>
       <a href="javascript:popURL('QA.do?module=<%= request.getAttribute("moduleAction") %><%= request.getAttribute("moduleCommand") != null ? "&section=" + (String) request.getAttribute("moduleCommand") : ""%><%= request.getAttribute("moduleSection") != null ? "&sub=" + (String) request.getAttribute("moduleSection") : "" %>&popup=true','CRM_QA','450','550','yes','yes');" class="s" onMouseOver="window.status='Pop-up QA';return true;" onMouseOut="window.status='';return true;"><dhv:label name="admin.page">Page</dhv:label></a>
       <a href="javascript:popURL('Help.do?command=ViewModuleDescription&module=<%=request.getAttribute("moduleAction")%>&popup=true','CRM_Help','790','500','yes','yes');" class="s" onMouseOver="window.status='Pop-up Help';return true;" onMouseOut="window.status='';return true;"><dhv:label name="qa.module">Module</dhv:label></a>
       |</dhv:permission>
       <dhv:permission name="admin-view">
-      <img src="images/icons/stock_form-properties-16.gif" border="0" align="absmiddle" height="16" width="16" />
       <a href="Admin.do"><dhv:label name="trails.admin">Admin</dhv:label></a>
       |</dhv:permission>
-      <img src="images/icons/stock_exit-16.gif" border="0" align="absmiddle" height="16" width="16"/>
       <a href="Login.do?command=Logout" class="s"><dhv:label name="global.button.Logout">Logout</dhv:label></a>
-      |<img src="images/icons/stock_about-16.gif" border="0" align="absmiddle" height="16" width="16"/>
+      |
       <a href="javascript:popURL('About.do?popup=true','CRM_About','600','650','yes','yes');" class="s"><dhv:label name="global.button.About">About</dhv:label></a>
       <dhv:evaluate if='<%= !User.getUserRecord().getContact().getNameFirstLast().equals("") %>'>
         <br />
@@ -165,7 +160,7 @@
       <span id="globalItemsHide" name="globalItemsHide"<dhv:evaluate if="<%= globalItemsPaneHidden %>"> style="display:none"</dhv:evaluate>><a href="javascript:resizeGlobalItemsPane('hide')"><img src="images/layout/div-hide.gif" alt="Hide" width="6" border="0" /></a></span>
       <span id="globalItemsShow" name="globalItemsShow"<dhv:evaluate if="<%= !globalItemsPaneHidden %>"> style="display:none"</dhv:evaluate>><a href="javascript:resizeGlobalItemsPane('show')"><img src="images/layout/div-show.gif" alt="Show" width="6" border="0" /></a></span>
     </td>
-    <td width="150" valign="top" id="rightcol" class="globalItemsPane" <dhv:evaluate if="<%= globalItemsPaneHidden %>"> style="display:none"</dhv:evaluate>>
+    <td width="200" valign="top" id="rightcol" class="globalItemsPane" <dhv:evaluate if="<%= globalItemsPaneHidden %>"> style="display:none"</dhv:evaluate>>
       <%= GlobalItems %>
     </td>
     </dhv:evaluate>

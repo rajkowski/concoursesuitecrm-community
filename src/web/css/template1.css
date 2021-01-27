@@ -65,10 +65,13 @@
 }
 .globalItem td {
   border-bottom: 1px solid #AAAAAA;
-  padding-left: 4px;
+  padding-left: 12px;
   padding-right: 4px;
   padding-top: 6px;
   padding-bottom: 8px;
+}
+.globalItem a {
+  line-height: 1.7;
 }
 /* trails */
 .trails {
@@ -136,9 +139,9 @@
   font-weight: normal;
 	text-align: center;
   vertical-align: middle;
-  padding-left: 3px;
-  padding-right: 4px;
-  padding-bottom: 3px;
+  padding-left: 7px;
+  padding-right: 8px;
+  padding-bottom: 6px;
 }
 
 /* selected tab */
@@ -185,7 +188,7 @@
 /* submenu */
 .submenu {
   background-color: #EEEEEE;
-  height: 20px;
+  height: 26px;
 }
 .submenuItem td {
   text-align: center;
@@ -228,7 +231,7 @@
 .tabs th {
 	background-image: url(../images/tabs/tabtopleft-sel.gif);
   border-right: 1px solid #333;
-	background-color: #fffef3;
+	background-color: #fffff4;
 	border-left: 1px solid #FFF;
 }
 .tabs th, .tabs th a:link, .tabs th a:visited {
@@ -284,12 +287,12 @@
  	background-image: url(../images/layout/container-left.gif);
  	background-repeat: no-repeat;
   background-position: top left;
-	background-color: #fffef3;
+	background-color: #fffff4;
 	padding-right: 3px;
 }
 .tabSelected {
   border-top: 1px solid #666;
-	background-color: #fffef3;
+	background-color: #fffff4;
 	padding-left: 4px;
 	padding-right: 4px;
 }
@@ -297,7 +300,7 @@
  	background-image: url(../images/layout/container-right.gif);
  	background-repeat: no-repeat;
   background-position: top right;
-	background-color: #fffef3;
+	background-color: #fffff4;
 	padding-left: 3px;
 }
 .tabSelected, .tabSelected a:link, .tabSelected a:visited {
@@ -344,7 +347,7 @@
 
 .sidetab-left {
   border-right: 1px solid #666;
-  background-color: #fffef3;
+  background-color: #fffff4;
   width: 6px;
 }
 .sidetab-mid {
@@ -382,7 +385,7 @@
 
 .sidetab-left-sp {
   border-right: 1px solid #666;
-  background-color: #fffef3;
+  background-color: #fffff4;
   height: 3px;
 }
 .sidetab-mid-sp {
@@ -414,7 +417,7 @@
 .containerHeader { background: #FFFF95; }
 .containerMenu { background: #F1F0E0; }
 .containerBack, .containerBackSide {
-  background: #fffef3;
+  background: #fffff4;
   border-bottom: 1px solid #666;
   border-left: 1px solid #666;
   width: 100%;
@@ -429,7 +432,7 @@
 }
 .containerBody { background: #FFFFFF; }
 .containerRight {
-  background: #fffef3;
+  background: #fffff4;
   border-right: 1px solid #666;
   border-bottom: 1px solid #666;
 }
@@ -504,7 +507,7 @@
   font-weight: bold;
   border-right: 1px solid #9C9A9C;
   border-bottom: 1px solid #9C9A9C;
-  background-color: #BDCFFF;
+  background-color: #ccdeff;
 }
 .pagedList th a:link, .pagedList th a:visited {
   color: #000000 !important;
@@ -529,7 +532,7 @@
   padding-bottom: 2px;
   padding-left: 2px;
   padding-right: 2px;
-  background-color: #BDCFFF;
+  background-color: #ccdeff;
   border-bottom: 1px solid #888888;
   border-right: 1px solid #888888;
   color: #000;
@@ -587,7 +590,7 @@ table.details td.clean{
 
 .highlight { color: #006699; font-weight: bold; }
 
-.title { background: #BDCFFF; color: #000; }
+.title { background: #ccdeff; color: #000; }
 .title a:link, .title a:visited { 
   color: #000;
 }
@@ -615,9 +618,9 @@ table.details td.clean{
 }
 .column { color: #000080; font-weight: bold; }
 .row1 { background: #EDEDED; }
-.row1hl { background: #fffef3; }
+.row1hl { background: #fffff4; }
 .row2 { background: #FFFFFF; }
-.row2hl { background: #fffef3; }
+.row2hl { background: #fffff4; }
 .rowHighlight { background: #fff7bd }
 .ghost { color: #666666; }
 .strike { text-decoration: line-through; }
@@ -631,7 +634,7 @@ table.details td.clean{
 .underline { text-decoration: underline; }
 .smallfooter { color: #000000; text-align: center; }
 .cellBox {
-  background: #BDCFFF;
+  background: #ccdeff;
   border: 1px solid #FFF;
 }
 .calendar { 
@@ -640,7 +643,7 @@ table.details td.clean{
 }
 .calendar th { 
   text-align: center;
-  background: #BDCFFF;
+  background: #ccdeff;
   color: #000;
   border-bottom: 1px solid #000;
   border-right: 1px solid #666;
@@ -651,18 +654,18 @@ table.details td.clean{
   border-right: 1px solid #666 !important;
 }
 .monthName { 
-  background: #BDCFFF;
+  background: #ccdeff;
   color: #000000;
   text-align: center;
 }
 .monthArrowPrev { 
-  background: #BDCFFF;
+  background: #ccdeff;
   color: #000000;
   font-weight: bold;
   text-align: center;
 }
 .monthArrowNext {
-  background: #BDCFFF;
+  background: #ccdeff;
   color: #000000;
   font-weight: bold;
   text-align: center;
@@ -735,7 +738,7 @@ table.details td.clean{
 }
 .smallcalendar th {
   text-align: center;
-  background: #BDCFFF;
+  background: #ccdeff;
   color: #000;
   border: none;
 }
@@ -744,7 +747,7 @@ table.details td.clean{
   text-align: center;
 }
 .smallmonthName {
-  background: #BDCFFF;
+  background: #ccdeff;
   color: #000;
   font-weight: bold;
   text-align: center;
@@ -885,7 +888,7 @@ a:visited:hover{color:#FF3300;}
   border-top: 1px solid #333;
   border-left: 1px solid #333;
   border-bottom: 1px solid #333;
-  background-color: #fffef3;
+  background-color: #fffff4;
 }
 .note td {
   width: 100%;
@@ -898,7 +901,7 @@ a:visited:hover{color:#FF3300;}
   border-top: 1px solid #333;
   border-right: 1px solid #333;
   border-bottom: 1px solid #333;
-  background-color: #fffef3;
+  background-color: #fffff4;
 }
 .pagedListTab {
   color: #000;
@@ -906,10 +909,10 @@ a:visited:hover{color:#FF3300;}
 }
 .pagedListTab th {
   font-weight: bold;
-  background-color: #BDCFFF;
+  background-color: #ccdeff;
 }
 .pagedListTab td {
-  border-bottom: 1px solid #BDCFFF;
+  border-bottom: 1px solid #ccdeff;
 }
 .pagedListTab a, .pagedListTab a:active, pagedListTab a:visited {
   color: #000;
@@ -1006,7 +1009,7 @@ a:visited:hover{color:#FF3300;}
 /* Sub tab trails */
 .subtab, .subtab a, .subtab a:active, .subtab a:hover, .subtab a:visited:hover, .subtab a:visited {
   color: #000;
-  background-color: #fffef3;
+  background-color: #fffff4;
 }
 .subtab td {
   border-bottom: 1px #333 solid;

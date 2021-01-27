@@ -121,75 +121,75 @@ public class GlobalItemsHook implements ControllerGlobalItemsHook {
                 "<tr>" +
                 "<td nowrap>");
         if (systemStatus.hasPermission(userId, "contacts-external_contacts-calls-add" + om)) {
-          items.append("<img src=\"images/alertcall.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+          items.append(
               "<a href=\"javascript:popURL('ExternalContactsCalls.do?command=Log&contactId=-1&actionSource=GlobalItem&popup=true','Activity','630','425','yes','yes');\">" +
               systemStatus.getLabel("quickactions.logActivity") +
               "</a> </br>");
         }
 
         if (systemStatus.hasPermission(userId, "contacts-external_contacts-calls-add" + om)) {
-          items.append("<img src=\"images/box-hold.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+          items.append(
               "<a href=\"javascript:popURL('ExternalContactsCalls.do?command=Schedule&contactId=-1&actionSource=GlobalItem&popup=true','Activity','630','425','yes','yes');\">" +
               systemStatus.getLabel("quickactions.scheduleActivity") +
               "</a> </br>");
         }
 
         if (systemStatus.hasPermission(userId, "contacts-external_contacts-add" + om)) {
-          items.append("<img src=\"images/icons/stock_bcard-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+          items.append(
               "<a href=\"javascript:popURL('ExternalContacts.do?command=Prepare&actionSource=GlobalItem&popup=true','contact','630','425','yes','yes');\">" +
               systemStatus.getLabel("quickactions.addContact") +
               "</a> </br>");
         }
 
         if (systemStatus.hasPermission(userId, "accounts-accounts-add" + om)) {
-          items.append("<img src=\"images/icons/stock_account-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+          items.append(
               "<a href=\"javascript:popURL('Accounts.do?command=Add&actionSource=GlobalItem&popup=true','Account','630','425','yes','yes');\">" +
               systemStatus.getLabel("quickactions.addAccount") +
               "</a> </br>");
         }
 
         if (systemStatus.hasPermission(userId, "myhomepage-tasks-add" + om)) {
-          items.append("<img src=\"images/box.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+          items.append(
               "<a href=\"javascript:popURL('MyTasks.do?command=New&actionSource=GlobalItem&popup=true&moreFields=false','Task','600','425','yes','yes');\">" +
               systemStatus.getLabel("quickactions.addTask") +
               "</a> </br>");
         }
 
-        items.append("<img src=\"images/icons/stock_data-edit-table-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+        items.append(
             "<a href=\"javascript:popURL('MyCFS.do?command=AddNote&actionSource=GlobalItem&popup=true','Note','600','500','yes','yes');\">" +
             systemStatus.getLabel("quickactions.addNote") +
             "</a> </br>");
 
         if (systemStatus.hasPermission(userId, "contacts-external_contacts-messages-add" + om) || systemStatus.hasPermission(userId, "contacts-external_contacts-messages-view" + om)) {
-          items.append("<img src=\"images/icons/stock_mail-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+          items.append(
               "<a href=\"javascript:popURL('ExternalContactsMessages.do?command=PrepareQuickMessage&actionSource=GlobalItem&popup=true','contact','600','425','yes','yes');\">" +
               systemStatus.getLabel("quickactions.mailToContact") +
               "</a> </br>");
         }
 
         if (systemStatus.hasPermission(userId, "sales-leads-add" + om)) {
-          items.append("<img src=\"images/icons/stock_hyperlink-target-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+          items.append(
               "<a href=\"javascript:popURL('Sales.do?command=Add&actionSource=GlobalItem&popup=true','Lead','600','500','yes','yes');\">" +
               systemStatus.getLabel("quickactions.addLead") +
               "</a> </br>");
         }
 
         if (systemStatus.hasPermission(userId, "quotes-quotes-add" + om)) {
-          items.append("<img src=\"images/icons/stock_hyperlink-target-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+          items.append(
               "<a href=\"javascript:popURL('Quotes.do?command=AddQuoteForm&actionSource=GlobalItem&popup=true','Quote','600','500','yes','yes');\">" +
               systemStatus.getLabel("quickactions.addQuote") +
               "</a> </br>");
         }
 
         if (systemStatus.hasPermission(userId, "tickets-tickets-add" + om)) {
-          items.append("<img src=\"images/icons/stock_hyperlink-target-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+          items.append(
               "<a href=\"javascript:popURL('TroubleTickets.do?command=Add&actionSource=GlobalItem&popup=true','Lead','600','500','yes','yes');\">" +
               systemStatus.getLabel("quickactions.addTicket") +
               "</a> </br>");
         }
 
         if (systemStatus.hasPermission(userId, "pipeline-opportunities-add" + om)) {
-          items.append("<img src=\"images/icons/stock_hyperlink-target-16.gif\" border=\"0\" align=\"absmiddle\" height=\"16\" width=\"16\"/> " +
+          items.append(
               "<a href=\"javascript:popURL('Leads.do?command=Prepare&actionSource=GlobalItem&popup=true','Opportunity','600','500','yes','yes');\">" +
               systemStatus.getLabel("quickactions.addOpportunity") +
               "</a> </br>");

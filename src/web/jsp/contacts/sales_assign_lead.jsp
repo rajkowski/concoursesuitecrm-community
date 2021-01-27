@@ -147,10 +147,10 @@
 		    <strong><dhv:label name="button.convertToAccount">Convert to Account</dhv:label></strong>
 			</dhv:evaluate>
       <dhv:evaluate if='<%=!"".equals(ids)&&ids != null  %>'>
-		    <dhv:evaluate if="<%="toContact".equals(action)%>">
+		    <dhv:evaluate if='<%="toContact".equals(action)%>'>
 		    	<strong><dhv:label name="button.convertToContact">Convert to Contact</dhv:label></strong>
 				</dhv:evaluate>
-				<dhv:evaluate if="<%="toAccount".equals(action)%>">
+				<dhv:evaluate if='<%="toAccount".equals(action)%>'>
 		    	<strong><dhv:label name="button.convertToAccount">Convert to Account</dhv:label></strong>
 				</dhv:evaluate>
 			</dhv:evaluate>

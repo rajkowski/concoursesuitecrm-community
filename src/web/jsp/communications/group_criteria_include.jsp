@@ -514,7 +514,7 @@ listOfOperators[2] = numberOperators
           </span>
          </td>
         </tr>
-        <dhv:evaluate if="<%="contacts".equals(source)%>">
+        <dhv:evaluate if='<%="contacts".equals(source)%>'>
         <tr>
           <td style="text-align: right;" nowrap>
             <dhv:label name="campaign.from">From</dhv:label>
@@ -524,7 +524,7 @@ listOfOperators[2] = numberOperators
           </td>
         </tr>
         </dhv:evaluate>
-        <dhv:evaluate if="<%="sales".equals(source)%>">
+        <dhv:evaluate if='<%="sales".equals(source)%>'>
         <td style="text-align: right;" nowrap>
             <dhv:label name="campaign.from">From</dhv:label>
           </td>
@@ -532,7 +532,7 @@ listOfOperators[2] = numberOperators
             <%= ContactSource.getHtml("contactSource", 5) %>
           </td>
         </dhv:evaluate>
-        <dhv:evaluate if="<%="employees".equals(source)%>">
+        <dhv:evaluate if='<%="employees".equals(source)%>'>
         <td style="text-align: right;" nowrap>
             <dhv:label name="campaign.from">From</dhv:label>
           </td>

@@ -3147,7 +3147,7 @@
     <forward name="ReloadOK"
              resource="/closepopupandreload.jsp" layout="nav"/>
     <forward name="AccountsAssetsListPopupOK"
-             resource="/accounts_asset_list.jsp" layout="style"/>
+             resource="/accounts/accounts_asset_list.jsp" layout="style"/>
     <forward name="AccountsAssetsAddOK"
              resource="/accounts/accounts_asset_add.jsp" layout="nav"/>
     <forward name="AccountsAssetsAddPopupOK"

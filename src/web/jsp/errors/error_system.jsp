@@ -20,7 +20,7 @@
 <img src="images/error.gif" border="0" align="absmiddle"/>
 <font color='red'><dhv:label name="errors.anErrorHasOccured">An Error Has Occurred</dhv:label></font>
 <hr color="#BFBFBB" noshade>
-<dhv:label name="errors.reportErrorTo">Please report the following error to</dhv:label> <a href="http://www.concursive.com" target="_blank">Concourse Suite Community Edition</a><p>
+<dhv:label name="errors.reportErrorTo">Please report the following error to</dhv:label> your administrator.<p>
 <dhv:label name="errors.backButtonBrowser.text">You may be able to hit the back button on your browser, review your selection, and try your request again.</dhv:label><p>
 <pre>
 <%

@@ -190,7 +190,7 @@
       <%}%>
     </td>
   </tr>
-  <dhv:evaluate if="<%="true".equals(request.getAttribute("hasEmail")) %>">
+  <dhv:evaluate if='<%="true".equals(request.getAttribute("hasEmail")) %>'>
   <tr>
     <td class="formLabel"><dhv:label name="reports.emailPreference">Email Preference</dhv:label></td>
     <td><input type="checkbox" name="email" value="true"/>&nbsp;<dhv:label name="reports.emailWhenProcessed">(email report when it is processed)</dhv:label> </td>

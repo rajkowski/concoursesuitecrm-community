@@ -36,7 +36,7 @@
   <tr>
     <th><img src="images/icons/stock_about-16.gif" border="0" align="absmiddle"/></th>
     <td><b><dhv:label name="admin.license.question">Have you upgraded your license?</dhv:label></b><br />
-<dhv:label name="admin.license.text">Every Concourse Suite Community Edition application instance requires a license agreement from Concursive Corporation.
+<dhv:label name="admin.license.text">Every CRM application instance requires a license agreement from Concursive Corporation.
 If changes have been made to the license, for example, 
 additional seats have been purchased, then the installed license should be updated to
 reflect those changes.</dhv:label>

@@ -339,7 +339,7 @@ public class Notifier extends ReportBuilder {
         thisNotification.setMessageToSend(
             ReportConstants.NOREPLY_DISCLAIMER + "<br>" +
             "<br>" +
-            "The following activity in Concourse Suite Community Edition has an alert set: <br>" +
+            "The following activity in CRM has an alert set: <br>" +
             "<br>" +
             "Contact: " + StringUtils.toHtml(thisCall.getContactName()) + "<br>" +
             "Notes: " + StringUtils.toHtml(thisCall.getNotes()) + "<br>" +
@@ -865,7 +865,7 @@ public class Notifier extends ReportBuilder {
       schema = "https";
     }
     return ("<a href=\"" + schema + "://" + siteInfo.getVirtualHost() + "/" + url + "\">" +
-        "View in Concourse Suite Community Edition" +
+        "View in CRM" +
         "</a>");
   }
 

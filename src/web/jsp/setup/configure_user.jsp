@@ -65,19 +65,19 @@
 <table border="0" width="100%">
   <tr class="sectionTitle">
     <th>
-      <dhv:label name="setup.centricCRM.step4of4">Concourse Suite Community Edition Configuration (Step 4 of 4)<br />User Settings</dhv:label>
+      <dhv:label name="setup.centricCRM.step4of4">CRM Configuration (Step 4 of 4)<br />User Settings</dhv:label>
     </th>
   </tr>
   <tr>
     <td>
-      <dhv:label name="setup.administratorResponsibilities.text">An administrative user is required to manage Concourse Suite Community Edition.  The administrator is primarily responsible for adding users, configuring user permissions, and tailoring Concourse Suite Community Edition to your organization.</dhv:label><br>
+      <dhv:label name="setup.administratorResponsibilities.text">An administrative user is required to manage CRM.  The administrator is primarily responsible for adding users, configuring user permissions, and tailoring CRM to your organization.</dhv:label><br>
       <br>
-      <dhv:label name="setup.followingInformationAppearsEmployees.text">The following information will appear in Concourse Suite Community Edition under Employees and can be modified later if necessary.</dhv:label><br>
+      <dhv:label name="setup.followingInformationAppearsEmployees.text">The following information will appear in CRM under Employees and can be modified later if necessary.</dhv:label><br>
       &nbsp;<br>
     </td>
   </tr>
   <tr class="sectionTitle">
-    <th><dhv:label name="setup.createAdministratorAccount.text">Create a Concourse Suite Community Edition administrator account</dhv:label></th>
+    <th><dhv:label name="setup.createAdministratorAccount.text">Create a CRM administrator account</dhv:label></th>
   </tr>
   <tr>
     <td nowrap>

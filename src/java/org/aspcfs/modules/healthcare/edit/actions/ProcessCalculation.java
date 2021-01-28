@@ -244,12 +244,12 @@ public final class ProcessCalculation extends CFSModule {
           hasErrors = true;
           errors.put(
               new Integer(thisRec.getId()), new String(
-                  "Error: Provider with tax ID = " + thisRec.getTaxId() + " not found in Concourse Suite Community Edition!"));
+                  "Error: Provider with tax ID = " + thisRec.getTaxId() + " not found in CRM!"));
         } else if (!payorOrgMapping.containsKey(thisRec.getPayerId())) {
           hasErrors = true;
           errors.put(
               new Integer(thisRec.getId()), new String(
-                  "Error: Payor with ID = " + thisRec.getPayerId() + " not found in Concourse Suite Community Edition!"));
+                  "Error: Payor with ID = " + thisRec.getPayerId() + " not found in CRM!"));
         }
         if (!hasErrors) {
           //error checking
@@ -260,7 +260,7 @@ public final class ProcessCalculation extends CFSModule {
             hasErrors = true;
             errors.put(
                 new Integer(thisRec.getId()), new String(
-                    "Error: Payor with ID = " + thisRec.getPayerId() + " not associated with Provider " + thisRec.getTaxId() + " in Concourse Suite Community Edition!"));
+                    "Error: Payor with ID = " + thisRec.getPayerId() + " not associated with Provider " + thisRec.getTaxId() + " in CRM!"));
           }
         }
         if (!hasErrors) {

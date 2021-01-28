@@ -54,7 +54,7 @@ function newOpt(param, value) {
   return newOpt;
 }
 function page_init() {
-<dhv:evaluate if="<%= ((CategoryList.size() > 0) || (reset != null && "true".equals(reset.trim()))) %>">
+<dhv:evaluate if='<%= ((CategoryList.size() > 0) || (reset != null && "true".equals(reset.trim()))) %>'>
   var list = parent.document.forms['<%= form %>'].elements['catCode'];
   list.options.length = 0;
   list.options[list.length] = newOpt("Undetermined", "0");

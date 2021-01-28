@@ -33,7 +33,7 @@
 <table class="note" cellspacing="0">
 <tr>
     <th><img src="images/icons/stock_about-16.gif" border="0" align="absmiddle"/></th>
-    <td><b><dhv:label name="admin.faxServer.text" param="server=<a href=\"http://www.hylafax.org\" target=\"_new\">|end=</a>">Which fax server should Concourse Suite Community Edition use?</b><br />Users will have the capability to send faxes using Concourse Suite Community Edition.<br /><font color="red">* </font>The HylaFax server application requires Linux or Unix.<br />The faxing component requires a properly configured <a href="http://www.hylafax.org" target="_new">HylaFax</a> server including fax hardware.</dhv:label><br />
+    <td><b><dhv:label name="admin.faxServer.text" param="server=<a href=\"http://www.hylafax.org\" target=\"_new\">|end=</a>">Which fax server should CRM use?</b><br />Users will have the capability to send faxes using Concourse Suite Community Edition.<br /><font color="red">* </font>The HylaFax server application requires Linux or Unix.<br />The faxing component requires a properly configured <a href="http://www.hylafax.org" target="_new">HylaFax</a> server including fax hardware.</dhv:label><br />
 <ul>
 <li><dhv:label name="admin.faxServer.note.1">The specified server must allow this server to send faxes</dhv:label></li>
 <li><dhv:label name="admin.faxServer.note.2">Leave blank if faxing will not be used</dhv:label></li>

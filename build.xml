@@ -546,10 +546,6 @@
         <exclude name="web.xml"/>
       </fileset>
     </copy>
-    <!-- Copy the object mappings file -->
-    <copy file="${pref.dir}/cfs/transfer/import-mappings.xml"
-          todir="${CENTRIC_HOME}/WEB-INF" verbose="true"/>
-
 
     <!-- Copy the default preference files -->
     <mkdir dir="${CENTRIC_HOME}/WEB-INF/setup/init/"/>
@@ -558,6 +554,12 @@
         <include name="*.xml"/>
       </fileset>
     </copy>
+
+    <!-- Copy the object mappings file -->
+    <copy file="${pref.dir}/cfs/transfer/import-mappings.xml"
+          todir="${CENTRIC_HOME}/WEB-INF/setup/init/" verbose="true"/>
+    <copy file="${pref.dir}/cfs/transfer/import-mappings.xml"
+          todir="${CENTRIC_HOME}/WEB-INF/" verbose="true"/>
 
     <!-- Copy the dictionary files -->
     <mkdir dir="${CENTRIC_HOME}/WEB-INF/languages"/>

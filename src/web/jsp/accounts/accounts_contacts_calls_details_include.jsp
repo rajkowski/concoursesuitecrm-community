@@ -40,10 +40,10 @@
       <dhv:label name="accounts.accounts_contacts_calls_details_include.StartDate">Start Date</dhv:label>
     </td>
     <td>
-      <zeroio:tz timestamp="<%= CallDetails.getCallStartDate() %>" default="&nbsp;" timeZone="<%= CallDetails.getCallStartDateTimeZone() %>" showTimeZone="true" default="&nbsp;" />
+      <zeroio:tz timestamp="<%= CallDetails.getCallStartDate() %>" timeZone="<%= CallDetails.getCallStartDateTimeZone() %>" showTimeZone="true" default="&nbsp;" />
       <% if(!User.getTimeZone().equals(CallDetails.getCallStartDateTimeZone())){%>
       <br>
-      <zeroio:tz timestamp="<%= CallDetails.getCallStartDate() %>" default="&nbsp;" timeZone="<%= User.getTimeZone() %>" showTimeZone="true" default="&nbsp;" />
+      <zeroio:tz timestamp="<%= CallDetails.getCallStartDate() %>" timeZone="<%= User.getTimeZone() %>" showTimeZone="true" default="&nbsp;" />
       <% } %>
     </td>
   </tr>
@@ -52,10 +52,10 @@
       <dhv:label name="accounts.accounts_contacts_calls_details_include.EndDate">End Date</dhv:label>
     </td>
     <td>
-      <zeroio:tz timestamp="<%= CallDetails.getCallEndDate() %>" default="&nbsp;" timeZone="<%= CallDetails.getCallEndDateTimeZone() %>" showTimeZone="true" default="&nbsp;" />
+      <zeroio:tz timestamp="<%= CallDetails.getCallEndDate() %>" timeZone="<%= CallDetails.getCallEndDateTimeZone() %>" showTimeZone="true" default="&nbsp;" />
       <% if(!User.getTimeZone().equals(CallDetails.getCallEndDateTimeZone())){%>
       <br>
-      <zeroio:tz timestamp="<%= CallDetails.getCallEndDate() %>" default="&nbsp;" timeZone="<%= User.getTimeZone() %>" showTimeZone="true" default="&nbsp;" />
+      <zeroio:tz timestamp="<%= CallDetails.getCallEndDate() %>" timeZone="<%= User.getTimeZone() %>" showTimeZone="true" default="&nbsp;" />
       <% } %>
     </td>
   </tr>

@@ -445,7 +445,7 @@ public final class AccountContactsOppQuotes extends CFSModule {
         return ("PermissionError");
       }
 
-      htmlDialog.setTitle("Concourse Suite Community Edition: Quote Management");
+      htmlDialog.setTitle("CRM: Quote Management");
       DependencyList dependencies = quote.processDependencies(db);
       dependencies.setSystemStatus(systemStatus);
       htmlDialog.addMessage(systemStatus.getLabel("confirmdelete.caution") + "\n" + dependencies.getHtmlString());

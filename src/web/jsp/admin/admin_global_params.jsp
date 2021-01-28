@@ -167,7 +167,7 @@
     </td>
   </dhv:permission>
   <td>
-    <dhv:label name="admin.centricCrmUrl">Concourse Suite Community Edition URL</dhv:label>
+    <dhv:label name="admin.centricCrmUrl">CRM URL</dhv:label>
   </td>
   <td>
     <%= toHtml(getPref(getServletConfig().getServletContext(), "WEBSERVER.URL")) %>

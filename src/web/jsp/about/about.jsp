@@ -29,7 +29,7 @@
 <%-- Trails --%>
 <table class="trails" cellspacing="0">
   <tr><td>
-    <dhv:label name="about.aboutCentricCRM">About Concourse Suite Community Edition</dhv:label>
+    <dhv:label name="about.aboutCentricCRM">About CRM</dhv:label>
   </td></tr>
 </table>
 <%-- End Trails --%>

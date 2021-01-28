@@ -33,7 +33,7 @@
 <table class="note" cellspacing="0">
 <tr>
     <th><img src="images/icons/stock_about-16.gif" border="0" align="absmiddle"/></th>
-    <td><b><dhv:label name="admin.emailServer.question" param="bold=</b>|break=<br />">Which email server should Concourse Suite Community Edition use?</b><br />Concourse Suite Community Edition sends various notifications to users by email.  Concourse Suite Community Edition can also be used to send email to contacts that have been entered into the Contacts and Accounts modules.</dhv:label>
+    <td><b><dhv:label name="admin.emailServer.question" param="bold=</b>|break=<br />">Which email server should CRM use?</b><br />CRM sends various notifications to users by email.  CRM can also be used to send email to contacts that have been entered into the Contacts and Accounts modules.</dhv:label>
 <ul><li><dhv:label name="admin.emailServer.note">The specified server must allow this server to relay email</dhv:label></li></ul>
 </td></tr></table>
 <dhv:permission name="admin-sysconfig-view">

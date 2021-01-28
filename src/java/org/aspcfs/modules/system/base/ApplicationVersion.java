@@ -27,9 +27,9 @@ import org.aspcfs.controller.ApplicationPrefs;
  * @created July 31, 2003
  */
 public class ApplicationVersion {
-  public final static String VERSION = "CRM (2021-01-26)";
-  public final static String APP_VERSION = "2021-01-26";
-  public final static String DB_VERSION = "2021-01-26";
+  public final static String VERSION = "CRM (2021-01-28)";
+  public final static String APP_VERSION = "2021-01-28";
+  public final static String DB_VERSION = "2021-01-28";
   public final static String RELEASE = "10.0";
 
 

@@ -39,10 +39,10 @@
       <dhv:label name="accounts.accounts_contacts_calls_details_include.StartDate">Start Date</dhv:label>
     </td>
     <td>
-      <zeroio:tz timestamp="<%= CallDetails.getAlertDate() %>" default="&nbsp;" timeZone="<%= CallDetails.getAlertDateTimeZone() %>" showTimeZone="true" default="&nbsp;" />
+      <zeroio:tz timestamp="<%= CallDetails.getAlertDate() %>" timeZone="<%= CallDetails.getAlertDateTimeZone() %>" showTimeZone="true" default="&nbsp;" />
       <% if(!User.getTimeZone().equals(CallDetails.getAlertDateTimeZone())){%>
       <br>
-      <zeroio:tz timestamp="<%= CallDetails.getAlertDate() %>" default="&nbsp;" timeZone="<%= User.getTimeZone() %>" showTimeZone="true" default="&nbsp;" />
+      <zeroio:tz timestamp="<%= CallDetails.getAlertDate() %>" timeZone="<%= User.getTimeZone() %>" showTimeZone="true" default="&nbsp;" />
       <% } %>
     </td>
   </tr><tr class="containerBody">
@@ -50,10 +50,10 @@
       <dhv:label name="accounts.accounts_contacts_calls_details_include.EndDate">End Date</dhv:label>
     </td>
     <td>
-      <zeroio:tz timestamp="<%= CallDetails.getFollowupEndDate() %>" default="&nbsp;" timeZone="<%= CallDetails.getFollowupEndDateTimeZone() %>" showTimeZone="true" default="&nbsp;" />
+      <zeroio:tz timestamp="<%= CallDetails.getFollowupEndDate() %>" timeZone="<%= CallDetails.getFollowupEndDateTimeZone() %>" showTimeZone="true" default="&nbsp;" />
       <% if(!User.getTimeZone().equals(CallDetails.getFollowupEndDateTimeZone())){%>
       <br>
-      <zeroio:tz timestamp="<%= CallDetails.getFollowupEndDate() %>" default="&nbsp;" timeZone="<%= User.getTimeZone() %>" showTimeZone="true" default="&nbsp;" />
+      <zeroio:tz timestamp="<%= CallDetails.getFollowupEndDate() %>" timeZone="<%= User.getTimeZone() %>" showTimeZone="true" default="&nbsp;" />
       <% } %>
     </td>
   </tr><tr class="containerBody">

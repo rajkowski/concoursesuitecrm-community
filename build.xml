@@ -21,9 +21,14 @@
   <!-- enable environment variables -->
   <property environment="env"/>
 
-  <!-- computed properties -->
+  <property name="project" value="crm-platform" />
+
   <property name="fs" value="${file.separator}"/>
   <property name="lf" value="${line.separator}"/>
+  <property name="j2ee.bin.dir" value="${env.CATALINA_HOME}/bin" />
+  <property name="j2ee.lib.dir" value="${env.CATALINA_HOME}/lib" />
+
+  <!-- computed properties -->
   <property name="base.dir" value="${basedir}"/>
   <property name="bin.dir" value="${base.dir}${fs}bin"/>
   <property name="doc.dir" value="${base.dir}${fs}doc"/>
@@ -47,6 +52,9 @@
   <property name="unittests.build.classes.dir" value="${unittests.build.dir}${fs}classes"/>
   <property name="unittests.build.lib.dir" value="${unittests.build.dir}${fs}lib"/>
   <property name="unittests.reports.dir" value="${unittests.build.dir}${fs}results"/>
+
+  <import file="${j2ee.bin.dir}/catalina-tasks.xml" optional="true" />
+
   <!-- Typical usage -->
   <target name="usage">
     <echo message="Further instructions will appear if settings are missing"/>
@@ -58,10 +66,9 @@
     <echo message="    install.help: just install the help contents"/>
     <echo message="ant upgradedb: upgrades database with a specified script file"/>
     <echo message="ant docs: generate JavaDocs for all packages"/>
-    <echo message="ant test: compile deployed JSPs to check for errors"/>
+    <echo message="ant test: run unit tests"/>
     <echo message="ant package: generate a .war file for manual deployment"/>
     <echo message="ant clean: delete the temporary build folder used by the install"/>
-    <echo message="ant ws: registers web services with apache axis webapp"/>
   </target>
 
   <!-- Environment variables must be set before continuing -->
@@ -104,13 +111,12 @@
   </target>
   <!-- Tomcat -->
   <target name="init.servlet6.exists" depends="init.environment" if="TYPE.CATALINA">
-    <available file="${CATALINA_HOME}/lib/servlet-api.jar" property="build.servlet6.present"/>
+    <available file="${j2ee.lib.dir}/servlet-api.jar" property="build.servlet6.present"/>
   </target>
   <target name="init.servlet6.set" depends="init.servlet6.exists" if="build.servlet6.present">
-    <property name="servletJar" value="${CATALINA_HOME}${fs}lib${fs}servlet-api.jar"/>
-    <property name="jspJar" value="${CATALINA_HOME}${fs}lib${fs}jsp-api.jar"/>
-    <property name="namingJar" value="${CATALINA_HOME}${fs}lib${fs}catalina.jar"/>
-    <echo message="Web Server: Tomcat 6.x"/>
+    <property name="servletJar" value="${j2ee.lib.dir}/servlet-api.jar"/>
+    <property name="jspJar" value="${j2ee.lib.dir}/jsp-api.jar"/>
+    <echo message="Web Server: Tomcat"/>
   </target>
 
   <!-- See where the build.properties file exists -->
@@ -327,7 +333,6 @@
     <path id="cfs2.classpath">
       <pathelement location="${servletJar}"/>
       <pathelement location="${jspJar}"/>
-      <pathelement location="${namingJar}"/>
       <fileset dir="${lib.dir}">
         <include name="*.jar"/>
       </fileset>
@@ -721,55 +726,6 @@
   <target name="dev" description="Deploy without deleting previously compiled source" depends="dev.configure,deploy">
   </target>
 
-  <!-- Generate .java/.class files out of the web-app .jsps -->
-  <target name="test" depends="init,deploy" description="Compile deployed JSPs to check for errors">
-    <delete dir="${build.jsp.dir}"/>
-    <delete dir="${build.jspclasses.dir}"/>
-    <echo message=""/>
-    <echo message="Converting JSPs to Class files..."/>
-    <mkdir dir="${build.jsp.dir}"/>
-    <java classname="org.apache.jasper.JspC" fork="yes" failonerror="yes">
-      <classpath>
-        <path refid="cfs2.classpath"/>
-        <pathelement location="${env.ANT_HOME}/lib/ant.jar"/>
-        <fileset dir="${CATALINA_HOME}${fs}common${fs}lib">
-          <include name="*.jar"/>
-        </fileset>
-        <fileset dir="${CATALINA_HOME}${fs}server${fs}lib">
-          <include name="*.jar"/>
-        </fileset>
-      </classpath>
-      <arg line="-v -d ${build.jsp.dir}
-                -l -s
-                -webapp ${CENTRIC_HOME} "/>
-    </java>
-    <echo message=""/>
-    <echo message="Compiling JSP Class files..."/>
-    <mkdir dir="${build.jspclasses.dir}"/>
-    <javac srcdir="${build.jsp.dir}" destdir="${build.jspclasses.dir}" verbose="off" deprecation="on">
-      <classpath>
-        <path refid="cfs2.classpath"/>
-        <fileset dir="${CATALINA_HOME}${fs}common${fs}lib">
-          <include name="*.jar"/>
-        </fileset>
-        <pathelement
-            location="${CENTRIC_HOME}/WEB-INF/lib/darkhorseventures.jar"/>
-        <pathelement location="${CENTRIC_HOME}/WEB-INF/lib/aspcfs.jar"/>
-        <pathelement location="${CENTRIC_HOME}/WEB-INF/lib/zeroio-iteam.jar"/>
-        <pathelement location="${CENTRIC_HOME}/WEB-INF/lib/isavvix.jar"/>
-        <pathelement location="${CENTRIC_HOME}/WEB-INF/lib/Novacoast.jar"/>
-        <pathelement location="${CENTRIC_HOME}/WEB-INF/lib/jcrontab.jar"/>
-        <pathelement location="${CENTRIC_HOME}/WEB-INF/lib/webdav.jar"/>
-      </classpath>
-      <include name="**/*.java"/>
-      <exclude name="**/*finclude_jsp.java"/>
-      <exclude name="**/*fheader_005finclude*_jsp.java"/>
-      <exclude name="**/*layout_005f*_jsp.java"/>
-      <exclude name="**/*fmenu_jsp.java"/>
-      <exclude name="**/*frelationships_*fview2_jsp.java"/>
-    </javac>
-  </target>
-
   <!-- Create a WAR -->
   <target name="war.create"
           depends="classes.prepare,build,dist.archive">
@@ -843,7 +799,6 @@
       <fileset dir="${src.web.dir}/WEB-INF">
         <include name="*.xml"/>
         <include name="*.tld"/>
-        <exclude name="web.xml"/>
       </fileset>
     </copy>
     <!-- Copy the object mappings file -->
@@ -928,6 +883,60 @@
         <include name="*.ttf"/>
       </fileset>
     </copy>
+    <!-- Convert the JSPs to Classes -->
+    <mkdir dir="${dist.dir}/cfs/WEB-INF/compiled"/>
+    <jasper validateXml="false"
+            uriroot="${dist.dir}/cfs"
+            webXmlFragment="${dist.dir}/cfs/WEB-INF/generated_web.xml"
+            addWebXmlMappings="true"
+            outputDir="${dist.dir}/cfs/WEB-INF/src" />
+    <!-- Compile the JSPs -->
+    <javac destdir="${dist.dir}/cfs/WEB-INF/compiled" source="10" target="10"
+           optimize="on" debug="off"
+           srcdir="${dist.dir}/cfs/WEB-INF/src"
+           excludes="**/*.smap">
+      <classpath>
+        <fileset dir="${dist.dir}/cfs/WEB-INF/lib">
+          <include name="*.jar"/>
+        </fileset>
+        <pathelement location="${j2ee.lib.dir}"/>
+        <fileset dir="${j2ee.lib.dir}">
+          <include name="*.jar"/>
+        </fileset>
+        <fileset dir="${j2ee.bin.dir}">
+          <include name="*.jar"/>
+        </fileset>
+      </classpath>
+      <include name="**/*.java"/>
+<!--      <exclude name="**/*finclude_jsp.java"/>-->
+      <exclude name="**/*finclude*_jsp.java"/>
+      <exclude name="**/*layout_005f*_jsp.java"/>
+      <exclude name="**/*fmenu_jsp.java"/>
+<!--      <exclude name="**/*frelationships_*fview2_jsp.java"/>-->
+    </javac>
+    <!-- JAR the JSPs -->
+    <jar jarfile="${dist.dir}/cfs/WEB-INF/lib/${project}-jsp.jar"
+         basedir="${dist.dir}/cfs/WEB-INF/compiled" includes="**/*.class" />
+    <!-- Cleanup temp files -->
+    <delete>
+      <fileset dir="${dist.dir}/cfs">
+        <include name="**/*.jsp"/>
+        <include name="**/*.jspf"/>
+      </fileset>
+    </delete>
+    <!-- Cleanup -->
+    <delete>
+      <fileset dir="${dist.dir}/cfs/WEB-INF/src"/>
+      <fileset dir="${dist.dir}/cfs/WEB-INF/compiled"/>
+    </delete>
+    <delete includeemptydirs="true">
+      <fileset dir="${dist.dir}/cfs"  >
+        <and>
+          <size value="0"/>
+          <type type="dir"/>
+        </and>
+      </fileset>
+    </delete>
     <!-- Archive the folder -->
     <war destfile="${dist.dir}/crm.war"
          webxml="${src.web.dir}/WEB-INF/web.xml"
@@ -1680,7 +1689,7 @@ a site has been deployed -->
     <delete dir="${unittests.reports.dir}" failonerror="false"/>
     <mkdir dir="${unittests.reports.dir}"/>
     <echo message="+-----------------------"/>
-    <echo message="| Tests are runnitng... See full-length results in '${unittests.reports.dir}'."/>
+    <echo message="| Tests are running... See full-length results in '${unittests.reports.dir}'."/>
     <echo message="+---------------------"/>
     <junit printsummary="yes" haltonfailure="yes">
       <classpath>
@@ -1703,80 +1712,7 @@ a site has been deployed -->
     </junit>
   </target>
 
-  <target name="unittests" depends="init,dev,unittests.runner" description="Deploy without deleting previously compiled source and run Unit tests">
-  </target>
-
-  <!-- Register Centric's Web Service with Axis -->
-  <target name="ws" depends="init">
-    <fail unless="AXIS_HOME">Web Services registration aborted
-
-      SOLUTION:
-
-      Set an environment variable for AXIS_HOME or add AXIS_HOME to
-      home.properties
-
-    </fail>
-    <fail unless="AXIS.PORT">Web Services registration aborted
-
-      SOLUTION:
-
-      Uncomment AXIS.PORT in build.properties:
-
-      ${build.config.filename}
-
-    </fail>
-    <fail unless="AXIS.HOST">Web Services registration aborted
-
-      SOLUTION:
-
-      Uncomment AXIS.HOST in build.properties:
-
-      ${build.config.filename}
-
-    </fail>
-    <fail unless="AXIS.WEBAPP">Web Services registration aborted
-
-      SOLUTION:
-
-      Uncomment AXIS.WEBAPP in build.properties:
-
-      ${build.config.filename}
-
-    </fail>
-
-    <available file="${AXIS_HOME}/WEB-INF/lib/aspcfs.jar" property="ws.aspcfs.present"/>
-    <fail unless="ws.aspcfs.present">Web Services registration aborted
-
-      SOLUTION:
-
-      Execute "ant deploy" first
-
-    </fail>
-
-    <path id="axis.classpath">
-      <fileset dir="${AXIS_HOME}/WEB-INF/lib">
-        <include name="*.jar"/>
-        <!--
-        <include name="axis.jar"/>
-        <include name="axis-ant.jar"/>
-        <include name="commons-discovery-0.2.jar"/>
-        <include name="commons-logging-1.0.4.jar"/>
-        <include name="log4j-1.2.8.jar"/>
-        <include name="xml-apis.jar"/>
-        <include name="xercesImpl.jar"/>
-        <include name="wsdl4j-1.5.1.jar"/>
-        <include name="aspcfs.jar"/>
-        <include name="darkhorseventures.jar"/>
-        -->
-      </fileset>
-      <fileset dir="${CATALINA_HOME}/common/lib">
-        <include name="servlet-api.jar"/>
-        <include name="jaxrpc.jar"/>
-        <include name="saaj.jar"/>
-      </fileset>
-    </path>
-    <taskdef resource="axis-tasks.properties" classpathref="axis.classpath"/>
-    <axis-admin port="${AXIS.PORT}" hostname="${AXIS.HOST}" failonerror="true" servletpath="${AXIS.WEBAPP}/services/AdminService" debug="true" xmlfile="${base.dir}/deploy.wsdd"/>
+  <target name="test" depends="init,dev,unittests.runner" description="Deploy without deleting previously compiled source and run Unit tests">
   </target>
 
   <!-- Database Importer based on CSV spec -->

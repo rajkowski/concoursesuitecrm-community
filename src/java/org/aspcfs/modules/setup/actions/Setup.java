@@ -158,7 +158,7 @@ public class Setup extends CFSModule {
         path = "c:\\CentricCRM\\fileLibrary\\" + instanceName + "\\";
       } else if (SystemUtils.IS_OS_MAC) {
         //Mac OSX
-        path = SystemUtils.getUserHome() + "/crm-platform/fileLibrary/" + instanceName + "/";
+        path = SystemUtils.getUserHome() + "/Web/crm-platform/fileLibrary/" + instanceName + "/";
       } else {
         File testDirectory = new File("/opt");
         if (testDirectory.exists()) {

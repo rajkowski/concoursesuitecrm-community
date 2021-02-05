@@ -85,7 +85,7 @@ public class ApplicationPrefs {
           systemOverrideFile = new File("c:\\CentricCRM\\fileLibrary\\path.txt");
         } else if (SystemUtils.IS_OS_MAC) {
           //Mac OSX
-          systemOverrideFile = new File(SystemUtils.getUserHome() + "/crm-platform/fileLibrary/path.txt");
+          systemOverrideFile = new File(SystemUtils.getUserHome() + "/Web/crm-platform/fileLibrary/path.txt");
         } else {
           File testDirectory = new File("/opt");
           if (testDirectory.exists()) {

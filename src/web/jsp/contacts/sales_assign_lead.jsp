@@ -157,7 +157,7 @@
 			
 	  </th>
   </tr>
-  <dhv:evaluate if="<%=!"toContact".equals(action)%>">
+  <dhv:evaluate if='<%=!"toContact".equals(action)%>'>
   <tr class="containerBody">
     <td nowrap class="formLabel" valign="top">
       <dhv:label name="actionPlan.planManager">Plan Manager</dhv:label>
@@ -233,7 +233,7 @@
   </tr>
   </dhv:evaluate>
   </dhv:evaluate>
-  <dhv:evaluate if= "<%=!"toAccount".equals(action)%>">
+  <dhv:evaluate if='<%=!"toAccount".equals(action)%>'>
   <tr>
     <td class="formLabel">
       <dhv:label name="accounts.account">Account</dhv:label>

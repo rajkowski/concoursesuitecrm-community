@@ -45,6 +45,8 @@
 <jsp:useBean id="defectSelect" class="org.aspcfs.utils.web.HtmlSelect" scope="request"/>
 <jsp:useBean id="defectCheck" class="java.lang.String" scope="request"/>
 <jsp:useBean id="TimeZoneSelect" class="org.aspcfs.utils.web.HtmlSelectTimeZone" scope="request"/>
+<jsp:useBean id="SubmiterOrgDetails" class="org.aspcfs.modules.accounts.base.Organization" scope="request"/>
+<jsp:useBean id="SubmitterContact" class="org.aspcfs.modules.contacts.base.Contact" scope="request"/>
 <%@ include file="../initPage.jsp" %>
 <body>
 <form name="details" action="TroubleTickets.do?command=Update&auto-populate=true&popup=true" method="post">

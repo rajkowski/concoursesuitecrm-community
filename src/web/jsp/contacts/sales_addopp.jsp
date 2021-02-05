@@ -122,7 +122,7 @@ function checkForm(form) {
 </table>
 <%-- End Trails --%>
 </dhv:evaluate>
-<dhv:container name="leads" selected="opportunities" object="ContactDetails" param='<%= "id=" + ContactDetails.getId() %>' hideContainer='<%="true".equals(request.getParameter("actionplan")) %>'appendToUrl='<%= addLinkParams(request, "popup|popupType|actionId|from|listForm") %>'>
+<dhv:container name="leads" selected="opportunities" object="ContactDetails" param='<%= "id=" + ContactDetails.getId() %>' hideContainer='<%="true".equals(request.getParameter("actionplan")) %>' appendToUrl='<%= addLinkParams(request, "popup|popupType|actionId|from|listForm") %>'>
   <input type="submit" value="<dhv:label name="global.button.save">Save</dhv:label>" onClick="this.form.dosubmit.value='true';">
   <input type="submit" value="<dhv:label name="global.button.cancel">Cancel</dhv:label>" onClick="javascript:this.form.action='SalesOpportunities.do?command=ViewOpps&contactId=<%= ContactDetails.getId() %><%= addLinkParams(request, "popup|popupType|actionId|from|listForm") %>';this.form.dosubmit.value='false';">
   <br />

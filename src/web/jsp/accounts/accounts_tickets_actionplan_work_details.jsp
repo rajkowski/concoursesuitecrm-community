@@ -18,8 +18,10 @@
   --%>
 <%@ taglib uri="/WEB-INF/dhv-taglib.tld" prefix="dhv" %>
 <%@ taglib uri="/WEB-INF/zeroio-taglib.tld" prefix="zeroio" %>
-<%@ page
-    import="org.aspcfs.modules.actionplans.base.ActionItemWork,org.aspcfs.modules.actionplans.base.ActionPlanWork, org.aspcfs.modules.actionplans.base.ActionStep" %>
+<%@ page import="org.aspcfs.modules.actionplans.base.ActionItemWork" %>
+<%@ page import="org.aspcfs.modules.actionplans.base.ActionPlanWork" %>
+<%@ page import="org.aspcfs.modules.actionplans.base.ActionStep" %>
+<%@ page import="org.aspcfs.modules.accounts.base.Organization" %>
 <jsp:useBean id="ticket" class="org.aspcfs.modules.troubletickets.base.Ticket"
              scope="request"/>
 <jsp:useBean id="OrgDetails"
@@ -204,8 +206,7 @@ function updateGlobalStatus(required, actionPlanId, actionId, itemId) {
     </dhv:evaluate>
     <% Organization orgDetails = new Organization();
       orgDetails.setOrgId(-2);%>
-    <%@ include
-        file="../troubletickets/troubletickets_actionplan_work_details_include.jsp" %>
+<%--    <%@ include file="../troubletickets/troubletickets_actionplan_work_details_include.jsp" %>--%>
   </dhv:container>
 </dhv:container>
 <iframe src="empty.html" name="server_commands" id="server_commands"

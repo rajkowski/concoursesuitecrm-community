@@ -72,8 +72,7 @@
       : <%= roleList.getHtmlSelect("roleId", userList.getRoleId()) %>
     </td>
     <td>
-      <dhv:pagedListStatus title="<%= showError(request, "actionError") %>"
-                           object="webdavUserListInfo"/>
+      <dhv:pagedListStatus title='<%= showError(request, "actionError") %>' object="webdavUserListInfo"/>
     </td>
   </tr>
 </table>

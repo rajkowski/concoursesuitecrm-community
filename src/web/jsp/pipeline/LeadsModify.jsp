@@ -118,7 +118,7 @@ function reopenOpportunity(id) {
             <table cellspacing="0" cellpadding="0" border="0" class="empty">
                 <tr>
                     <td>
-                      <input type="radio" name="type" value="org" <dhv:evaluate if="<%=opportunityHeader.getAccountLink() > -1 || "org".equals(request.getParameter("type")) %>">checked</dhv:evaluate>>
+                      <input type="radio" name="type" value="org" <dhv:evaluate if='<%=opportunityHeader.getAccountLink() > -1 || "org".equals(request.getParameter("type")) %>'>checked</dhv:evaluate>>
                     </td>
                     <td>
                       <dhv:label name="account.account.colon">Account:</dhv:label>&nbsp;
@@ -141,7 +141,7 @@ function reopenOpportunity(id) {
             <table border="0" cellspacing="0" cellpadding="0" class="empty">
               <tr>
                 <td>
-                  <input type="radio" name="type" value="contact" <dhv:evaluate if="<%= opportunityHeader.getContactLink() > -1 || "contact".equals(request.getParameter("type"))%>">checked</dhv:evaluate>>
+                  <input type="radio" name="type" value="contact" <dhv:evaluate if='<%= opportunityHeader.getContactLink() > -1 || "contact".equals(request.getParameter("type"))%>'>checked</dhv:evaluate>>
                 </td>
                 <td>
                   <dhv:label name="account.contact.colon">Contact:</dhv:label>&nbsp;

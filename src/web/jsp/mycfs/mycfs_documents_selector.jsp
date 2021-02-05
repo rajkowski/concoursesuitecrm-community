@@ -130,12 +130,12 @@
     <td align="left" valign="center">
       <select size="1" name="moduleId" onChange="javascript:document.listForm.submit();">
     <dhv:evaluate if='<%= (!"".equals(contactId) && !"".equals(orgId))%>'>
-      <dhv:evaluate if="<%=!"-1".equals(orgId) %>">
+      <dhv:evaluate if='<%=!"-1".equals(orgId) %>'>
         <dhv:permission name="accounts-accounts-documents-view">
        		<option value="<%= Constants.ACCOUNTS %>" <dhv:evaluate if="<%= moduleId == Constants.ACCOUNTS %>">selected</dhv:evaluate>><dhv:label name="accounts.accounts">Accounts</dhv:label></option>
 		</dhv:permission>
        </dhv:evaluate>
-       <dhv:evaluate if="<%= (!"-1".equals(orgId) && !"-1".equals(contactId)) %>">
+       <dhv:evaluate if='<%= (!"-1".equals(orgId) && !"-1".equals(contactId)) %>'>
        	 <dhv:permission name="accounts-accounts-contacts-documents-view">
        		<option value="<%= Constants.CONTACTS %>" <dhv:evaluate if="<%= moduleId == Constants.CONTACTS %>">selected</dhv:evaluate>><dhv:label name="contacts">Contacts</dhv:label></option>
 		 </dhv:permission>
@@ -156,7 +156,7 @@
     </td>
     <td>
     <dhv:evaluate if="<%= linkItemId != -1%>">
-      <dhv:pagedListStatus title="<%= showError(request, "actionError") %>" object="documentListInfo" showHiddenParams="true" enableJScript="true" form="listForm"/>
+      <dhv:pagedListStatus title='<%= showError(request, "actionError") %>' object="documentListInfo" showHiddenParams="true" enableJScript="true" form="listForm"/>
     </dhv:evaluate>
     </td>
   </tr>

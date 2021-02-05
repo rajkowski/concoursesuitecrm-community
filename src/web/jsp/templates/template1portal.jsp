@@ -19,21 +19,20 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page pageEncoding="UTF-8" %>
 <%@ taglib uri="/WEB-INF/dhv-taglib.tld" prefix="dhv" %>
-<jsp:useBean id="site" class="org.aspcfs.modules.website.base.Site" scope="request"/>
-<jsp:useBean id="style" class="org.aspcfs.modules.website.base.Style" scope="request"/>
+<%--<jsp:useBean id="site" class="org.aspcfs.modules.website.base.Site" scope="request"/>--%>
+<%--<jsp:useBean id="style" class="org.aspcfs.modules.website.base.Style" scope="request"/>--%>
 <%@ include file="../initPage.jsp" %>
 <%
   response.setHeader("Pragma", "no-cache"); // HTTP 1.0
   response.setHeader("Cache-Control", "no-cache"); // HTTP 1.1
   response.setHeader("Expires", "-1");
 %>
-<!-- Powered By Concourse Suite Community Edition, Inc. -->
 <html>
 <head>
-  <title><%= toHtml(site.getName()) %>: <%= toHtml(site.getTabToDisplay().getDisplayText()) %></title>
-  <dhv:meta />
+<%--  <title><%= toHtml(site.getName()) %>: <%= toHtml(site.getTabToDisplay().getDisplayText()) %></title>--%>
+<%--  <dhv:meta />--%>
   <link rel="stylesheet" href="portal/styles/style_global.css" type="text/css">
-  <link rel="stylesheet" href="portal/styles/<%= style.getCss() %>" type="text/css">
+<%--  <link rel="stylesheet" href="portal/styles/<%= style.getCss() %>" type="text/css">--%>
 </head>
 <body leftmargin="0" rightmargin="0" margin="0" marginwidth="0" topmargin="0" marginheight="0">
 <table border="0" width="100%" cellpadding="0" cellspacing="0">
@@ -46,4 +45,3 @@
 </table>
 </body>
 </html>
-

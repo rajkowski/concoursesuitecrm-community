@@ -1,8 +1,15 @@
+<jsp:useBean id="applicationPrefs" class="org.aspcfs.controller.ApplicationPrefs" scope="application"/>
+<jsp:useBean id="User" class="org.aspcfs.modules.login.beans.UserBean" scope="session"/>
 <jsp:useBean id="constants" class="java.util.HashMap" scope="request"/>
 <jsp:useBean id="objectName" class="java.lang.String" scope="request"/>
 <jsp:useBean id="moduleName" class="java.lang.String" scope="request"/>
 <jsp:useBean id="ratingLookup" class="org.aspcfs.utils.web.LookupList" scope="request"/>
 <jsp:useBean id="systemStatus" class="org.aspcfs.controller.SystemStatus" scope="request"/>
+<jsp:useBean id="ContactDetails" class="org.aspcfs.modules.contacts.base.Contact" scope="request"/>
+<jsp:useBean id="ticket" class="org.aspcfs.modules.troubletickets.base.Ticket" scope="request"/>
+<jsp:useBean id="globalActionPlanWork" class="org.aspcfs.modules.actionplans.base.ActionPlanWork" scope="request"/>
+<jsp:useBean id="actionPlanWork" class="org.aspcfs.modules.actionplans.base.ActionPlanWork" scope="request"/>
+<%@ include file="../initPage.jsp" %>
 <%-- Initialize the drop-down menus --%>
 <%@ include file="../initPopupMenu.jsp" %>
 <%@ include file="../contacts/sales_troubletickets_actionplan_details_menu.jsp" %>

@@ -52,7 +52,7 @@
     </tr>
     <tr class="containerBody">
       <td width="100%" valign="center" class="row1">
-        <dhv:label name="contact.name.spouseTo.text" param='<%= "linkStart=<a href=\"test\">|linkEnd=</a>|contact.fullName="+toHtml(ContactDetails.getNameFull()) %>'><a href="#"><dhv:label name="contacts.name">Name</dhv:label></a> (Spouse) to <%= toHtml(ContactDetails.getNameFull()) %></dhv:label>
+        <a href="#"><dhv:label name="contacts.name">Name</dhv:label></a> (Spouse) to <%= toHtml(ContactDetails.getNameFull()) %>
       </td>
       <td width="10" valign="center" align="right" nowrap class="row1">
         1.00
@@ -60,7 +60,7 @@
     </tr>
     <tr class="row2">
       <td width="100%" valign="center">
-        <dhv:label name="contact.name.friendTo.text" param='<%= "linkStart=<a href=\"test\">|linkEnd=</a>|contact.fullName="+toHtml(ContactDetails.getNameFull()) %>'><a href="#"><dhv:label name="contacts.name">Name</dhv:label></a> (Friend) to <%= toHtml(ContactDetails.getNameFull()) %></dhv:label>
+        <a href="#"><dhv:label name="contacts.name">Name</dhv:label></a> (Friend) to <%= toHtml(ContactDetails.getNameFull()) %>
       </td>
       <td width="10" valign="center" align="right" nowrap>
         .90
@@ -68,7 +68,7 @@
     </tr>
     <tr class="row1">
       <td width="100%" valign="center">
-        <dhv:label name="contact.name.coworkerTo.text" param='<%= "linkStart=<a href=\"test\">|linkEnd=</a>|contact.fullName="+toHtml(ContactDetails.getNameFull()) %>'><a href="#"><dhv:label name="contacts.name">Name</dhv:label></a> (Co-Worker) to <%= toHtml(ContactDetails.getNameFull()) %></dhv:label>
+        <a href="#"><dhv:label name="contacts.name">Name</dhv:label></a> (Co-Worker) to <%= toHtml(ContactDetails.getNameFull()) %>
       </td>
       <td width="10" valign="center" align="right" nowrap>
         .60

@@ -23,6 +23,7 @@
 <jsp:useBean id="selectedContacts" class="java.util.HashMap" scope="session"/>
 <jsp:useBean id="viewUser" class="java.lang.String" scope="session"/>
 <jsp:useBean id="User" class="org.aspcfs.modules.login.beans.UserBean" scope="session"/>
+<jsp:useBean id="sources" class="java.lang.String" scope="request"/>
 <%@ include file="../initPage.jsp" %>
 <SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" SRC="javascript/confirmDelete.js"></SCRIPT>
 <SCRIPT LANGUAGE="JavaScript" TYPE="text/javascript" src="javascript/popContacts.js?v=20070827"></script>
